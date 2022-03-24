@@ -14,6 +14,18 @@ h2 {
   margin-bottom: 20px;
 }
 
+h3 {
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+
+p {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
 
 .splash .blob{
   position: absolute;
@@ -88,12 +100,6 @@ h2 {
   align-items: center;
   margin-top: 150px;  
 
-  p {
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.5em;
-  }
-
   img {
     position: relative;
     width: 500px;
@@ -114,9 +120,15 @@ h2 {
   .caption {
     display: block;
     color: rgb(0, 130, 148);
-    margin: 5px 0;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 17px;    
+    display: flex;
+    align-items: center;
+
+    &::after{      
+      content: asset_url("splash/right-arrow.svg");
+      margin: 5px;     
+    }
   }
 
   .splash-photo {
@@ -144,6 +156,8 @@ h2 {
   max-height: 50px;
   max-width: fit-content;
   white-space: nowrap;
+
+  &:hover {background-color: #0098ae}
 }
 
 .splash-explore {
@@ -183,5 +197,55 @@ h2 {
     // width: 97%;
     font-size: 22px;
     font-weight: 800;
+  }
+}
+
+.splash-how {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 50px;
+  
+  h6 {
+    width: 60%;
+    margin: auto;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  img {
+    width: 160px;
+    height: 150px;        
+  }
+
+  p {font-size: 16px;}
+
+  a {
+    color: rgb(0, 130, 148);
+    margin: 15px 0;
+    font-weight: 700;
+    font-size: 20px;    
+
+    &:hover{opacity: 80%;}
+  }
+
+  .splash-how-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .how-card {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;    
+    justify-content: start;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  button {
+    margin: auto;
+    margin-top: 20px;
   }
 }

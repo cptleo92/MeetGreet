@@ -11,6 +11,9 @@ declare global {
     category1: string;
     category2: string;
     category3: string;
+    joinGroup: string;
+    findEvent: string;
+    startGroup: string;
   }
 }
 
