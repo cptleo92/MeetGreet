@@ -20,8 +20,9 @@ module.exports = {
           options: {
             presets: ['@babel/env', '@babel/react', '@babel/typescript']
           }
-        },
-      }
+        },      
+      },
+    
     ]
   },
   devtool: 'source-map'
