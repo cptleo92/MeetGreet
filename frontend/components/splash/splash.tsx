@@ -8,35 +8,18 @@ declare global {
   interface Window {
     meetupLogo: string;
     onlineEvents: string;
-    greenBlob: string;
-    redBlob: string;
-    yellowBlob: string;
+    category1: string;
+    category2: string;
+    category3: string;
   }
 }
 
 const Splash: React.FC = () => {
   return (
-    <div>
-      <div className="blobs">
-        {/* <img 
-          src={window.greenBlob}
-          alt="green blob"
-          className="green-blob"
-        />
-        <img 
-          src={window.redBlob}
-          alt="red blob"
-          className="red-blob-top"
-        />
-        <img 
-          src={window.yellowBlob}
-          alt="yellow blob"
-          className="yellow-blob-top"
-        /> */}
-        <div className="green-blob"></div>
-        <div className="red-blob-top"></div>
-        <div className="yellow-blob-top"></div>
-      </div>
+    <div className="splash">   
+      <div className="blob green-blob"></div>
+      <div className="blob red-blob-top"></div>
+      <div className="blob yellow-blob-top"></div>     
       <SplashHeader />
       <SplashMain />
       {/* <SplashFooter /> */}
