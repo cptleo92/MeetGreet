@@ -32,8 +32,9 @@ const UserForm = ({ formType }: {formType: string}) => {
     navigate('/home')
   }
 
-  const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();  
+    e.stopPropagation();
     const user = input; 
 
     // sorry Typescript! have to ignore you for now
@@ -58,7 +59,8 @@ const UserForm = ({ formType }: {formType: string}) => {
   return (
     <div className="login-form">
       <SessionFormHeader formType={formType} />
-
+      
+      <form onSubmit={submit}>
       {/* only render this section if this is a signup form */}
       { formType === "signup" && 
         <>
@@ -142,9 +144,10 @@ const UserForm = ({ formType }: {formType: string}) => {
       />
       </div>     
 
-      <button className="btn-red" onClick={submit}>
+      <button className="btn-red" type="submit">
         {formType === "login" ? "Log in" : "Sign up"}
       </button>
+    </form>
 
 
       {errors && <FormErrors formType={formType} />}
