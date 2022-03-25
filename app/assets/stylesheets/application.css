@@ -16,5 +16,6 @@
 
 @import "reset.scss";
 @import "variables.scss";
+@import "general_stylings.scss";
 @import "splash.scss";
 @import "modal.scss";
