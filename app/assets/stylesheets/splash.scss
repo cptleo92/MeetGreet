@@ -96,6 +96,7 @@ p {
     right: 0;
   
     a {
+      cursor: pointer;
       padding-left: 25px;
       font-size: 15px;
       font-weight: 500;
@@ -221,31 +222,31 @@ p {
     }
   }
 
-  input {
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 20px;
-    text-indent: 20px;
-    min-width: 220px;
-  }
-
-
   .explore-search {
     display: flex;
     flex-direction: column;
   }
 
-  .explore-search-btn {
-    cursor: pointer;
-    color: white;
-    background-color: #F65858;
-    border-radius: 10px;
-    border: 0;
-    padding: 10px;
-    font-size: 22px;
-    font-weight: 800;
-  }
+}
+
+input {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-indent: 20px;
+  min-width: 220px;
+}
+
+.btn-red {
+  cursor: pointer;
+  color: white;
+  background-color: #F65858;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .splash-how {

@@ -1,9 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Modal from "./modal";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../actions/modal_actions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const SplashHeader = () => {
+  const dispatch = useDispatch();
+  const modal = useSelector((state: RootState) => state.ui.modal)
+
   return (
     <nav className="splash-header-nav"> 
+      <Modal modal={modal}/>
       <img       
         src={window.meetupLogo}
         alt="meetgreet logo"
@@ -11,10 +19,10 @@ const SplashHeader = () => {
       />     
       <ul className="splash-header-nav-right">
         <li className="splash-header-nav-right-login">
-          <Link to="/login">Log in</Link>
+          <a onClick={() => dispatch(openModal('login'))}>Log in</a>
         </li>
         <li className="splash-header-nav-right-signup">
-          <Link to="/signup">Sign up</Link>
+          <a onClick={() => dispatch(openModal('signup'))}>Sign up</a>
         </li>
       </ul>
   

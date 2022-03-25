@@ -22,7 +22,7 @@ const SplashMainOverviewExplore = () => {
             />                
           </div>
         </div>
-        <button className="explore-search-btn">Search</button>
+        <button className="btn-red">Search</button>
       </section>
 
       <section className="explore-buttons">

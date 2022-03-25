@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../actions/session_actions'
+import SessionFormHeader from './session_form_header'
 
-const SessionForm: React.FC = () => {
+const LoginForm = ({ formType }: {formType: string}) => {
   const [input, setInput] = useState({
     email: "",
     password: ""
@@ -29,30 +30,30 @@ const SessionForm: React.FC = () => {
   }
 
   return (
-    <form className="login-form">
-      <label htmlFor="email">Email: </label>
+    <div className="login-form">
+      <SessionFormHeader formType={formType} />
+
+      <label htmlFor="email">Email</label>
       <input
         id="email"
         type="text"
         value={input.email}
-        onChange={update}   
-        placeholder="Email"   
+        onChange={update}     
         name="email"  
       />
 
-      <label htmlFor="password">Password: </label>
+      <label htmlFor="password">Password</label>
       <input
         id="password"
         type="password"
         value={input.password}
-        onChange={update}     
-        placeholder="Password"   
+        onChange={update}       
         name="password"
       />
 
-      <button onClick={submit}>Log in</button>
-    </form>
+      <button className="btn-red" onClick={submit}>Log in</button>
+    </div>
   )
 }
 
-export default SessionForm
+export default LoginForm
