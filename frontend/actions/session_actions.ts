@@ -1,24 +1,16 @@
 // import { User } from "../types/interfaces"
-import { AppDispatch } from "../store/store"
 import * as SessionAPIUtil from "../util/session_api_util"
 import { AnyAction } from "redux"
+import { UserLogin, UserSignup } from "../util/session_api_util"
+import { AppDispatch } from "../store/store"
+import { Navigate } from "react-router-dom"
 
 export const RECEIVE_USER = "RECEIVE_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS"
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 
-interface UserLogin {
-  email: string;
-  password: string;
-}
 
-interface UserSignup {
-  fname: string;
-  lname: string;
-  email: string;
-  password: string;
-}
 
 const receiveUser = (user: UserLogin | UserSignup): AnyAction => ({
   type: RECEIVE_USER,

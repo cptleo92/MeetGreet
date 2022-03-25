@@ -60,7 +60,7 @@
     margin: 10px 0;
   }
 
-  .email-field, .password-field {
+  .email-field, .password-field, .fname-field, .lname-field {
     position: relative;    
     display: flex;
     align-items: center;
@@ -72,5 +72,13 @@
   svg:hover {
     cursor: pointer;
     opacity: 90%;    
+  }
+
+  .demo {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid lightgray;
+    padding: 30px;
+    line-height: 1.3rem;
   }
 }

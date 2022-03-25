@@ -15,5 +15,5 @@
   )
 end
 
-User.create!(email: 'demo@fake.com', password: 'password', fname: 'test', lname: 'demo')
+User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
 

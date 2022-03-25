@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../actions/session_actions'
+import React, { useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { login, signup } from '../../actions/session_actions'
 import { RootState } from '../../store/store'
 import SessionFormHeader from './session_form_header'
+import FormErrors from './form_errors'
+import { useNavigate } from 'react-router-dom'
+import { closeModal } from '../../actions/modal_actions'
 
-const LoginForm = ({ formType }: {formType: string}) => {
+const UserForm = ({ formType }: {formType: string}) => {
   const [input, setInput] = useState({
     email: "",
-    password: ""
+    password: "",
+    fname: "",
+    lname: ""
   })
 
   const [hidden, setHidden] = useState(true);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const update = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({
@@ -21,15 +27,26 @@ const LoginForm = ({ formType }: {formType: string}) => {
     })
   }
 
+  const loginSuccess = () => {
+    dispatch(closeModal())
+    navigate('/home')
+  }
+
   const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();  
-    const user = input;
-    dispatch(login(user))
+    const user = input; 
 
-    setInput({
-      email: "",
-      password: ""
-    })
+    // sorry Typescript! have to ignore you for now
+    formType === "login" ? 
+      dispatch(login(user)).then(loginSuccess) :
+      dispatch(signup(user)).then(loginSuccess) ;    
+  }
+
+  const handleDemoLogin = () => {
+    dispatch(login({
+      email: "demo@fake.com",
+      password: 'password'
+    })).then(loginSuccess)
   }
 
   const toggleShowPassword = () => {
@@ -42,13 +59,48 @@ const LoginForm = ({ formType }: {formType: string}) => {
     <div className="login-form">
       <SessionFormHeader formType={formType} />
 
-      {errors && <small className="error">{errors[0]}</small>}
+      {/* only render this section if this is a signup form */}
+      { formType === "signup" && 
+        <>
+        <label htmlFor="fname">First name</label>
+        <div className="fname-field">
+          <svg 
+            className="icon"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              {/* Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
+              <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>
+          <input
+          id="fname"
+          type="text"
+          value={input.fname}
+          onChange={update}     
+          name="fname"  
+          />
+        </div>
+
+        <label htmlFor="lname">Last name</label>
+        <div className="lname-field">
+          <svg 
+            className="icon"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              {/* Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
+            <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>
+          <input
+          id="lname"
+          type="text"
+          value={input.lname}
+          onChange={update}     
+          name="lname"  
+          />
+        </div>
+        </>
+      }
 
       <label htmlFor="email">Email</label>
       <div className="email-field">
-      <svg 
-        className="icon"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">{/*Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.*/}<path d="M0 128C0 92.65 28.65 64 64 64H448C483.3 64 512 92.65 512 128V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V128zM48 128V150.1L220.5 291.7C241.1 308.7 270.9 308.7 291.5 291.7L464 150.1V127.1C464 119.2 456.8 111.1 448 111.1H64C55.16 111.1 48 119.2 48 127.1L48 128zM48 212.2V384C48 392.8 55.16 400 64 400H448C456.8 400 464 392.8 464 384V212.2L322 328.8C283.6 360.3 228.4 360.3 189.1 328.8L48 212.2z"/></svg>
+        <svg 
+          className="icon"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">{/*Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.*/}<path d="M0 128C0 92.65 28.65 64 64 64H448C483.3 64 512 92.65 512 128V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V128zM48 128V150.1L220.5 291.7C241.1 308.7 270.9 308.7 291.5 291.7L464 150.1V127.1C464 119.2 456.8 111.1 448 111.1H64C55.16 111.1 48 119.2 48 127.1L48 128zM48 212.2V384C48 392.8 55.16 400 64 400H448C456.8 400 464 392.8 464 384V212.2L322 328.8C283.6 360.3 228.4 360.3 189.1 328.8L48 212.2z"/></svg>
       <input
         id="email"
         type="text"
@@ -56,7 +108,7 @@ const LoginForm = ({ formType }: {formType: string}) => {
         onChange={update}     
         name="email"  
       />
-      </div>
+      </div>    
 
       <label htmlFor="password">Password</label>
       <div className="password-field">
@@ -93,8 +145,17 @@ const LoginForm = ({ formType }: {formType: string}) => {
       <button className="btn-red" onClick={submit}>
         {formType === "login" ? "Log in" : "Sign up"}
       </button>
+
+
+      {errors && <FormErrors formType={formType} />}
+
+      {formType === "login" && 
+        <a className="demo" href="#" onClick={handleDemoLogin}>
+          See what the app has to offer without the hassle of registering an account! Click here to sign in as a demo user.
+        </a>
+      }
     </div>
   )
 }
 
-export default LoginForm
+export default UserForm

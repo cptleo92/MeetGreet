@@ -4,7 +4,7 @@ import { configureStore } from './store/store'
 import Root from './components/root'
 
 //TESTING
-// import { signup, login, logout } from "./actions/session_actions"
+import { signup, login, logout } from "./actions/session_actions"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // //TESTING
   // window.demo = {email: 'demo@fake.com', password: 'password'}
   // window.getState = store.getState;
-  // window.dispatch = store.dispatch;
+  window.dispatch = store.dispatch;
   // window.signup = signup;
   // window.login = login;
-  // window.logout = logout;
+  window.logout = logout;
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(

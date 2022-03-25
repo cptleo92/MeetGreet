@@ -100,7 +100,8 @@ p {
       padding-left: 25px;
       font-size: 15px;
       font-weight: 500;
-      text-decoration: none;        
+      text-decoration: none;      
+      color: black;  
 
       &:hover {
         color: rgb(0, 130, 148)
@@ -213,14 +214,6 @@ p {
 
 }
 
-input {
-  border: 1px solid lightgray;
-  border-radius: 3px;
-  padding: 10px;
-  margin-bottom: 20px;
-  text-indent: 20px;
-  min-width: 220px;
-}
 
 .btn-red {
   cursor: pointer;
@@ -383,9 +376,10 @@ input {
     font-weight: 700;
     margin: 15px 0;
     line-height: 1.4em;
+    color: black;
   }
 
-  p{color: #757575}
+  p {color: #757575}
 }
 
 .stories-card:hover {
@@ -396,13 +390,16 @@ input {
 .splash-footer {
   margin-top: auto;
   background-color: #212121;
-  color: #C5C4C4;
   height: 530px;
   line-height: 2em;
   font-size: 15px;
+  color: #C5C4C4;
 
-  a:hover {
-    color: #a0a0a0;
+  a {
+    color: #C5C4C4;  
+    &:hover {
+      color: #a0a0a0;
+    }
   }
 }
 
@@ -447,7 +444,7 @@ input {
   margin-top: 30px;
   
   li {
-    padding-right: 15px; 
+    padding-right: 15px;    
   }
 
   li:first-child {

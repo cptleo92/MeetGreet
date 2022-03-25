@@ -1,6 +1,16 @@
-import { User } from "../types/interfaces"
+export interface UserLogin {
+  email: string;
+  password: string;
+}
 
-export const login = (user: User) => (
+export interface UserSignup {
+  fname: string;
+  lname: string;
+  email: string;
+  password: string;
+}
+
+export const login = (user: UserLogin) => (
   $.ajax({
     method: "POST",
     url: "/api/session",
@@ -15,7 +25,7 @@ export const logout = () => (
   })
 )
 
-export const signup = (user: User) => (
+export const signup = (user: UserSignup) => (
   $.ajax({
     method: "POST",
     url: "/api/users",

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../actions/modal_actions";
-import LoginForm from "../user_forms/login_form";
+import UserForm from "../user_forms/user_form";
 
 const Modal = ({ modal }: {modal: string}) => { 
 
@@ -14,10 +14,10 @@ const Modal = ({ modal }: {modal: string}) => {
   let component;
   switch (modal) {
     case 'login':
-      component = <LoginForm formType={'login'} />
+      component = <UserForm formType={'login'} />
       break;
     case 'signup':
-      component = <LoginForm formType={'signup'}/>
+      component = <UserForm formType={'signup'}/>
       break;
     default:
       return null;

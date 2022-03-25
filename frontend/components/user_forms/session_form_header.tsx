@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../actions/modal_actions";
+import { closeModal, openModal } from "../../actions/modal_actions";
 
 const SessionFormHeader = ({ formType }: {formType: string}) => {
   const dispatch = useDispatch();
@@ -16,6 +16,16 @@ const SessionFormHeader = ({ formType }: {formType: string}) => {
     link = "Log in"
   }
 
+  const handleToggle = () => {
+    if (formType === "login") {
+      // dispatch(closeModal());
+      dispatch(openModal("signup"))
+    } else {
+      // dispatch(closeModal());
+      dispatch(openModal("login"))
+    }
+  }
+
   return (
     <div className="session-header">
       <span className="close" onClick={() => dispatch(closeModal())}>x</span>
@@ -24,7 +34,7 @@ const SessionFormHeader = ({ formType }: {formType: string}) => {
         alt="meetgreet logo"        
       />   
       <h3>{head}</h3>
-      <p>{text} <a href="#">{link}</a></p>      
+      <p>{text} <a href="#" onClick={handleToggle}>{link}</a></p>      
       
     </div>
   )
