@@ -18,6 +18,10 @@ input {
   margin-bottom: 20px;
   text-indent: 24px;
   min-width: 220px;
+
+  &:hover {
+    border: 1px solid rgb(6, 6, 105);
+  }
 }
 
 a {
@@ -34,4 +38,38 @@ a {
   padding: 10px;
   font-size: 22px;
   font-weight: 800;
+
+  &:hover {
+    background-color: #f53a3a;
+  }
+}
+
+.google-btn {
+  display: none;
+
+  input {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background-image: asset_url("splash/btn_google_signin_dark_normal_web@2x.png");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    width: 250px;
+    height: 80px;
+
+    &:hover {
+      background-image: asset_url("splash/btn_google_signin_dark_focus_web@2x.png");
+      transition: 200ms;
+    }
+  }
+
+  &.shown {
+    display: block; 
+  }
+}
+
+.required {
+  color: red;
 }

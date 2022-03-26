@@ -27,7 +27,13 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'figaro'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'uuidtools'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

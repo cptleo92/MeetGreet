@@ -17,6 +17,9 @@
   height: 820px;
   background: white;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .session-header {
@@ -48,8 +51,10 @@
 .login-form {
   width: 70%;
   margin: auto;
+  margin-top: 50px;
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 
   input {
     width: 93%;    
@@ -85,4 +90,5 @@
     padding: 30px;
     line-height: 1.3rem;
   }
+
 }

@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, signup } from '../../actions/session_actions'
 import { RootState } from '../../store/store'
@@ -26,6 +26,15 @@ const UserForm = ({ formType }: {formType: string}) => {
       [e.target.name]: e.target.value
     })
   }
+
+  // this basically clones the hidden button (generated in application.html.erb)
+  // each time the modal opens
+  // kind of a ridiculous method of getting it to work but I'm out of ideas :(
+  useEffect( () => {
+    console.log("running!")
+    const btn = $(".google-btn")
+    btn.clone().appendTo( $(".modal-child") ).addClass("shown")
+  }, [])
 
   const loginSuccess = () => {
     dispatch(closeModal())
@@ -157,6 +166,7 @@ const UserForm = ({ formType }: {formType: string}) => {
           See what the app has to offer without the hassle of registering an account! Click here to sign in as a demo user.
         </a>
       }
+
     </div>
   )
 }

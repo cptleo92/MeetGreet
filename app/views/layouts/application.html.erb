@@ -37,6 +37,9 @@
   </head>
 
   <body>
+    <!-- unfortunately, this is the best way I can think of to get this button working in React -->
+    <%= button_to "", user_google_oauth2_omniauth_authorize_path, form_class: "google-btn" %>
+
     <%= yield %>
   </body>
 </html>
