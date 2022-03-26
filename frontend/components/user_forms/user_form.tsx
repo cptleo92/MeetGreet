@@ -153,7 +153,7 @@ const UserForm = ({ formType }: {formType: string}) => {
       {errors && <FormErrors formType={formType} />}
 
       {formType === "login" && 
-        <a className="demo" href="#" onClick={handleDemoLogin}>
+        <a className="demo" onClick={handleDemoLogin}>
           See what the app has to offer without the hassle of registering an account! Click here to sign in as a demo user.
         </a>
       }

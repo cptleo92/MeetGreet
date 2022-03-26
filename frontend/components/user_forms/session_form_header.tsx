@@ -34,7 +34,7 @@ const SessionFormHeader = ({ formType }: {formType: string}) => {
         alt="meetgreet logo"        
       />   
       <h3>{head}</h3>
-      <p>{text} <a href="#" onClick={handleToggle}>{link}</a></p>      
+      <p>{text} <a onClick={handleToggle}>{link}</a></p>      
       
     </div>
   )
