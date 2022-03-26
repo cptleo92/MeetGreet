@@ -31,7 +31,6 @@ const UserForm = ({ formType }: {formType: string}) => {
   // each time the modal opens
   // kind of a ridiculous method of getting it to work but I'm out of ideas :(
   useEffect( () => {
-    console.log("running!")
     const btn = $(".google-btn")
     btn.clone().appendTo( $(".modal-child") ).addClass("shown")
   }, [])
