@@ -212,6 +212,9 @@ p {
     flex-direction: column;
   }
 
+  input {
+    min-width: 250px;
+  }
 }
 
 .splash-how {

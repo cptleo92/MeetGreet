@@ -1,9 +1,14 @@
 import { AnyAction } from "redux";
 import { RECEIVE_USER } from "../actions/session_actions";
+import { User } from "../types/types";
 
-const _nullUser = {}
+interface UserEntity {
+  [id: number]: User
+}
 
-export default (state = _nullUser, {type, payload}: AnyAction) => {
+const _nullState: UserEntity = {}
+
+export default (state = _nullState, {type, payload}: AnyAction) => {
   Object.freeze(state);
   switch (type) {
     case RECEIVE_USER:

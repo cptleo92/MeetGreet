@@ -1,11 +1,6 @@
 export interface UserLogin {
-  email: string;
-  password: string;
-}
-
-export interface UserSignup {
-  fname: string;
-  lname: string;
+  fname?: string;
+  lname?: string;
   email: string;
   password: string;
 }
@@ -25,7 +20,7 @@ export const logout = () => (
   })
 )
 
-export const signup = (user: UserSignup) => (
+export const signup = (user: UserLogin) => (
   $.ajax({
     method: "POST",
     url: "/api/users",

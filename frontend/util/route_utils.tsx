@@ -6,5 +6,5 @@ export const ProtectedRoutes = ({ loggedIn }: {loggedIn: boolean}) => {
 }
 
 export const AuthRoutes = ({ loggedIn }: {loggedIn: boolean}) => {
-  return !loggedIn ? <Outlet /> : <Navigate to="/" />;
+  return !loggedIn ? <Outlet /> : <Navigate to="/home" />;
 }

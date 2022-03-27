@@ -4,7 +4,8 @@ import { AuthRoutes, ProtectedRoutes} from '../util/route_utils';
 import Splash from './splash/splash';
 import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
-import SplashFooter from './splash/splash_footer';
+import Home from './home/home';
+
 
 export default function App() {
   const currentUser = useSelector((state: RootState) => state.session.currentUserId )
@@ -12,11 +13,13 @@ export default function App() {
 
   return (
     <div>
-      <Routes>     
-        <Route path="/" element={<Splash />}/>
+      <Routes> 
+        <Route element={<AuthRoutes loggedIn={loggedIn} />}>    
+          <Route path="/" element={<Splash />}/>
+        </Route>
 
         <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-          <Route path="/home" element={<SplashFooter />}>
+          <Route path="/home" element={<Home />}>
         </Route>
 
         </Route>

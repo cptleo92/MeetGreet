@@ -1,9 +1,9 @@
 // import { User } from "../types/interfaces"
 import * as SessionAPIUtil from "../util/session_api_util"
 import { AnyAction } from "redux"
-import { UserLogin, UserSignup } from "../util/session_api_util"
+import { UserLogin } from "../util/session_api_util"
 import { AppDispatch } from "../store/store"
-import { Navigate } from "react-router-dom"
+import { User } from "../types/types"
 
 export const RECEIVE_USER = "RECEIVE_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
@@ -12,7 +12,7 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 
 
 
-const receiveUser = (user: UserLogin | UserSignup): AnyAction => ({
+const receiveUser = (user: User): AnyAction => ({
   type: RECEIVE_USER,
   payload: user
 })
@@ -31,7 +31,7 @@ const receiveSessionErrors = (errors: string[]): AnyAction => ({
   payload: errors
 })
 
-export const signup = (user: UserSignup) => (dispatch: AppDispatch) => {
+export const signup = (user: UserLogin) => (dispatch: AppDispatch) => {
   return SessionAPIUtil.signup(user).then(
     user => dispatch(receiveUser(user)),
     err => dispatch(receiveUserErrors(err.responseJSON)))
