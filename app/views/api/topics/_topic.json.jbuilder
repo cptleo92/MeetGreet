@@ -1,0 +1,1 @@
+json.extract! topic, :id, :name, :topicable_id, :topicable_type

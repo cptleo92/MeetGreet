@@ -12,6 +12,38 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8, allow_nil: true }
   before_validation :ensure_session_token
 
+  has_many :memberships,
+    foreign_key: :member_id
+  has_many :groups, through: :memberships, inverse_of: :members
+
+  has_many :attendances,
+    foreign_key: :attendee_id
+  has_many :events, through: :attendances, inverse_of: :attendees
+
+  has_many :hostings, 
+    class_name: "Event",
+    foreign_key: :host_id
+
+  has_many :topics, as: :topicable
+
+  def organizings
+    Group.joins(:memberships).where('organizer = ? and member_id = ?', true, self.id)
+  end
+
+  def similar_groups
+    topics = self.topics.pluck(:name)
+    
+    # split multiple word topics and add % for querying
+    split_topics = []
+    topics.each do |topic|
+      split_topics += topic.split(" ")
+    end
+    split_topics.map! {|topic| "%#{topic}%"}
+
+    Group.joins(:topics).where('name ILIKE ANY ( array[?] )', split_topics)
+  end
+
+  # auth-related methods below  
   def self.find_or_create_by_oauth(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
