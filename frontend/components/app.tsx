@@ -7,6 +7,7 @@ import { RootState } from "../store/store"
 import Home from './home/home';
 import Missing from './misc/missing';
 import Group from './groups/group';
+import Layout from './layout';
 
 export default function App() {
   const currentUser = useSelector((state: RootState) => state.session.currentUserId )
@@ -18,7 +19,8 @@ export default function App() {
         <Route element={<AuthRoutes loggedIn={loggedIn} />}>    
           <Route path="/" element={<Splash />}/>
         </Route>
-        
+
+      <Route element={<Layout />}>
         <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
           <Route path="/home" element={<Home />} />
         </Route>
@@ -27,7 +29,17 @@ export default function App() {
 
         <Route path="*" element={<Missing />} />
 
-      </Routes>     
+        </Route>     
+      </Routes>
     </div>
   )
 }
+
+// Route info: 
+// - User can only access splash page if logged out
+
+// - Layout will apply to all below: 
+//  - User can only acccess home page if logged in
+//  - Any user can access these routes: 
+//   - Search, groups/:id, events/:id, user/:id
+ 

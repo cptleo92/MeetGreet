@@ -9,12 +9,10 @@ const Home = () => {
 
   return (
     <div className="home">
-      <HomeHeader />
-      <div className="home-body">
+      <div className="body">
         <HomeGreeting />
         <HomeMain />
       </div>
-      <SplashFooter />
     </div>
   )
 }
