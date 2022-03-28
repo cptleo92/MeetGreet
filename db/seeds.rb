@@ -54,14 +54,17 @@ end
 end
 
 20.times do
+  rand_start = Faker::Time.forward(days: 30)
+  rand_duration = rand(3600.. (3600 * 3))
+
   Event.create!(
     group_id: rand(1..20),
     host_id: rand(1..50),
     title: Faker::Book.title,
     description: "Placeholder event description",
     location: Faker::Address.city,
-    start_time: Time.now,
-    end_time: Time.now + 7200,    
+    start_time: rand_start,
+    end_time: rand_start + rand_duration
   )
 end
 

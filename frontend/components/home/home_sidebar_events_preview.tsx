@@ -2,27 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
 import { Event, EventEntity } from "../../types/types";
-import { fetchEvents } from "../../actions/events_actions"
 import { RootState } from "../../store/store";
+import { sortByDate, getSoonestEvent, stringifyDate } from "../../util/event_util";
+import { getEvents } from "../../selectors/selectors";
 
 const HomeSidebarEventsPreview = () => {
-  const dispatch = useDispatch();
-  const currentUser = useUser();  
-  // const allEvents = useSelector((state: RootState) => state.entities.events)
-  console.log(currentUser)
+  const userEvents: Event[] = useSelector((state: RootState) => getEvents(state))
 
-  // const userEvents = currentUser.events.map(id => allEvents[id])
+  let firstEvent: Event | null;
+  if (userEvents.length === 0) {
+    firstEvent = null;
+  } else if (userEvents.length === 1) {
+    firstEvent = userEvents[0];
+  } else {
+    firstEvent = getSoonestEvent(userEvents);
+  }
 
+  const renderEvents = () => {
+    if (firstEvent === null) {
+      return (
+        <div className="no-events">          
+          <strong>You have not registered for any events</strong>
+          <p>Events you have registered for will appear here.</p>
+        </div>
+      )
+    } else {
+      return (
+        <ul className="next-event">          
+          <li><h2>{firstEvent.title}</h2></li>
+          <li>{stringifyDate(firstEvent.start_time)}</li>                        
+          <li>{firstEvent.attendees.length} attending</li>                                  
+        </ul>
+      )
+    }
+
+  }
 
   return (
     <div className="sidebar-events-preview">
-      <ul>
-        {/* {
-          userEvents.map((ev: Event) => <li>{ev.title}</li>)
-        } */}
-      </ul>
+      {renderEvents()}
     </div>
   )
 }
 
 export default HomeSidebarEventsPreview
+

@@ -5,6 +5,8 @@ import Root from './components/root'
 
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
+import { fetchGroups } from "./actions/groups_actions"
+import { fetchUserFeedItems } from "./actions/users_actions"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -30,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.signup = signup;
   // window.login = login;
   window.logout = logout;
+  window.fetchUserFeedItems = fetchUserFeedItems
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(

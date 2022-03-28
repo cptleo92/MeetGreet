@@ -28,8 +28,27 @@ export interface Event {
   topics: number[];
 }
 
+export interface Group {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  city: string | null;
+  state: string | null;
+  country: string | null;
+  public: boolean;
+  members: number[];
+  events: number[];
+  topics: number[];
+}
+
+
 export interface EventEntity {
   [id: number]: Event
+}
+
+export interface GroupEntity {
+  [id: number]: Group
 }
 
 export interface Filter {

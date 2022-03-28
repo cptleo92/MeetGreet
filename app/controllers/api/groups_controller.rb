@@ -1,6 +1,14 @@
 class Api::GroupsController < ApplicationController
   def index
-    @groups = Group.all
+    filter = params[:filter]
+
+    if filter == [0]
+      @groups = Group.all
+    elsif filter.is_a?(Array) && filter.length > 0
+      @groups = Group.where('id IN (?)', filter)
+    elsif filter.nil?
+      render json: []
+    end
   end
 
   def show

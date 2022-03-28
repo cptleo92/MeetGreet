@@ -17,31 +17,32 @@
 
 .home-body {
   width: 50vw;
+  min-width: 1000px;
   margin: auto;
 }
 
 .home-main {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 70px;
+  gap: 50px;
   margin: 100px 0;
 }
 
 .home-sidebar {
   width: auto;
   height: 800px;
-  border: 1px solid red;
-  padding: 20px;
+  padding: 30px;
 }
 
 .home-feed {
-  width: auto;
+  min-width: 700px;
   height: 800px;
   border: 1px solid red;
 }
 
 .home-sidebar {
-  background-color: rgb(246, 247, 248)
+  background-color: rgb(246, 247, 248);
+  min-width: 350px;
 }
 
 .sidebar-event-header {
@@ -51,17 +52,36 @@
   margin-bottom: 20px;  
 
   h4 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
   }
 
   a {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 
-.sidebar-events-preview {
+.sidebar-events-preview, .sidebar-groups-preview {
   background-color: white;
-  height: 200px;
+  height: fit-content;
   border: 1px solid lightgray;
+  padding: 30px;
+  margin-bottom: 50px; 
+}
+
+.no-events, .no-groups {
+  color: gray;
+  text-align: center;  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  strong {
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  p {
+    line-height: 1rem;
+  }
 }
