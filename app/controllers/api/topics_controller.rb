@@ -1,6 +1,14 @@
 class Api::TopicsController < ApplicationController
   def index
-    @topics = Topic.all
+    filter = params[:filter]
+    
+    if filter == ["0"]
+      @topics = Topic.all
+    elsif filter.is_a?(Array) && filter.length > 0
+      @topics = Topic.where('id IN (?)', filter)
+    elsif filter.nil?
+      render json: []
+    end
   end
 
   def show

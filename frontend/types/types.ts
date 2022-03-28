@@ -7,7 +7,7 @@ export interface User {
   description: string | null;
   groups: number[];
   events: number[];
-  topics: number[];
+  topics: string[];
 }
 
 export interface Event {
@@ -25,7 +25,7 @@ export interface Event {
   public: boolean;
   capacity: number | null;
   attendees: number[];
-  topics: number[];
+  topics: string[];
 }
 
 export interface Group {
@@ -39,9 +39,19 @@ export interface Group {
   public: boolean;
   members: number[];
   events: number[];
-  topics: number[];
+  topics: string[];
 }
 
+export interface Topic {
+  id: number;
+  name: string;
+  topicable_id: number;
+  topicable_type: string;
+}
+
+export interface TopicEntity {
+  [id: number]: Topic;
+}
 
 export interface EventEntity {
   [id: number]: Event

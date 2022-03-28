@@ -11,7 +11,7 @@ const receiveGroups = (groups: GroupEntity) => ({
   payload: groups
 })
 
-export const fetchGroups = (filter: number[] = []) => (dispatch: AppDispatch) => {
+export const fetchGroups = (filter: number[]) => (dispatch: AppDispatch) => {
   // dispatch(loadGroups())
   return EntitiesAPIUtil.fetchGroups(filter)
     .then(

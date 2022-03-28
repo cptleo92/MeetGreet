@@ -17,4 +17,11 @@ export const fetchEvents = (filter: number[] = [0]) => (
   })
 )
 
+export const fetchTopics = (filter: number[] = [0]) => (
+  $.ajax({
+    method: "GET",
+    url: "api/topics",
+    data: {filter: filter}
+  })
+)
 

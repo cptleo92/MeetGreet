@@ -23,11 +23,11 @@ const SplashFooter = () => {
         <SplashFooterSocials />
 
         <ul className="footer-copy">
-          <li>2022 MeetGreet</li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Help</a></li>
+          <li>&copy; 2022 MeetGreet</li>
+          <li><a>Terms of Service</a></li>
+          <li><a>Privacy Policy</a></li>
+          <li><a>Cookie Policy</a></li>
+          <li><a>Help</a></li>
         </ul>
       </div>
     </footer>

@@ -10,7 +10,7 @@ const HomeHeader = () => {
   return (
     <nav className="splash-header-nav home-header"> 
       <img       
-        src={window.meetupLogo}
+        src={window.smallLogo}
         alt="meetgreet logo"
         className="splash-header-logo"
       />     
@@ -19,7 +19,7 @@ const HomeHeader = () => {
           <a onClick={() => dispatch(logout())}>Log out</a>
         </li>
         <li className="splash-header-nav-right-signup">
-          <a href="#">Your Profile</a>
+          <a>Your Profile</a>
         </li>
       </ul>
   

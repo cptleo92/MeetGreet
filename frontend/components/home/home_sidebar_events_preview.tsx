@@ -21,7 +21,7 @@ const HomeSidebarEventsPreview = () => {
   const renderEvents = () => {
     if (firstEvent === null) {
       return (
-        <div className="no-events">          
+        <div className="no-preview">          
           <strong>You have not registered for any events</strong>
           <p>Events you have registered for will appear here.</p>
         </div>
@@ -39,7 +39,7 @@ const HomeSidebarEventsPreview = () => {
   }
 
   return (
-    <div className="sidebar-events-preview">
+    <div className="sidebar-preview">
       {renderEvents()}
     </div>
   )

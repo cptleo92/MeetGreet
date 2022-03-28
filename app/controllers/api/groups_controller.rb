@@ -2,7 +2,7 @@ class Api::GroupsController < ApplicationController
   def index
     filter = params[:filter]
 
-    if filter == [0]
+    if filter == ["0"]
       @groups = Group.all
     elsif filter.is_a?(Array) && filter.length > 0
       @groups = Group.where('id IN (?)', filter)

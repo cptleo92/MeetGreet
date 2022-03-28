@@ -23,14 +23,14 @@ const SplashMainMobile = () => {
         <p className="mobile-text">Download the app.</p>
 
         <div className="download-buttons">
-          <a href="#">
+          <a>
             <img 
               className="ios-button"
               src={window.iosDownload}
               alt="ios store download"
             />
           </a>
-          <a href="#">
+          <a>
             <img 
               className="android-button"
               src={window.androidDownload}

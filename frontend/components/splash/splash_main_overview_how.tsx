@@ -11,7 +11,7 @@ const SplashMainOverviewHow = () => {
             src={window.joinGroup}
             alt="join a group"
           />
-          <a href="#">Join a group</a>
+          <a>Join a group</a>
           <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
         </div>
 
@@ -20,7 +20,7 @@ const SplashMainOverviewHow = () => {
             src={window.findEvent}
             alt="find an event"
           />
-          <a href="#">Find an event</a>
+          <a>Find an event</a>
           <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
         </div>
 
@@ -29,7 +29,7 @@ const SplashMainOverviewHow = () => {
             src={window.startGroup}
             alt="start a group"
           />
-          <a href="#">Start a group</a>
+          <a>Start a group</a>
           <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
         </div>
       </section>

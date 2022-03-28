@@ -13,7 +13,7 @@ const HomeSidebarGroupsPreview = () => {
   const renderGroups = () => {
     if (userGroups.length === 0) {
       return (
-        <div className="no-groups">          
+        <div className="no-preview">          
           <strong>You have not joined any groups</strong>
           <a>Discover groups</a>
         </div>
@@ -26,7 +26,7 @@ const HomeSidebarGroupsPreview = () => {
   }
 
   return (
-    <div className="sidebar-groups-preview">
+    <div className="sidebar-preview">
       {renderGroups()}
     </div>
   )

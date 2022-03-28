@@ -13,3 +13,7 @@ export const getEvents = (state: RootState): Event[] => {
 export const getGroups = (state: RootState): Group[] => {
   return Object.values(state.entities.groups)
 }
+
+export const getUserTopics = (state: RootState, id: number): string[] => {
+  return state.entities.users[id].topics
+}

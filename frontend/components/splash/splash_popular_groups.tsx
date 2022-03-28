@@ -6,7 +6,7 @@ const SplashPopularGroups = () => {
     <div className="splash-upcoming-events">
       <header className="suggestions-header">
         <h2>Popular Groups</h2>
-        <a href="#">Explore more groups</a>
+        <a>Explore more groups</a>
       </header>
       <SplashPopularGroupsIndex />
     </div>

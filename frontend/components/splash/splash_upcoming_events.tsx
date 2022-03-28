@@ -6,7 +6,7 @@ const SplashUpcomingEvents = () => {
     <div className="splash-upcoming-events">
       <header className="suggestions-header">
         <h2>Upcoming events</h2>
-        <a href="#">Explore more events</a>
+        <a>Explore more events</a>
       </header>
       <SplashUpcomingEventsIndex />
     </div>
