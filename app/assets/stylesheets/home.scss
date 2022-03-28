@@ -8,6 +8,51 @@
 
   .splash-header-logo {
     width: 50px;
+    margin-right: 40px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 80%;
+    }
+  }
+}
+
+.header-search {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+
+  input {
+    margin: 0;
+    text-indent: 10px;
+    border-right: 1px solid transparent;
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;   
+
+      &:hover {
+        border-right: 1px solid #060669;
+      }
+    }
+
+    &:nth-child(2) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .btn-red {
+    height: 37px;
+    width: 37px;
+    padding: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .svg-button {
+    width: 15px;
+    fill: white;
   }
 }
 

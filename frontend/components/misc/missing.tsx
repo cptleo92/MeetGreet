@@ -1,0 +1,24 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import HomeHeader from '../home/home_header';
+import SplashFooter from '../splash/splash_footer';
+
+function Missing() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="missing">
+      <HomeHeader />
+
+      <div className="missing-text">
+        <h2>Our deepest apologies!</h2>
+        <p>We couldn't find the page you're looking for.</p>
+        <a onClick={() => navigate(-1)}>Click here to go back to where you were.</a>
+      </div>
+
+      <SplashFooter />
+    </div>
+  );
+}
+
+export default Missing;

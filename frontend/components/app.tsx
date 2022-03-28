@@ -5,7 +5,8 @@ import Splash from './splash/splash';
 import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import Home from './home/home';
-
+import Missing from './misc/missing';
+import Group from './groups/group';
 
 export default function App() {
   const currentUser = useSelector((state: RootState) => state.session.currentUserId )
@@ -17,12 +18,14 @@ export default function App() {
         <Route element={<AuthRoutes loggedIn={loggedIn} />}>    
           <Route path="/" element={<Splash />}/>
         </Route>
-
+        
         <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-          <Route path="/home" element={<Home />}>
+          <Route path="/home" element={<Home />} />
         </Route>
 
-        </Route>
+        <Route path="/groups/:id" element={<Group />}/>
+
+        <Route path="*" element={<Missing />} />
 
       </Routes>     
     </div>

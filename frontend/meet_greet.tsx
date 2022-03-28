@@ -7,7 +7,7 @@ import Root from './components/root'
 import { signup, login, logout } from "./actions/session_actions"
 import { fetchGroups } from "./actions/groups_actions"
 import { fetchUserFeedItems } from "./actions/users_actions"
-import { fetchTopics } from "./actions/topics_actions"
+// import { fetchTopics } from "./actions/topics_actions"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.login = login;
   window.logout = logout;
   window.fetchUserFeedItems = fetchUserFeedItems
-  window.fetchTopics = fetchTopics;
+  // window.fetchTopics = fetchTopics;
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(
