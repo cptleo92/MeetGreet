@@ -1,12 +1,34 @@
 import React from "react";
+import { useUser } from "../../util/hooks";
 
 const SplashFooterLinks = () => {
+  const currentUser = useUser();
+
+  const accountLinks = () => {
+    if (currentUser) {
+      return (
+        <>
+          <li><a>Your Profile</a></li>
+          <li><a>Your Events</a></li>
+          <li><a>Your Groups</a></li>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <li><a>Sign up</a></li>
+          <li><a>Log in</a></li>
+        </>
+      )
+    }
+  }
+
+
   return (
     <div className="footer-links">
       <ul className="account">
-        <li className="footer-links-title">Your Account</li>
-        <li><a>Sign up</a></li>
-        <li><a>Log in</a></li>
+        <li className="footer-links-title">Your Account</li>         
+        {accountLinks()}
         <li><a>Help</a></li>
       </ul>
 

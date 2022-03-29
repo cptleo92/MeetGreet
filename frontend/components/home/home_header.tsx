@@ -13,6 +13,11 @@ const HomeHeader = () => {
     navigate("/home");
   }
 
+  const handleLogout = () => {
+    goHome();
+    dispatch(logout());
+  }
+
   return (
     <nav className="splash-header-nav home-header"> 
       <img       
@@ -40,7 +45,7 @@ const HomeHeader = () => {
 
       <ul className="splash-header-nav-right">
         <li className="splash-header-nav-right-login">
-          <a onClick={() => dispatch(logout())}>Log out</a>
+          <a onClick={handleLogout}>Log out</a>
         </li>
         <li className="splash-header-nav-right-signup">
           <a>Your Profile</a>

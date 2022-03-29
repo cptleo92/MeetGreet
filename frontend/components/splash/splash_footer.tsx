@@ -1,18 +1,26 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SplashFooterLinks from "./splash_footer_links";
 import SplashFooterSocials from "./splash_footer_socials";
 import { openModal } from "../../actions/modal_actions";
+import { useLoggedIn } from "../../util/hooks";
+import { useNavigate } from "react-router-dom";
+import Modal from "./modal";
+import { RootState } from "../../store/store";
 
 const SplashFooter = () => {
   const dispatch = useDispatch();
+  const loggedIn = useLoggedIn();
+  const navigate = useNavigate();
+  const modal = useSelector((state: RootState) => state.ui.modal)
 
   const handleClick = () => {
-    dispatch(openModal("signup"))
+    loggedIn ? navigate("groups/new") : dispatch(openModal("login"))
   }
 
   return (
     <footer className="splash-footer">
+      <Modal modal={modal} />
       <div className="splash-footer-body">
         <div className="footer-head">
           <h4>Create your own MeetGreet group.</h4>

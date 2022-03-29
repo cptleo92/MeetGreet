@@ -1,4 +1,16 @@
 class Api::UsersController < ApplicationController
+  def index
+    filter = params[:filter]
+
+    if filter == ["0"]
+      @users = User.all
+    elsif filter.is_a?(Array) && filter.length > 0
+      @users = User.where('id IN (?)', filter)
+    elsif filter.nil?
+      render json: []
+    end
+  end
+
   def show
     @user = User.find_by(id: params[:id])    
   end

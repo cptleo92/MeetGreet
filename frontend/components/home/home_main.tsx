@@ -4,29 +4,27 @@ import HomeFeed from "./home-feed";
 import { useDispatch } from "react-redux";
 import { fetchUserFeedItems } from "../../actions/users_actions";
 import { useUser } from "../../util/hooks";
+import Loading from "../misc/loading";
 
 const HomeMain = () => {
-  const dispatch = useDispatch(); 
-  const [loading, setLoading] = useState(true);
-  const currentUser = useUser();
+  // const dispatch = useDispatch(); 
+  // const [loading, setLoading] = useState(true);
+  // const currentUser = useUser();
 
-  useEffect(() => {
-    dispatch(fetchUserFeedItems(currentUser))
-      .then(() => {
-        console.log("Finished loading user info")
-        setLoading(false)
-      })
-  }, [])
+  // useEffect(() => {
+  //   dispatch(fetchUserFeedItems(currentUser))
+  //     .then(() => {
+  //       setLoading(false)
+  //     })
+  // }, [])
 
   // console.log(loading)
   // debugger
   
   return (    
     <div className="home-main">      
-      {!loading && <HomeSidebar />}
-      {!loading && <HomeFeed /> } 
-
-      {loading && <p>Loading...</p>}
+      <HomeSidebar />
+      <HomeFeed /> 
     </div>
   )
 }

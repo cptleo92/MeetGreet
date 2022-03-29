@@ -15,5 +15,5 @@ const closingModal = () => ({
 export const closeModal = () => (dispatch: AppDispatch) => {
   const modal = document.querySelector(".modal-child")
   modal?.classList.add('animate__fadeOut', 'animate__faster')    
-  setTimeout( () => dispatch(closingModal()), 200)
+  dispatch(closingModal())
 }

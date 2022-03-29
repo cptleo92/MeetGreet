@@ -10,9 +10,7 @@ export const LOGOUT_USER = "LOGOUT_USER"
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS"
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 
-
-
-const receiveUser = (user: User): AnyAction => ({
+export const receiveUser = (user: User): AnyAction => ({
   type: RECEIVE_USER,
   payload: user
 })

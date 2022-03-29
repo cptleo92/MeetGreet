@@ -11,7 +11,7 @@ const SplashHeader = () => {
 
   return (
     <nav className="splash-header-nav"> 
-      <Modal modal={modal}/>
+      {/* <Modal modal={modal}/> */}
       <img       
         src={window.meetupLogo}
         alt="meetgreet logo"

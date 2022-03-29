@@ -25,3 +25,10 @@ export const fetchTopics = (filter: number[] = [0]) => (
   })
 )
 
+export const fetchUsers = (filter: number[] = [0]) => (
+  $.ajax({
+    method: "GET",
+    url: "api/users",
+    data: {filter: filter}
+  })
+)

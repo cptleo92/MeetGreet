@@ -9,6 +9,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['session']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -27,3 +28,4 @@ export const configureStore = (preloadedState = {}) => {
 const store = configureStore().store;
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+

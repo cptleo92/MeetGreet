@@ -6,6 +6,10 @@ export const getCurrentUser = (state: RootState) => {
   return state.entities.users[currentUserId]
 }
 
+export const getCurrentUserId = (state: RootState) => {
+  return state.session.currentUserId;
+}
+
 export const getEvents = (state: RootState): Event[] => {
   return Object.values(state.entities.events)
 }

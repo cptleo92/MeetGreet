@@ -5,13 +5,11 @@ import Root from './components/root'
 
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
-import { fetchGroups } from "./actions/groups_actions"
-import { fetchUserFeedItems } from "./actions/users_actions"
-// import { fetchTopics } from "./actions/topics_actions"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
   // bootstrapping current user to window so it remembers if a user is logged in
+  // keeping this in in case redux-persist has issues!
   // ---------------------------
   // let store;
   // if (window.currentUser) {
@@ -27,27 +25,33 @@ document.addEventListener("DOMContentLoaded", () => {
   //   store = configureStore();
   // }
 
-  // this bit belongs in root.html.erb for bootstrapping
-  // -----------------------------
-  //   <% if logged_in? %>
-  //   <script type="text/javascript">
-  //     window.currentUser = <%= render("api/users/user_full.json.jbuilder", user: current_user).html_safe %>
-  //   </script>
-  // <% end %>
+  let persistedStore;
+  if (window.currentUser) {
+    console.log("found current user!")
+    const preloadedState = {
+      entities: {
+        users: { [window.currentUser.id]: window.currentUser }       
+      },
+      session: { currentUserId: window.currentUser.id }
+    }
+    persistedStore = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    persistedStore = configureStore();
+  }
 
+  const { store, persistor } = persistedStore;
   // //TESTING
-  // window.demo = {email: 'demo@fake.com', password: 'password'}
-  // window.getState = store.getState;
-  // window.dispatch = store.dispatch;
+  window.demo = {email: 'demo@fake.com', password: 'password'}
+  window.dispatch = store.dispatch;
   // window.signup = signup;
-  // window.login = login;
-  // window.logout = logout;
-  // window.fetchUserFeedItems = fetchUserFeedItems
-  // window.fetchTopics = fetchTopics;
+  window.login = login;
+  window.logout = logout;
+
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(
-    <Root />,
+    <Root store={store} persistor={persistor}/>,
     rootEl
   )
 })

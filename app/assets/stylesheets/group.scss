@@ -1,0 +1,31 @@
+.group-header {
+  display: flex;
+  margin: 50px 0;
+}
+
+.group-image {
+  border: 1px solid red;  
+  width: 600px;
+  height: 330px;
+  margin-right: 50px;
+}
+
+.info {
+  ul {
+    // margin-top: 20px;
+  }
+
+  svg {
+    width: 15px;  
+    fill: gray;
+    margin-right: 5px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    p {font-weight: 300;}
+    strong {font-weight: 700;}
+  }
+}

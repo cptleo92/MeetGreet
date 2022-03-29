@@ -40,6 +40,7 @@ export interface Group {
   members: number[];
   events: number[];
   topics: string[];
+  organizers: number[];
 }
 
 export interface Topic {

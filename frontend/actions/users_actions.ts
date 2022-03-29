@@ -1,6 +1,4 @@
-import { AppDispatch } from "../store/store";
 import { User } from "../types/types";
-import { useAppDispatch } from "../util/hooks";
 import { fetchEvents } from "./events_actions";
 import { fetchGroups } from "./groups_actions";
 
