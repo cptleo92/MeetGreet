@@ -17,13 +17,17 @@ function GroupPanelMembers({ group }: {group: Group}) {
   // }, [group])
 
   const members = useSelector((state: RootState) => state.ui.group.members)
+  const previewMembers = members.slice(0,15)
 
   return (
     <div className="members">
-      <h4>Members ({group.members.length})</h4>     
+      <div className="members-header">
+        <h4>Members ({group.members.length})</h4>     
+        <a>See all</a>
+      </div>
         <ul>
           {
-            members.map((member: User, idx) => <li key={idx}>{member.fname} {member.lname}</li>)
+            previewMembers.map((member: User, idx: number) => <li key={idx}>{member.fname} {member.lname}</li>)
           }
         </ul>        
     </div>

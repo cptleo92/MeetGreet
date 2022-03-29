@@ -3,6 +3,11 @@
   margin: 50px auto;
 }
 
+.members-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .group-image {
   border: 1px solid red;  
   width: 600px;
@@ -11,6 +16,7 @@
 }
 
 .group-container {
+
   svg {
     width: 15px;  
     fill: gray;
@@ -55,6 +61,7 @@
 
 .group-bg {
   background: rgb(241, 241, 241);
+  min-height: 100vh;
 }
 
 .group-main {
@@ -84,6 +91,7 @@
   padding: 15px;
   margin: 20px 0;  
   transition: .2s;
+  max-width: 600px;
 
   p {
     display: flex;
@@ -107,5 +115,32 @@
     box-shadow: 1px 1px 20px 5px rgb(211, 211, 211);
     transform: translateY(-2px);
     transition: .2s;
+  }
+}
+
+.events-tab {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 50px;
+  padding: 50px 0;
+}
+
+.events-tab-select {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  height: min-content;
+
+  a {
+    margin: 20px 0 20px 20px;
+    padding: 5px;
+    font-size: 1rem;
+    color: black;
+    
+    &.active {
+      color: #008294;
+      font-weight: 700;
+      border-right: 3px solid #008294;
+    }
   }
 }

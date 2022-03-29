@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Group } from '../../types/types';
 import GroupPanelMembers from './group_panel_members';
 import GroupPanelOrganizers from './group_panel_organizers';
-import GroupEvents from './group_about_events';
+import GroupEventsList from './group_events_list';
 
 function GroupAbout({ group }: {group: Group}) {
 
@@ -18,7 +18,7 @@ function GroupAbout({ group }: {group: Group}) {
         <GroupPanelMembers group={group} />
       </div>
 
-      <GroupEvents group={group} />
+      <GroupEventsList group={group} preview={true} pastOnly={false} />
     </div>
   );
 }

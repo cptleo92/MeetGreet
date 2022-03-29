@@ -7,21 +7,21 @@ import { fetchEvents } from '../../util/entities_api_util';
 import { getUpcomingEvents, getPastEvents, sortByDate } from '../../util/event_util';
 import GroupEventsItem from './group_event_item';
 
-function GroupEvents({ group }: {group: Group}) {
+function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, preview: boolean, pastOnly: boolean}) {
   const eventsFromStore = useSelector((state: RootState) => getEventsFromGroup(state, group))
   const [loading, setLoading] = useState(true)
   const [events, setEvents] = useState(eventsFromStore)
-  const [hasUpcoming, setHasUpcoming] = useState(true)  
+  const [hasUpcoming, setHasUpcoming] = useState(true) 
 
   const sortEvents = (fetchedEvents: Event[]) => {
     if (fetchedEvents.length > 0) {      
       let sortedEvents = sortByDate(getUpcomingEvents(fetchedEvents));
       setHasUpcoming(true)
-      if (sortedEvents.length === 0) {
+      if (sortedEvents.length === 0 || pastOnly) {
         sortedEvents = sortByDate(getPastEvents(fetchedEvents)).reverse();    
         setHasUpcoming(false)  
       }
-      setEvents(sortedEvents)
+      preview ? setEvents(sortedEvents.slice(0,5)) : setEvents(sortedEvents)
     } else {
       setEvents([])
     }
@@ -30,8 +30,8 @@ function GroupEvents({ group }: {group: Group}) {
 
   useEffect(() => {
     setLoading(true);
-    sortEvents(events)
-  }, [group])
+    sortEvents(eventsFromStore)
+  }, [group, pastOnly])
 
   const renderEventHeader = () => {
     if (events.length === 0) {
@@ -56,7 +56,7 @@ function GroupEvents({ group }: {group: Group}) {
           {renderEventHeader()}       
         <ul>
           {
-            events.map((event: Event) => <GroupEventsItem key={event.id} event={event} upcoming={hasUpcoming} />)
+            events.map((event: Event) => <GroupEventsItem key={event.id} event={event} upcoming={pastOnly ? false : hasUpcoming} />)
           }
         </ul>
         </>
@@ -65,4 +65,4 @@ function GroupEvents({ group }: {group: Group}) {
   );
 }
 
-export default GroupEvents;
+export default GroupEventsList;

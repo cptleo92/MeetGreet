@@ -24,7 +24,7 @@ function GroupMain({ group }: {group: Group}) {
         <div className="body">
           <Routes>
             <Route index element={<GroupAbout group={group}/>} />
-            <Route path="events" element={<GroupEvents group={group}/>} />
+            <Route path="events/*" element={<GroupEvents group={group}/>} />
           </Routes>
         </div>
       </div>
