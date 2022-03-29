@@ -29,7 +29,11 @@ p {
 
 .splash {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
+
+  .btn-red {
+    font-size: 22px;
+  }
 }
 
 .splash .blob{

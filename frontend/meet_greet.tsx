@@ -5,6 +5,7 @@ import Root from './components/root'
 
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
+import { getUpcomingEvents, getPastEvents } from "./util/event_util"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -47,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.signup = signup;
   window.login = login;
   window.logout = logout;
-
+  window.getUpcomingEvents = getUpcomingEvents;
+  window.getPastEvents = getPastEvents;
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(

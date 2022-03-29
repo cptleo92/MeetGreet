@@ -27,7 +27,7 @@ end
 
   Group.create!(
     title: rand_title,
-    description: "Placeholder group description",
+    description: Faker::Hipster.paragraph,
     location: Faker::TvShows::TheExpanse.location
   )
   
@@ -65,30 +65,30 @@ end
 end
 
 # event seeding
-25.times do
+100.times do
   rand_start = Faker::Time.forward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
 
   Event.create!(
-    group_id: rand(1..20),
+    group_id: rand(1..50),
     host_id: rand(1..50),
     title: Faker::Book.title,
-    description: "Placeholder event description",
+    description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
     start_time: rand_start,
     end_time: rand_start + rand_duration
   )
 end
 
-25.times do
-  rand_start = Faker::Time.forward(days: 30)
+100.times do
+  rand_start = Faker::Time.backward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
 
   Event.create!(
-    group_id: rand(1..20),
+    group_id: rand(1..50),
     host_id: rand(1..50),
     title: Faker::Hipster.sentence,
-    description: "Placeholder event description",
+    description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
     start_time: rand_start,
     end_time: rand_start + rand_duration
@@ -130,12 +130,17 @@ end
 
 200.times do
   rand_id = rand(1..100)
+  rand_name = Faker::Hobby.activity
 
-  Topic.create!(
-    name: Faker::Hobby.activity,
-    topicable_id: rand_id,
-    topicable_type: "User"
-  )
+  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "User")
+
+  unless topic
+    Topic.create!(
+      name: rand_name,
+      topicable_id: rand_id,
+      topicable_type: "User"
+    )
+  end
 end
 
 

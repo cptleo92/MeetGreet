@@ -6,7 +6,7 @@ import * as EntitiesAPIUtil from "../util/entities_api_util"
 import { GroupEntity } from "../types/types"
 import { AppDispatch } from "../store/store"
 
-const receiveGroups = (groups: GroupEntity) => ({
+export const receiveGroups = (groups: GroupEntity) => ({
   type: RECEIVE_GROUPS,
   payload: groups
 })

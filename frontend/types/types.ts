@@ -1,6 +1,7 @@
 export interface User {
   id: number;
   fname: string;
+  lname: string;
   email: string;
   birthdate: string | null;
   location: string | null;
@@ -10,7 +11,7 @@ export interface User {
   topics: string[];
 }
 
-export interface Event {
+export type Event = {
   id: number;
   group_id: number;
   host_id: number;

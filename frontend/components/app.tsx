@@ -25,7 +25,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
         </Route>
 
-        <Route path="/groups/:id" element={<Group />}/>
+        <Route path="/groups/:id/*" element={<Group />}/>
         {/* <Route path="/groups/new" element={<GroupCreate />}/> */}
         <Route path="/groups/new" element={<Missing />}/>
 

@@ -1,4 +1,5 @@
 import { Group } from "../types/types";
+import { Organizers } from "../components/groups/group_header";
 
 // type organizers = {
 //   [id: number]: {
@@ -11,6 +12,6 @@ export const getOrganizers = (group: Group) => {
   return $.ajax({
     method: "GET",
     url: "api/memberships",
-    data: {id: group.id}
+    data: {id: group.id}    
   })
 }
