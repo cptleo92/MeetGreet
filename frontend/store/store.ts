@@ -12,13 +12,22 @@ const persistConfig = {
   blacklist: ['session']
 }
 
+const middlewares = [thunk];
+
+if (process.env.NODE_ENV !== "production") {
+  // must use 'require' (import only allowed at top of file)
+  const { logger } = require("redux-logger");
+  middlewares.push(logger);
+}
+
+
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const configureStore = (preloadedState = {}) => {
   let store = createStore(
     persistedReducer,
     preloadedState,
-    composeWithDevTools(applyMiddleware(thunk, logger))
+    composeWithDevTools(applyMiddleware(...middlewares))
   )
   let persistor = persistStore(store)
   return { store, persistor }

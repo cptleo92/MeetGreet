@@ -4,9 +4,9 @@ import { configureStore } from './store/store'
 import Root from './components/root'
 
 //TESTING
-import { signup, login, logout } from "./actions/session_actions"
-import { getUpcomingEvents, getPastEvents } from "./util/event_util"
-import { getEventsFromGroup } from "./selectors/selectors"
+// import { signup, login, logout } from "./actions/session_actions"
+// import { getUpcomingEvents, getPastEvents } from "./util/event_util"
+// import { getEventsFromGroup } from "./selectors/selectors"
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { store, persistor } = persistedStore;
   // //TESTING
-  window.demo = {email: 'demo@fake.com', password: 'password'}
-  window.dispatch = store.dispatch;
+  // window.demo = {email: 'demo@fake.com', password: 'password'}
+  // window.dispatch = store.dispatch;
   // window.signup = signup;
-  window.login = login;
-  window.logout = logout;
-  window.getEventsFromGroup = getEventsFromGroup;
+  // window.login = login;
+  // window.logout = logout;
+  // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")
   ReactDOM.render(

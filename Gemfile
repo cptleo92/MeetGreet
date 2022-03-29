@@ -27,6 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem 'faker'
 gem 'figaro'
 gem 'devise'
 gem 'omniauth'
@@ -47,7 +48,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'annotate'  
-  gem 'faker'
+
   gem 'guard-livereload', '~> 2.5', require: false
   gem "rack-livereload"
 

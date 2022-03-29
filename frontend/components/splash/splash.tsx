@@ -27,6 +27,7 @@ declare global {
     firstArticle: string;
     secondArticle: string;
     thirdArticle: string;
+    currentUser: any;
   }
 }
 
