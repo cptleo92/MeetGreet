@@ -15,6 +15,7 @@ export default function App() {
 
   return (
     <div>
+
       <Routes> 
         <Route element={<AuthRoutes loggedIn={loggedIn} />}>    
           <Route path="/" element={<Splash />}/>
@@ -33,6 +34,7 @@ export default function App() {
 
         </Route>     
       </Routes>
+      
     </div>
   )
 }

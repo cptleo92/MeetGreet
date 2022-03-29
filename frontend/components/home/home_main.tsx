@@ -18,8 +18,6 @@ const HomeMain = () => {
   //     })
   // }, [])
 
-  // console.log(loading)
-  // debugger
   
   return (    
     <div className="home-main">      

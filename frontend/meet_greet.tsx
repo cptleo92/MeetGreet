@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let persistedStore;
   if (window.currentUser) {
-    console.log("found current user!")
     const preloadedState = {
       entities: {
         users: { [window.currentUser.id]: window.currentUser }       

@@ -40,7 +40,6 @@ function Group() {
         dispatch(receiveGroups(data))    
         let group = Object.values(data)[0]   
         setGroup(group)
-        // debugger
         dispatch(fetchOrganizers(group))
         dispatch(fetchMembers(group))
         dispatch(fetchEvents(group.events))

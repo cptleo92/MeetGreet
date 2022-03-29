@@ -20,8 +20,6 @@ const receiveEvents = (events: EventEntity) => ({
 // })
 
 export const fetchEvents = (filter: number[]) => (dispatch: AppDispatch) => {
-  // dispatch(loadAllUserInfo())
-  console.log("fetching events!")
   return EntitiesAPIUtil.fetchEvents(filter)
     .then(
       (events: EventEntity) => dispatch(receiveEvents(events)),
