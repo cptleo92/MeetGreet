@@ -10,7 +10,7 @@ import { Persistor } from 'redux-persist';
 import { login } from '../actions/session_actions';
 
 
-export default function Root({ store, persistor }: {store: RootState, persistor: Persistor}) {
+export default function Root({ store, persistor }: {store: any, persistor: Persistor}) {
   // testing
   // window.demo = {email: 'demo@fake.com', password: 'password'}
   // window.dispatch = store.dispatch;
