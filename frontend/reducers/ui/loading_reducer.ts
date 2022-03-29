@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
-import { RECEIVE_EVENTS } from "../actions/events_actions";
-import { START_LOADING_EVENTS } from "../actions/events_actions";
+import { RECEIVE_EVENTS } from "../../actions/events_actions";
+import { START_LOADING_EVENTS } from "../../actions/events_actions";
 
 export default (state = false, action: AnyAction) => {
   Object.freeze(state);

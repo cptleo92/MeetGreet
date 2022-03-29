@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import Loading from '../misc/loading';
 import { receiveGroups } from '../../actions/groups_actions';
 import { GroupEntity } from '../../types/types';
+import { fetchEvents } from '../../actions/events_actions';
+import { fetchOrganizers, fetchMembers } from '../../actions/ui_actions';
 
 function Group() {
   const { id } = useParams();
@@ -17,25 +19,32 @@ function Group() {
   const [group, setGroup] = useState();
   const dispatch = useDispatch();
 
-  // this seems like an extremely roundabout way to get the group entity to the components after
+  // this seems like an extremely roundabout way to get the group entity to the components
   // previously, this was my flow:
-  // - fetch group(:id) from database
+  // - fetch group(:id) from database so it's added to the store
   // - set loading to true after store is updated
   // - render components, which can grab the group from the store themselves as needed
   //
-  // i couldn't figure out a way to make it so the components only render when the fetched 
-  // group hits the store
-  // this is my solution: 
+  // how it works now:  
   // - fetch the group directly via AJAX
   // - dispatch/receive the group so the store is updated
   // - pass the group as a prop down and switch loading so the components render
+  // - also add the group's events to the store so I don't have to fetch them every time
+  //
+  // basically, i'm threading props down which may not be the best practice? 
 
   useEffect(() => {   
+    setLoading(true)
     fetchGroups([parsedId])
       .then(((data: GroupEntity) => {
-        dispatch(receiveGroups(data))
-        setGroup(Object.values(data)[0])
-        setLoading(false)
+        dispatch(receiveGroups(data))    
+        let group = Object.values(data)[0]   
+        setGroup(group)
+        // debugger
+        dispatch(fetchOrganizers(group))
+        dispatch(fetchMembers(group))
+        dispatch(fetchEvents(group.events))
+          .then(() => setLoading(false))
       }))
   },[id])
 

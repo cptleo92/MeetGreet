@@ -7,9 +7,22 @@ function GroupEventsItem({ event, upcoming }: {event: Event, upcoming: boolean})
     return upcoming ? "event-card upcoming" : "event-card past"
   }
 
+  const style = {
+    color: upcoming ? "" : "gray"
+  }
+
   return (
-    <div className={className()}>
-      <h4 className="title">{stringifyDateLong(event.start_time)}</h4>
+    <div 
+      className={className()}
+      style={style}
+    >
+      <h4 
+        className="title"
+        style={style}
+      >
+        {stringifyDateLong(event.start_time)}
+      </h4>
+      
       <h2>{event.title}</h2>
 
       <p>

@@ -99,20 +99,17 @@
     font-weight: 500;
   }  
 
-  .past {
-    color: rgb(121, 121, 121);
-  }
-
   h4 {
     margin: 10px 0;
     font-weight: 400;
     font-size: 1rem;
+    
   }
 
   &:hover {
     cursor: pointer;
-    box-shadow: 1px 1px 5px 5px lightgray;
-    transform: translateY(-3px);
-    transition: .5s;
+    box-shadow: 1px 1px 20px 5px rgb(211, 211, 211);
+    transform: translateY(-2px);
+    transition: .2s;
   }
 }

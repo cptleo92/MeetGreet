@@ -66,3 +66,12 @@ export interface GroupEntity {
 export interface Filter {
   [key: string]: number[];
 }
+
+export interface UserName {
+  fname: string;
+  lname: string;
+}[]
+
+export interface UserNameEntity {
+  [id: number]: UserName;
+}

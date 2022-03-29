@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modal_actions';
+import { OPEN_MODAL, CLOSE_MODAL } from '../../actions/modal_actions';
 
 export default function modalReducer(state = null, action: AnyAction) {
   switch (action.type) {

@@ -10,8 +10,7 @@ export const sortByDate = (eventArray: Event[]): Event[] => {
 }
 
 export const getSoonestEvent = (eventArray: Event[]): Event => {
-  const sorted = sortByDate(eventArray);
-  return sorted[0];
+  return sortByDate(getUpcomingEvents(eventArray))[0]
 }
 
 export const stringifyDate = (time: string): string => {

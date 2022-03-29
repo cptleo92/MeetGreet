@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
 import { RootState } from "../../store/store";
 import { Group } from "../../types/types";
-import { getGroups } from "../../selectors/selectors";
+import { getUserGroups } from "../../selectors/selectors";
 import HomeSidebarGroupItem from "./home_sidebar_group_item";
 
 const HomeSidebarGroupsPreview = () => {
-  let userGroups: Group[] = useSelector((state: RootState) => getGroups(state))
+  let userGroups: Group[] = useSelector((state: RootState) => getUserGroups(state))
   userGroups = userGroups.slice(0, 5)
 
   const renderGroups = () => {

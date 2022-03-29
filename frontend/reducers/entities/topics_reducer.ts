@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
-import { RECEIVE_TOPICS } from "../actions/topics_actions";
-import { TopicEntity } from "../types/types";
-import { LOGOUT_USER } from "../actions/session_actions";
+import { RECEIVE_TOPICS } from "../../actions/topics_actions";
+import { TopicEntity } from "../../types/types";
+import { LOGOUT_USER } from "../../actions/session_actions";
 
 const _nullState: TopicEntity = {}
 

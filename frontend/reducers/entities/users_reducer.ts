@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
-import { RECEIVE_USER } from "../actions/session_actions";
-import { User } from "../types/types";
-import { LOGOUT_USER } from "../actions/session_actions"
+import { RECEIVE_USER } from "../../actions/session_actions";
+import { User } from "../../types/types";
+import { LOGOUT_USER } from "../../actions/session_actions"
 
 interface UserEntity {
   [id: number]: User

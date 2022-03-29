@@ -4,10 +4,10 @@ import { useUser } from "../../util/hooks";
 import { Event, EventEntity } from "../../types/types";
 import { RootState } from "../../store/store";
 import { sortByDate, getSoonestEvent, stringifyDate } from "../../util/event_util";
-import { getEvents } from "../../selectors/selectors";
+import { getUserEvents } from "../../selectors/selectors";
 
 const HomeSidebarEventsPreview = () => {
-  const userEvents: Event[] = useSelector((state: RootState) => getEvents(state))
+  const userEvents: Event[] = useSelector((state: RootState) => getUserEvents(state))
 
   let firstEvent: Event | null;
   if (userEvents.length === 0) {

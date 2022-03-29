@@ -2,21 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { fetchUsers } from '../../util/entities_api_util';
 import { Group } from '../../types/types';
 import { useParams } from 'react-router-dom';
-
-export type Organizers = {
-  fname: string;
-  lname: string;
-}[]
+import { fetchOrganizers } from '../../actions/ui_actions';
+import { RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
 
 function GroupHeader({ group }: {group: Group}) {
-  const { id } = useParams();
-  const [organizers, setOrganizers] = useState<Organizers>([]);
+  // const [organizers, setOrganizers] = useState<Organizers>([]);
   // const group = useSelector((state: RootState) => getGroup(state, id))
 
-  useEffect(() => {
-    fetchUsers(group.organizers)
-      .then(organizers => setOrganizers(Object.values(organizers)))
-  }, [group])
+  // useEffect(() => {
+  //   fetchUsers(group.organizers)
+  //     .then(organizers => setOrganizers(Object.values(organizers)))
+  // }, [group])
+
+  const organizers = useSelector((state: RootState) => state.ui.group.organizers)
 
   const multipleOrganizers = () => {
     if (organizers.length === 2) {

@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getEventsFromGroup } from '../../selectors/selectors';
+import { RootState } from '../../store/store';
 import { Event, Group } from '../../types/types';
 import { fetchEvents } from '../../util/entities_api_util';
 import { getUpcomingEvents, getPastEvents, sortByDate } from '../../util/event_util';
 import GroupEventsItem from './group_event_item';
 
 function GroupEvents({ group }: {group: Group}) {
+  const eventsFromStore = useSelector((state: RootState) => getEventsFromGroup(state, group))
   const [loading, setLoading] = useState(true)
-  const [events, setEvents] = useState<any>([])
-  const [hasUpcoming, setHasUpcoming] = useState(true)
+  const [events, setEvents] = useState(eventsFromStore)
+  const [hasUpcoming, setHasUpcoming] = useState(true)  
 
   const sortEvents = (fetchedEvents: Event[]) => {
     if (fetchedEvents.length > 0) {      
       let sortedEvents = sortByDate(getUpcomingEvents(fetchedEvents));
       setHasUpcoming(true)
       if (sortedEvents.length === 0) {
-        sortedEvents = sortByDate(getPastEvents(fetchedEvents));    
+        sortedEvents = sortByDate(getPastEvents(fetchedEvents)).reverse();    
         setHasUpcoming(false)  
       }
       setEvents(sortedEvents)
@@ -25,11 +29,8 @@ function GroupEvents({ group }: {group: Group}) {
   }
 
   useEffect(() => {
-    setLoading(true)
-    fetchEvents(group.events)
-      .then((data) => {
-        sortEvents(Object.values(data))        
-      })
+    setLoading(true);
+    sortEvents(events)
   }, [group])
 
   const renderEventHeader = () => {

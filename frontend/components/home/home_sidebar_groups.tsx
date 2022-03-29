@@ -1,4 +1,3 @@
-
 import React from "react";
 import HomeSidebarGroupsPreview from "./home_sidebar_groups_preview";
 
