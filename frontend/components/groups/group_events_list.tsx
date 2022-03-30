@@ -9,7 +9,7 @@ import GroupEventsItem from './group_event_item';
 
 function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, preview: boolean, pastOnly: boolean}) {
   const eventsFromStore = useSelector((state: RootState) => getEventsFromGroup(state, group))
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [events, setEvents] = useState(eventsFromStore)
   const [hasUpcoming, setHasUpcoming] = useState(true) 
 
@@ -25,11 +25,11 @@ function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, prev
     } else {
       setEvents([])
     }
-    setLoading(false)
+    // setLoading(false)
   }
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     sortEvents(eventsFromStore)
   }, [group, pastOnly])
 
@@ -50,17 +50,13 @@ function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, prev
   }
 
   return (
-    <div className="about-event-list">
-      { !loading && 
-        <>
+    <div className="about-event-list">     
           {renderEventHeader()}       
         <ul>
           {
             events.map((event: Event) => <GroupEventsItem key={event.id} event={event} upcoming={pastOnly ? false : hasUpcoming} />)
           }
-        </ul>
-        </>
-      }
+        </ul>     
     </div>
   );
 }

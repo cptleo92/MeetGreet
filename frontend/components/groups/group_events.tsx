@@ -9,12 +9,12 @@ import GroupEventsList from './group_events_list';
 function GroupEvents({ group }: {group: Group}) {
 
   return (
-    <div className="events-tab">
-      <div className="events-tab-select">
+    <div className="tab">
+      <div className="tab-select">
         <NavLink to="" end>Upcoming</NavLink>
         <NavLink to="past">Past</NavLink>
       </div> 
-      <div className="events-list">
+      <div className="list">
         <Routes>
           <Route index element={<GroupEventsList group={group} preview={false} pastOnly={false} />} />
           <Route path="past" element={<GroupEventsList group={group} preview={false} pastOnly={true}/>} />

@@ -118,14 +118,14 @@
   }
 }
 
-.events-tab {
+.tab {
   display: grid;
   grid-template-columns: 35% 65%;
   gap: 50px;
   padding: 50px 0;
 }
 
-.events-tab-select {
+.tab-select {
   display: flex;
   flex-direction: column;
   background: white;
@@ -143,4 +143,20 @@
       border-right: 3px solid #008294;
     }
   }
+}
+
+.member-search {
+  position: relative;
+}
+
+.member-list-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.member-card {
+  background: white;
+  border-bottom: 1px solid lightgray;
+  padding: 30px;
+  line-height: 2rem;
 }
