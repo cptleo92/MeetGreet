@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { Group } from '../../types/types';
-import { getOrganizers } from '../../util/group_util';
-import { Organizers } from './group_header';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 

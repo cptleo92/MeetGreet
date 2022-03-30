@@ -1,5 +1,4 @@
-import { Filter } from "../types/types"
-// import { User } from "./session_api_util"
+import { Group } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -32,3 +31,11 @@ export const fetchUsers = (filter: number[] = [0]) => (
     data: {filter: filter}
   })
 )
+
+export const fetchMemberships = (group: Group) => {
+  return $.ajax({
+    method: "GET",
+    url: "api/memberships",
+    data: {id: group.id}
+  })
+}

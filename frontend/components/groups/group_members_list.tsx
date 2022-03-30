@@ -7,19 +7,55 @@ import GroupMembersItem from './group_members_item';
 function GroupMembersList({ group, organizers }: { group: Group, organizers: boolean }) {
   const membersFromStore = useSelector((state: RootState) => state.ui.group.members)
   const organizersFromStore = useSelector((state: RootState) => state.ui.group.organizers)
+  const memberships = useSelector((state: RootState) => state.ui.group.memberships)
+
   const [peopleList, setPeopleList] = useState(membersFromStore);
+  const [sortType, setSortType] = useState(true); // default sort by name
+
+  const sortByDate = (list: UserName[]) => {
+    let sortedList = [...list]
+    return sortedList.sort((member1, member2) => {
+      const create1 = new Date(memberships[member1.id].created_at)
+      const create2 = new Date(memberships[member2.id].created_at)
+      return create1.valueOf() - create2.valueOf()
+    })
+  }
+
+  const sortByName = (list: UserName[]) => {    
+    let sortedList = [...list]    
+    return sortedList.sort((member1, member2) => {      
+      const name1 = member1.fname.toUpperCase();
+      const name2 = member2.fname.toUpperCase();
+      if (name1 < name2) {
+        return -1;
+      }
+      if (name1 > name2) {
+        return 1;
+      }
+      return 0;
+    })
+  }
 
   const setMembers = () => {
     if (organizers) {
-      setPeopleList(organizersFromStore)
+      if (sortType) {
+        setPeopleList(sortByName(organizersFromStore))
+      } else {
+        setPeopleList(sortByDate(organizersFromStore))
+      }
     } else {
-      setPeopleList(membersFromStore)
+      if (sortType) {
+        setPeopleList(sortByName(membersFromStore))
+      } else {
+        setPeopleList(sortByDate(membersFromStore))
+      }
     }
   }
 
   useEffect(() => {
     setMembers()
-  }, [group, organizers])
+    setSearch("")
+  }, [group, organizers, sortType])
 
   const [search, setSearch] = useState("")
 
@@ -38,12 +74,15 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
     }       
   }
 
+  const toggleSort = () => {
+    setSortType(!sortType)
+  }
 
   return (
     <div className="member-list">
       <div className="member-list-header">
         <h3>{organizers ? "Leadership team" : "All members"}</h3>
-        <p>Sort by..</p>
+        <a onClick={toggleSort}>Sort by {sortType ? "Name" : "Join Date"}</a>
       </div>
       <div className="member-search">
         {/* Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.  */}

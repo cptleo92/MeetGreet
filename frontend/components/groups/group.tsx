@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { batch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import GroupHeader from './group_header';
@@ -8,15 +8,15 @@ import { fetchGroups } from '../../util/entities_api_util';
 import { useDispatch } from 'react-redux';
 import Loading from '../misc/loading';
 import { receiveGroups } from '../../actions/groups_actions';
-import { GroupEntity } from '../../types/types';
+import { Group, GroupEntity } from '../../types/types';
 import { fetchEvents } from '../../actions/events_actions';
-import { fetchOrganizers, fetchMembers } from '../../actions/ui_actions';
+import { fetchOrganizers, fetchMembers, fetchMemberships } from '../../actions/ui_actions';
 
-function Group() {
+function GroupContainer() {
   const { id } = useParams();
   const parsedId = parseInt(id);
   const [loading, setLoading] = useState(true);
-  const [group, setGroup] = useState();
+  const [group, setGroup] = useState<Group>();
   const dispatch = useDispatch();
 
   // this seems like an extremely roundabout way to get the group entity to the components
@@ -32,6 +32,8 @@ function Group() {
   // - also add the group's events to the store so I don't have to fetch them every time
   //
   // basically, i'm threading props down which may not be the best practice? 
+  //
+  // update: now i have this monstrosity 
 
   useEffect(() => {   
     setLoading(true)
@@ -41,9 +43,16 @@ function Group() {
         let group = Object.values(data)[0]   
         setGroup(group)
         dispatch(fetchOrganizers(group))
-        dispatch(fetchMembers(group))
-        dispatch(fetchEvents(group.events))
-          .then(() => setLoading(false))
+          .then(() => {
+            dispatch(fetchMembers(group))
+              .then(() => {
+                dispatch(fetchEvents(group.events))
+                  .then(() => {
+                    dispatch(fetchMemberships(group))   
+                      .then(() => setLoading(false))                   
+                  })
+              })
+          })
       }))
   },[id])
 
@@ -61,4 +70,4 @@ function Group() {
   ) 
 }
 
-export default Group;
+export default GroupContainer;

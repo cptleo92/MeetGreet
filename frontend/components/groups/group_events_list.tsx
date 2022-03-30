@@ -7,29 +7,29 @@ import { fetchEvents } from '../../util/entities_api_util';
 import { getUpcomingEvents, getPastEvents, sortByDate } from '../../util/event_util';
 import GroupEventsItem from './group_event_item';
 
-function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, preview: boolean, pastOnly: boolean}) {
+function GroupEventsList({ group, preview = true, pastOnly }: { group: Group, preview: boolean, pastOnly: boolean }) {
   const eventsFromStore = useSelector((state: RootState) => getEventsFromGroup(state, group))
-  // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [events, setEvents] = useState(eventsFromStore)
-  const [hasUpcoming, setHasUpcoming] = useState(true) 
+  const [hasUpcoming, setHasUpcoming] = useState(true)
 
   const sortEvents = (fetchedEvents: Event[]) => {
-    if (fetchedEvents.length > 0) {      
+    if (fetchedEvents.length > 0) {
       let sortedEvents = sortByDate(getUpcomingEvents(fetchedEvents));
       setHasUpcoming(true)
       if (sortedEvents.length === 0 || pastOnly) {
-        sortedEvents = sortByDate(getPastEvents(fetchedEvents)).reverse();    
-        setHasUpcoming(false)  
+        sortedEvents = sortByDate(getPastEvents(fetchedEvents)).reverse();
+        setHasUpcoming(false)
       }
-      preview ? setEvents(sortedEvents.slice(0,5)) : setEvents(sortedEvents)
+      preview ? setEvents(sortedEvents.slice(0, 5)) : setEvents(sortedEvents)
     } else {
       setEvents([])
     }
-    // setLoading(false)
+    setLoading(false)
   }
 
   useEffect(() => {
-    // setLoading(true);
+    setLoading(true)
     sortEvents(eventsFromStore)
   }, [group, pastOnly])
 
@@ -51,13 +51,17 @@ function GroupEventsList({ group, preview = true, pastOnly}: {group: Group, prev
 
   return (
     <div className="about-event-list">     
-          {renderEventHeader()}       
-        <ul>
-          {
-            events.map((event: Event) => <GroupEventsItem key={event.id} event={event} upcoming={pastOnly ? false : hasUpcoming} />)
-          }
+      { !loading &&
+      <>
+      { renderEventHeader() }  
+        < ul >
+        {
+          events.map((event: Event) => <GroupEventsItem key={event.id} event={event} upcoming={pastOnly ? false : hasUpcoming} />)
+        }
         </ul>     
-    </div>
+      </>
+      }  
+    </div >
   );
 }
 

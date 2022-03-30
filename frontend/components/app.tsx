@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import Home from './home/home';
 import Missing from './misc/missing';
-import Group from './groups/group';
+import GroupContainer from './groups/group';
 import Layout from './layout';
 
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
         </Route>
 
-        <Route path="/groups/:id/*" element={<Group />}/>
+        <Route path="/groups/:id/*" element={<GroupContainer />}/>
         {/* <Route path="/groups/new" element={<GroupCreate />}/> */}
         <Route path="/groups/new" element={<Missing />}/>
 

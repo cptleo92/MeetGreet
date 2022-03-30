@@ -9,7 +9,7 @@
 # user seeding with demo user
 User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
 
-99.times do 
+199.times do 
   User.create!(
     fname: Faker::Name.first_name, 
     lname: Faker::Name.last_name,
@@ -35,7 +35,7 @@ end
 
 # making sure every group has an organizer
 (1..50).to_a.each do |grp_id|
-  user_id = rand(1..100)
+  user_id = rand(1..200)
   membership = Membership.find_by(member_id: user_id, group_id: grp_id)
 
   unless membership
@@ -48,8 +48,8 @@ end
 end
 
 # seeding users as group members
-(1..100).to_a.each do |id|
-  3.times do
+(1..200).to_a.each do |id|
+    rand(3..8).times do
     grp_id = rand(1..20)
 
     membership = Membership.find_by(member_id: id, group_id: grp_id)
@@ -58,7 +58,8 @@ end
       Membership.create!(
         member_id: id,
         group_id: grp_id,
-        organizer: (rand(1..4) == 1 ? true : false)
+        organizer: (rand(1..4) == 1 ? true : false),
+        created_at: Faker::Time.backward(days: 90)
       )
     end  
   end
@@ -80,7 +81,7 @@ end
   )
 end
 
-100.times do
+200.times do
   rand_start = Faker::Time.backward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
 
@@ -96,9 +97,9 @@ end
 end
 
 # seeding attendances
-(1..100).to_a.each do |id|
-  2.times do
-    ev_id = rand(1..50)
+(1..200).to_a.each do |id|
+  rand(3..8).times do
+    ev_id = rand(1..300)
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
 

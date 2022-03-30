@@ -18,6 +18,11 @@ export const stringifyDate = (time: string): string => {
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric' });
 }
 
+export const stringifyDateMedium = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', year: 'numeric' });
+}
+
 export const stringifyDateLong = (time: string): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', hour: "numeric", minute: "numeric", timeZoneName: "short" });

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { Group, User } from '../../types/types';
 import { fetchUsers } from '../../util/entities_api_util';
@@ -23,7 +24,7 @@ function GroupPanelMembers({ group }: {group: Group}) {
     <div className="members">
       <div className="members-header">
         <h4>Members ({group.members.length})</h4>     
-        <a>See all</a>
+        <NavLink to="members">See all</NavLink>
       </div>
         <ul>
           {

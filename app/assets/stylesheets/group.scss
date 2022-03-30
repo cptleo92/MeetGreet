@@ -147,11 +147,24 @@
 
 .member-search {
   position: relative;
+  
+  input {
+    width: 97%;
+  }
+}
+
+.member-list {
+  max-width: 700px;
 }
 
 .member-list-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 .member-card {
@@ -159,4 +172,8 @@
   border-bottom: 1px solid lightgray;
   padding: 30px;
   line-height: 2rem;
+}
+
+.member-title {
+  font-weight: 700;  
 }

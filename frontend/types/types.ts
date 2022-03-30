@@ -68,10 +68,18 @@ export interface Filter {
 }
 
 export interface UserName {
+  id: number;
   fname: string;
   lname: string;
 }[]
 
 export interface UserNameEntity {
   [id: number]: UserName;
+}
+
+export interface Membership {
+  member_id: number;
+  group_id: number;
+  organizer: boolean;
+  created_at: string;
 }
