@@ -112,7 +112,8 @@
 .sidebar-preview {
   background-color: white;
   height: fit-content;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
+  border-radius: 3px;
   padding: 30px;
   margin-bottom: 50px; 
 
@@ -121,6 +122,52 @@
 
     &:hover {
       font-weight: 500;
+    }
+  }
+}
+
+.next-event {
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700px;
+    border-bottom: 3px solid lightgray;
+    padding-bottom: 20px;
+    // text-align: right;
+  }
+
+  li {
+    margin: 10px 0;    
+  }
+
+  .date {
+    color: rgb(135, 116, 87);
+    font-weight: 700;
+  }
+
+  .title {
+    font-weight: 700;
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    p {font-size: .9rem;}
+  }
+
+  .group {
+    color: gray;
+    margin-bottom: 10px;
+  }
+
+  .attending {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+    font-weight: 500;
+
+    svg {
+      fill: green;
     }
   }
 }
