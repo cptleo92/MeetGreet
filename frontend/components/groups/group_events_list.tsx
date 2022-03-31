@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
 import { getEventsFromGroup } from '../../selectors/selectors';
 import { RootState } from '../../store/store';
 import { Event, Group } from '../../types/types';
-import { fetchEvents } from '../../util/entities_api_util';
 import { getUpcomingEvents, getPastEvents, sortByDate } from '../../util/event_util';
 import GroupEventsItem from './group_event_item';
 
@@ -33,6 +33,8 @@ function GroupEventsList({ group, preview = true, pastOnly }: { group: Group, pr
     sortEvents(eventsFromStore)
   }, [group, pastOnly])
 
+  const { pathname } = useLocation();
+
   const renderEventHeader = () => {
     if (events.length === 0) {
       return (
@@ -43,11 +45,18 @@ function GroupEventsList({ group, preview = true, pastOnly }: { group: Group, pr
         <h2>Upcoming events ({events.length})</h2>
       )
     } else {
-      return (
-        <h2>Past events ({events.length})</h2>
-      )
+        if (pathname.includes("past") || !pathname.includes("allevents")) {
+          return (
+            <h2>Past events ({events.length})</h2>
+            )
+        } else {
+          return (
+            <h2>No upcoming events.<br/>See past events below.</h2>
+          )
+        }
     }
   }
+
 
   return (
     <div className="about-event-list">     

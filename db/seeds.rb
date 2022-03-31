@@ -59,7 +59,7 @@ end
       Membership.create!(
         member_id: id,
         group_id: grp_id,
-        organizer: (rand(1..4) == 1 ? true : false),
+        organizer: (rand(1..6) == 1 ? true : false),
         created_at: Faker::Time.backward(days: 90)
       )
     end  
@@ -70,10 +70,12 @@ end
 100.times do
   rand_start = Faker::Time.forward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
+  rand_group = rand(1..5)
+  rand_organizer = Membership.where(organizer: true, group_id: rand_group).pluck(:member_id)
 
   Event.create!(
-    group_id: rand(1..50),
-    host_id: rand(1..200),
+    group_id: rand_group,
+    host_id: rand_organizer.sample,
     title: Faker::Book.title,
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,

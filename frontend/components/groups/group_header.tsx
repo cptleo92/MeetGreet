@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUsers } from '../../util/entities_api_util';
 import { Group } from '../../types/types';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchOrganizers } from '../../actions/ui_actions';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
@@ -33,6 +33,11 @@ function GroupHeader({ group }: {group: Group}) {
     }
   }
 
+  const navigate = useNavigate();
+  const goToMembers = () => {
+    navigate("members/leadership")
+  }
+
   return (
     <div className="group-header body">
       <div className="group-image">       
@@ -62,7 +67,7 @@ function GroupHeader({ group }: {group: Group}) {
             {
               organizers.length === 0 ? "Loading..." : 
               <p>
-                Organized by <strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> {multipleOrganizers()}
+                Organized by <a onClick={goToMembers}><strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> {multipleOrganizers()}</a>
               </p>                
             } 
           </li>

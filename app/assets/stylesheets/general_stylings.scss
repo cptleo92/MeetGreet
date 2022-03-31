@@ -114,4 +114,11 @@ a {
   height: 70px;
 }
 
+::-webkit-scrollbar {
+  width: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.4);
+}
 

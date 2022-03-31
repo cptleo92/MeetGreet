@@ -16,7 +16,7 @@ function GroupMembersItem({ member }: {member: UserName}) {
   return (
     <div className="member-card">
       <h4>{member.fname} {member.lname}</h4>
-      {isOrganizer ? <p className="member-t">Organizer</p> : ""}      
+      {isOrganizer ? <p className="member-title">Organizer</p> : ""}      
       <p>Joined {calcJoinedTime()}</p>
     </div>
   );

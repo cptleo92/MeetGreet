@@ -25,6 +25,8 @@
 }
 
 .info {
+  a { color: black; }
+
   li {
     display: flex;
     align-items: center;
@@ -34,6 +36,12 @@
   }
 }
 
+.organizers {
+  strong {
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
 
 .group-nav {
   display: flex;
@@ -155,12 +163,17 @@
 
 .member-list {
   max-width: 700px;
+  max-height: 1200px;
+  overflow: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .member-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 20px;
 
   a:hover {
     text-decoration: underline;
@@ -176,4 +189,9 @@
 
 .member-title {
   font-weight: 700;  
+}
+
+.list.about-event-list {
+  max-height: 1200px;
+  overflow: auto;
 }
