@@ -9,7 +9,6 @@ import { Persistor } from 'redux-persist';
 
 // testing
 import { login } from '../actions/session_actions';
-import SimpleBar from 'simplebar-react';
 
 
 export default function Root({ store, persistor }: {store: any, persistor: Persistor}) {
@@ -23,9 +22,7 @@ export default function Root({ store, persistor }: {store: any, persistor: Persi
     <Provider store={store}>
       <HashRouter>
         <PersistGate loading={null} persistor={persistor}>
-          <SimpleBar>
-            <App />
-          </SimpleBar>            
+          <App />      
         </PersistGate>
       </HashRouter>
     </Provider>
