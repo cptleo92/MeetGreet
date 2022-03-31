@@ -7,7 +7,7 @@ const HomeMain = () => {
   return (    
     <div className="home-main">      
       <HomeSidebar />
-      <HomeFeed /> 
+      <HomeFeed attendingOnly={false} pastOnly={false}/> 
     </div>
   )
 }

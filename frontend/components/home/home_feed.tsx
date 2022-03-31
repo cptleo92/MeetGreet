@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { getEvents } from "../../selectors/selectors"
-import { stringifyDateLong, sortByDate, stringifyDate, getUpcomingEvents } from "../../util/event_util";
+import { getEvents, getUserEvents } from "../../selectors/selectors"
+import { stringifyDateLong, sortByDate, stringifyDate, getUpcomingEvents, getPastEvents } from "../../util/event_util";
 import { Event } from "../../types/types";
 import HomeFeedEventItem from "./home_feed_event_item";
 import { useUser } from "../../util/hooks";
@@ -11,12 +11,23 @@ export interface EventsByDay {
   [day: string]: Event[]
 }
 
-const HomeFeed = () => {
-  const eventsFromStore = useSelector((state: RootState) => getEvents(state))  
-  let events = sortByDate(getUpcomingEvents([...eventsFromStore]))
-  const groupsFromStore = useSelector((state: RootState) => state.entities.groups)
-  const user = useUser();
+const HomeFeed = ({ attendingOnly, pastOnly }: { attendingOnly: boolean, pastOnly: boolean }) => {
+  let eventsFromStore;
+  if (attendingOnly) {
+    eventsFromStore = useSelector((state: RootState) => getUserEvents(state))      
+  } else {
+    eventsFromStore = useSelector((state: RootState) => getEvents(state))  
+  }
 
+  let events;
+  if (pastOnly) {
+    console.log('hit')
+    events = sortByDate(getPastEvents([...eventsFromStore])).reverse();
+  } else {
+    events = sortByDate(getUpcomingEvents([...eventsFromStore]))
+  }
+
+  const user = useUser();
   events = events.filter(event => user.groups.includes(event.group_id))
 
   // create an object grouping events by day
@@ -35,10 +46,12 @@ const HomeFeed = () => {
   const renderNoEventsHeader = () => {
     if (events.length === 0) {
       return(
-        <h2>You have no upcoming events!</h2>
+        <h2>You have no events!</h2>
       )
     }
   }
+
+
 
   return (
     <div className="home-feed">
