@@ -18,7 +18,7 @@ export const stringifyRSVPtime = (time: string): string => {
   return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric"}) + ' , ' + date.toLocaleString("en-US", {month: 'long', day: 'numeric'})
 }
 
-export const stringifyTime = (time: string): string => {
+export const stringifyTime = (time: string ): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
 }
@@ -28,7 +28,7 @@ export const stringifyTimeTZ = (time: string): string => {
   return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric", timeZoneName: "short"});
 }
 
-export const stringifyDate = (time: string): string => {
+export const stringifyDate = (time: string | number) : string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric' });
 }

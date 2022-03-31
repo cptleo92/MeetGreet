@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HomeSidebar from "./home_sidebar";
-import HomeFeed from "./home-feed";
-import { useDispatch } from "react-redux";
-import { fetchUserFeedItems } from "../../actions/users_actions";
-import { useUser } from "../../util/hooks";
-import Loading from "../misc/loading";
+import HomeFeed from "./home_feed";
 
 const HomeMain = () => {
   // const dispatch = useDispatch(); 

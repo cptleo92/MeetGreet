@@ -79,14 +79,19 @@
 }
 
 .home-feed {
+  padding: 20px;
   min-width: 700px;
-  height: 800px;
-  border: 1px solid red;
+  height: 1200px;
+  overflow: scroll;
+  border-top: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
+  // border-radius: 10px;
 }
 
 .home-sidebar {
   background-color: rgb(246, 247, 248);
   min-width: 350px;
+  height: fit-content;
 }
 
 .sidebar-header {
@@ -119,10 +124,40 @@
   
   a {
     text-decoration: underline;
+    display: block;
+    margin: 20px 0;
 
     &:hover {
       font-weight: 500;
     }
+  }
+}
+
+.sidebar-group-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  width: 80%;
+  padding: 15px;
+
+  &:last-child {
+    border: 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
   }
 }
 
@@ -149,36 +184,38 @@
     margin: 10px 0;    
   }
 
-  .date {
-    color: rgb(135, 116, 87);
-    font-weight: 700;
-  }
-
-  .title {
-    font-weight: 700;
-  }
-
   .location {
     display: flex;
     align-items: center;
     p {font-size: .9rem;}
   }
 
-  .group {
-    color: gray;
-    margin-bottom: 10px;
-  }
+}
 
-  .attending {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 10px;
-    background-color: rgb(240, 240, 240);
-    font-weight: 500;
+.date {
+  color: rgb(135, 116, 87);
+  font-weight: 700;
+} 
 
-    svg {
-      fill: green;
-    }
+.title {
+  font-weight: 700;
+}
+
+.group {
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.attending {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: rgb(240, 240, 240);
+  font-weight: 500;
+  width: fit-content;
+
+  svg {
+    fill: green;
   }
 }
 
@@ -213,5 +250,42 @@
 
   &:hover {
     opacity: 80%;
+  }
+}
+
+.feed-event {
+  margin-bottom: 70px;
+
+  a {
+    color: black;
+    display: block;
+    width: 90%;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid lightgray;        
+    }
+  }
+
+  .header {
+    border-bottom: 3px solid gray;
+    padding: 10px 0;
+    width: 90%;
+  }
+
+  .item {
+    display: flex;
+    padding: 20px 0;
+    width: 90%;
+    // border: 1px solid red;
+    
+  
+
+    // &:hover {
+    //   border-bottom: 1px solid rgb(230,230,230);
+    // }
+  }
+
+  .avatar {
+    margin: 0 20px;
   }
 }

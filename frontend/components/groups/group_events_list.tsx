@@ -21,7 +21,7 @@ function GroupEventsList({ group, preview = true, pastOnly }: { group: Group, pr
         sortedEvents = sortByDate(getPastEvents(fetchedEvents)).reverse();
         setHasUpcoming(false)
       }
-      preview ? setEvents(sortedEvents.slice(0, 5)) : setEvents(sortedEvents)
+      setEvents(sortedEvents)
     } else {
       setEvents([])
     }
