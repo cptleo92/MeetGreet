@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
 
@@ -12,10 +12,21 @@ function GroupEventsItem({ event, upcoming }: {event: Event, upcoming: boolean})
     color: upcoming ? "" : "gray"
   }
 
+  const navigate = useNavigate();
+
+  const navigateToEvent = () => { 
+    const path = generatePath("/groups/:group_id/events/:id", {
+      group_id: event.group_id.toString(),
+      id: event.id.toString()
+    })
+    navigate(path);
+  }
+
   return (
     <div 
       className={className()}
       style={style}
+      onClick={navigateToEvent}
     >
       <h4 
         className="title"

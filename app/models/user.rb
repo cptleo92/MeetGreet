@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   attr_reader :password
 
-  validates :fname, :lname, :password_digest, :session_token, presence: true
+  validates :fname, :password_digest, :session_token, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }

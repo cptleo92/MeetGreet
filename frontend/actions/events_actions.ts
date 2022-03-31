@@ -9,7 +9,7 @@ import { AppDispatch } from "../store/store"
 export const loadAllUserInfo = () => ({
   type: START_LOADING_EVENTS
 })
-const receiveEvents = (events: EventEntity) => ({
+export const receiveEvents = (events: EventEntity) => ({
   type: RECEIVE_EVENTS,
   payload: events
 })

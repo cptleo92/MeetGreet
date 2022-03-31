@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../actions/modal_actions";
 import UserForm from "../user_forms/user_form";
+import AttendeesModal from "../events/attendees_modal";
+import SimpleBar from "simplebar-react";
 
 const Modal = ({ modal }: {modal: string}) => { 
 
@@ -19,17 +21,22 @@ const Modal = ({ modal }: {modal: string}) => {
     case 'signup':
       component = <UserForm formType={'signup'}/>
       break;
+    case 'attendees':
+      component = <AttendeesModal />
+      break;
     default:
       return null;
   }
 
   return (
     <div className="modal-background" onClick={() => dispatch(closeModal())}>
-      <div 
+  
+      <div
         className="modal-child animate__animated animate__fadeIn animate__faster" 
         onClick={e => e.stopPropagation()}>
         { component }
       </div>
+ 
     </div>
   )
 }

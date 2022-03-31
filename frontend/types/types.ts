@@ -83,3 +83,10 @@ export interface Membership {
   organizer: boolean;
   created_at: string;
 }
+
+export interface Attendance {
+  [id: string]: {
+    event_id: number;
+    created_at: string;
+  }
+}

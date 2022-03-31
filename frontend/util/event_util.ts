@@ -13,6 +13,21 @@ export const getSoonestEvent = (eventArray: Event[]): Event => {
   return sortByDate(getUpcomingEvents(eventArray))[0]
 }
 
+export const stringifyRSVPtime = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric"}) + ' , ' + date.toLocaleString("en-US", {month: 'long', day: 'numeric'})
+}
+
+export const stringifyTime = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
+}
+
+export const stringifyTimeTZ = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric", timeZoneName: "short"});
+}
+
 export const stringifyDate = (time: string): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric' });
@@ -26,6 +41,25 @@ export const stringifyDateMedium = (time: string): string => {
 export const stringifyDateLong = (time: string): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', hour: "numeric", minute: "numeric", timeZoneName: "short" });
+}
+
+export const stringifyDateLongNoTZ = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', hour: "numeric", minute: "numeric"});
+}
+
+export const stringifyEventTimes = (startTime: string, endTime: string) => {
+  const startString = stringifyTime(startTime)
+  let endString = stringifyTimeTZ(endTime)
+
+  const startDay = stringifyDate(startTime)
+  const endDay = stringifyDate(endTime)
+
+  if (startDay !== endDay) {
+    endString = stringifyTimeTZ(endTime) + ` (${stringifyDate(endTime)})`
+  }
+
+  return `${startString} to ${endString}`
 }
 
 
@@ -44,3 +78,4 @@ export const getPastEvents = (eventArray: Event[]): Event[] => {
     return eventStart - currentTime <= 0;
   })
 }
+

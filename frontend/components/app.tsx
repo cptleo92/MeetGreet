@@ -6,8 +6,9 @@ import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import Home from './home/home';
 import Missing from './misc/missing';
-import GroupContainer from './groups/group';
+import GroupContainer from './groups/group_container';
 import Layout from './layout';
+import EventsContainer from './events/events_container';
 
 export default function App() {
   const currentUser = useSelector((state: RootState) => state.session.currentUserId )
@@ -28,7 +29,8 @@ export default function App() {
 
         <Route path="/groups/:id/*" element={<GroupContainer />}/>
         {/* <Route path="/groups/new" element={<GroupCreate />}/> */}
-        <Route path="/groups/new" element={<Missing />}/>
+
+        <Route path="/groups/:group_id/events/:id/*" element={<EventsContainer />} />
 
         <Route path="*" element={<Missing />} />
 

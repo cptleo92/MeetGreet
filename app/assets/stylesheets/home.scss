@@ -113,16 +113,26 @@
   background-color: white;
   height: fit-content;
   border: 2px solid lightgray;
-  border-radius: 3px;
+  border-radius: 10px;
   padding: 30px;
   margin-bottom: 50px; 
-
+  
   a {
     text-decoration: underline;
 
     &:hover {
       font-weight: 500;
     }
+  }
+}
+
+.sidebar-preview.event {
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    box-shadow: 1px 1px 15px 2px rgb(230, 230, 230);
+    transition: .2s;
   }
 }
 
@@ -178,6 +188,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border-radius: 0;
 
   strong {
     font-weight: 700;

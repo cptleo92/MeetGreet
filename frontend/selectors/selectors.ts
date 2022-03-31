@@ -1,3 +1,4 @@
+import Root from "../components/root";
 import { RootState } from "../store/store";
 import { Event, Group } from "../types/types";
 
@@ -49,4 +50,8 @@ export const getUserTopics = (state: RootState, id: number): string[] => {
 
 export const getGroup = (state: RootState, id: string | undefined): Group => {
   return state.entities.groups[parseInt(id)];
+}
+
+export const getMemberships = (state: RootState) => {
+  return state.ui.group.memberships;
 }

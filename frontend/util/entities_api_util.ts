@@ -1,4 +1,4 @@
-import { Group } from "../types/types"
+import { Event, Group } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -37,5 +37,13 @@ export const fetchMemberships = (group: Group) => {
     method: "GET",
     url: "api/memberships",
     data: {id: group.id}
+  })
+}
+
+export const fetchAttendances = (event: Event) => {
+  return $.ajax({
+    method: "GET",
+    url: "api/attendances",
+    data: {id: event.id}
   })
 }

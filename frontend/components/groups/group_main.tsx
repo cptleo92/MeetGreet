@@ -11,7 +11,7 @@ function GroupMain({ group }: {group: Group}) {
       <nav className="group-nav body">
         <ul className="group-nav-links">
           <NavLink to="" end>About</NavLink>
-          <NavLink to="events">Events</NavLink>
+          <NavLink to="allevents">Events</NavLink>
           <NavLink to="members">Members</NavLink>          
           <li><a>Photos</a></li>
           <li><a>Discussions</a></li>
@@ -21,11 +21,11 @@ function GroupMain({ group }: {group: Group}) {
         <button className="btn-red">Join this group</button>
       </nav>
 
-      <div className="group-bg">
+      <div className="content-bg">
         <div className="body">
           <Routes>
             <Route index element={<GroupAbout group={group}/>} />
-            <Route path="events/*" element={<GroupEvents group={group}/>} />
+            <Route path="allevents/*" element={<GroupEvents group={group}/>} />
             <Route path="members/*" element={<GroupMembers group={group}/>} />
           </Routes>
         </div>

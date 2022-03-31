@@ -34,6 +34,7 @@ end
 end
 
 # making sure every group has an organizer
+# also need to make sure only organizers host events!
 (1..50).to_a.each do |grp_id|
   user_id = rand(1..200)
   membership = Membership.find_by(member_id: user_id, group_id: grp_id)
@@ -72,7 +73,7 @@ end
 
   Event.create!(
     group_id: rand(1..50),
-    host_id: rand(1..50),
+    host_id: rand(1..200),
     title: Faker::Book.title,
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
@@ -81,13 +82,30 @@ end
   )
 end
 
+# seeding attendances for future events
+(1..200).to_a.each do |id|
+  rand(3..8).times do
+    ev_id = rand(1..100)
+
+    attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
+
+    unless attendance
+      Attendance.create!(
+        attendee_id: id,
+        event_id: ev_id,
+        created_at: Faker::Time.backward(days: 10)
+      )
+    end  
+  end
+end
+
 200.times do
   rand_start = Faker::Time.backward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
 
   Event.create!(
     group_id: rand(1..50),
-    host_id: rand(1..50),
+    host_id: rand(1..200),
     title: Faker::Hipster.sentence,
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
@@ -96,10 +114,10 @@ end
   )
 end
 
-# seeding attendances
+# seeding attendances for past events
 (1..200).to_a.each do |id|
   rand(3..8).times do
-    ev_id = rand(1..300)
+    ev_id = rand(101..300)
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
 
@@ -107,8 +125,22 @@ end
       Attendance.create!(
         attendee_id: id,
         event_id: ev_id,
+        created_at: Faker::Time.between_dates(from: Faker::Time.backward(days: 60) , to: Faker::Time.backward(days: 30))
       )
     end  
+  end
+end
+
+# also making sure hosts are counted as attendees
+events = Event.all
+events.each do |event|
+  attendance = Attendance.find_by(attendee_id: event.host_id, event_id: event.id)
+
+  unless attendance
+    Attendance.create!(
+      attendee_id: event.host_id,
+      event_id: event.id
+    )
   end
 end
 

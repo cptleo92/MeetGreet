@@ -4,11 +4,11 @@ import SplashFooterLinks from "./splash_footer_links";
 import SplashFooterSocials from "./splash_footer_socials";
 import { openModal } from "../../actions/modal_actions";
 import { useLoggedIn } from "../../util/hooks";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "./modal";
 import { RootState } from "../../store/store";
 
-const SplashFooter = () => {
+const SplashFooter = () => {  
   const dispatch = useDispatch();
   const loggedIn = useLoggedIn();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const SplashFooter = () => {
 
   return (
     <footer className="splash-footer">
-      <Modal modal={modal} />
+      {!loggedIn && <Modal modal={modal} /> }
       <div className="splash-footer-body">
         <div className="footer-head">
           <h4>Create your own MeetGreet group.</h4>

@@ -5,7 +5,7 @@ import { Event, EventEntity, Group, GroupEntity } from "../../types/types";
 import { RootState } from "../../store/store";
 import { sortByDate, getSoonestEvent, stringifyDateLong } from "../../util/event_util";
 import { getUserEvents } from "../../selectors/selectors";
-import { Link, NavLink } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 
 const HomeSidebarEventsPreview = () => {
   const userEvents: Event[] = useSelector((state: RootState) => getUserEvents(state))
@@ -65,8 +65,20 @@ const HomeSidebarEventsPreview = () => {
 
   }
 
+  const navigate = useNavigate();
+
+  const handleClick = () => { 
+    if (firstEvent !== null) {
+      const path = generatePath("/groups/:group_id/events/:id", {
+        group_id: firstEvent.group_id.toString(),
+        id: firstEvent.id.toString()
+      })
+      navigate(path);
+    }
+  }
+
   return (
-    <div className="sidebar-preview">
+    <div className="sidebar-preview event" onClick={handleClick}>
       {renderEvents()}
     </div>
   )

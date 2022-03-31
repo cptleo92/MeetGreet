@@ -1,0 +1,129 @@
+.event-header {
+  margin: 50px auto;
+
+  .date {
+    color: gray;
+  } 
+}
+
+.event-main {
+  display: grid;
+  grid-template-columns: 700px 700px;
+  gap: 100px;
+  padding: 50px 0;
+
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h5 {
+    font-weight: 700;
+  }
+
+  .description {
+    margin: 50px 0;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 100px 0 50px 0;
+
+    a {
+      margin-right: 50px;
+    }
+  }
+}
+
+.event-main-right {  
+  width: 50%;
+
+  > * {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .group-card {        
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .group-avatar {
+      width: 50px;
+      height: 50px;
+      border: 1px solid gray;
+      margin-right: 20px;
+    }
+
+    .type {
+      color: gray;
+    }
+  }
+
+  .details {
+    margin-top: 50px;
+
+    .clock {
+      width: 20px;
+    }
+
+    svg {
+      margin-right: 20px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.attendees-cards {
+  display: grid;
+  grid-template: 180px 180px / repeat(4, 130px);
+  gap: 20px;
+}
+
+.attendee-card {
+  background-color: white;
+  border-radius: 10px;
+  transition: .2s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;  
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 2px rgb(211, 211, 211);
+    transform: translateY(-2px);
+    transition: .2s;
+  }
+}
+
+.attendee-modal {
+  width: 90%;  
+  height: 100%;
+  overflow-y: auto;
+}
+
+.attendee-modal-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 20px;
+  border-bottom: 1px solid rgb(233, 233, 233);
+
+  .avatar {
+    margin-right: 20px;
+  }  
+
+  .rsvp-time {
+    color: gray;
+  }
+}

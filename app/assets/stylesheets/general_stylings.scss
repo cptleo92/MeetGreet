@@ -93,7 +93,7 @@ a {
 }
 
 .body {
-  width: 50vw;
+  width: 45vw;
   min-width: 1000px;
   margin: auto;
 }
@@ -105,6 +105,13 @@ a {
   p {
     font-size: 60px;
   }
+}
+
+.avatar {
+  border: 1px solid gray;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
 }
 
 
