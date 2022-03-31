@@ -11,7 +11,7 @@ export interface EventsByDay {
   [day: string]: Event[]
 }
 
-const HomeFeed = ({ attendingOnly, pastOnly }: { attendingOnly: boolean, pastOnly: boolean }) => {
+const HomeFeed = ({ attendingOnly, pastOnly, hosting }: { attendingOnly: boolean, pastOnly: boolean, hosting: boolean }) => {
   let eventsFromStore;
   if (attendingOnly) {
     eventsFromStore = useSelector((state: RootState) => getUserEvents(state))      
@@ -30,6 +30,10 @@ const HomeFeed = ({ attendingOnly, pastOnly }: { attendingOnly: boolean, pastOnl
   const user = useUser();
   events = events.filter(event => user.groups.includes(event.group_id))
 
+  if (hosting) {
+    events = events.filter(event => event.host_id === user.id)
+  }
+
   // create an object grouping events by day
   const userEventsByDay: EventsByDay = {};
   
@@ -45,6 +49,11 @@ const HomeFeed = ({ attendingOnly, pastOnly }: { attendingOnly: boolean, pastOnl
 
   const renderNoEventsHeader = () => {
     if (events.length === 0) {
+      if (hosting) {
+        return (
+          <h2>You are not hosting any events!</h2>
+        )
+      }
       return(
         <h2>You have no events!</h2>
       )
