@@ -5,11 +5,13 @@ import { useUser } from "../../util/hooks";
 import HomeGreeting from "./home_greeting";
 import HomeMain from "./home_main";
 import Loading from "../misc/loading";
+import HomeAllEvents from "./home_all_events";
 import { fetchEvents } from "../../actions/events_actions";
 import { EventEntity, GroupEntity } from "../../types/types";
 import { fetchGroups } from "../../actions/groups_actions"
 import { AppDispatch } from "../../store/store";
 import { AnyAction } from "redux";
+import { Route, Routes } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch(); 
@@ -55,10 +57,14 @@ const Home = () => {
       <div className="body">
         
         { !loading &&
-          <>
-          <HomeGreeting />
-          <HomeMain />
-          </>
+        <>
+            <HomeGreeting />
+          <Routes>
+            <Route index element={<HomeMain />} />
+            <Route path="myevents" element={<HomeAllEvents />} />
+          </Routes>
+        </>
+          
         }
 
 

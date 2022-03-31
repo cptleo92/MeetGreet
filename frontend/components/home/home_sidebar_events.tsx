@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HomeSidebarEventsPreview from "./home_sidebar_events_preview";
 
 const HomeSidebarEvents = () => {
@@ -6,7 +7,7 @@ const HomeSidebarEvents = () => {
     <div className="home-sidebar-events">
       <section className="sidebar-header">
         <h4>Your next event</h4>
-        <a>See all your events</a>
+        <Link to="myevents">See all your events</Link>
       </section>
       <HomeSidebarEventsPreview />
     </div>

@@ -24,7 +24,7 @@ export default function App() {
 
       <Route element={<Layout />}>
         <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-          <Route path="/home" element={<Home />} />
+          <Route path="/home/*" element={<Home />} />
         </Route>
 
         <Route path="/groups/:id/*" element={<GroupContainer />}/>
