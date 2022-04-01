@@ -1,10 +1,25 @@
 class Api::MembershipsController < ApplicationController
-  # def index
-  #   group = Group.find(params[:id])
-  #   @organizers = group.organizers
-  # end 
-
   def index
     @memberships = Membership.where(group_id: params[:id])
+  end
+
+  def create
+    @membership = Membership.new(membership_params)
+    if @membership.save
+      render json: @membership
+    else
+      render json: @membership.errors.full_messages, status: 422
+    end
+  end
+
+  def destroy
+    @membership = Membership.find_by(id: params[:id])
+    @membership.destroy
+    render json: @membership
+  end
+
+  private
+  def membership_params
+    params.require(:membership).permit(:member_id, :group_id, :organizer)
   end
 end

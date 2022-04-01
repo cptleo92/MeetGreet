@@ -28,7 +28,9 @@ const HomeFeed = ({ attendingOnly, pastOnly, hosting }: { attendingOnly: boolean
   }
 
   const user = useUser();
-  events = events.filter(event => user.groups.includes(event.group_id))
+  events = events.filter(event => 
+    user.groups.includes(event.group_id) || event.attendees.includes(user.id)
+  )
 
   if (hosting) {
     events = events.filter(event => event.host_id === user.id)

@@ -81,7 +81,7 @@ export interface Membership {
   member_id: number;
   group_id: number;
   organizer: boolean;
-  created_at: string;
+  created_at?: string;
 }
 
 export interface Attendance {

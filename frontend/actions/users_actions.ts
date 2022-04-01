@@ -1,25 +1,24 @@
-// import { Event, EventEntity, User } from "../types/types";
-// import { fetchEvents } from "./events_actions";
-// import { fetchGroups } from "./groups_actions";
+import { AppDispatch } from "../store/store";
+import { Membership } from "../types/types";
+import * as EntitiesAPIUtil from "../util/entities_api_util"
+import { receiveUser } from "./session_actions";
 
-// const fetchGroupsOfEvents = (events: EventEntity) => (dispatch: any) => {
-//   const eventGroups: number[] = [];
-//   const eventArray = Object.values(events)
-//   for (let i = 0; i < eventArray.length; i++) {
-//     eventGroups.push(eventArray[i].group_id)
-//   }
-//   console.log('fetching event groups')
-//   return dispatch(fetchGroups(eventGroups))
-// }
+export const deleteMembership = (membershipId: number) => (dispatch: AppDispatch) => {
+  return EntitiesAPIUtil.deleteMembership(membershipId)
+    .then((membership) => {
+      const memberId = membership.member_id
+      console.log(memberId)
+      EntitiesAPIUtil.fetchUser(memberId)
+        .then((user) => dispatch(receiveUser(user)))        
+    })
+}
 
-// export const fetchUserFeedItems = (currentUser: User) => (dispatch: any) => {
-//   return dispatch(fetchEvents(currentUser.events))
-//     .then(({ payload }: { payload: EventEntity }) =>
-//       dispatch(fetchGroupsOfEvents(payload)))
-//       .then(() => {
-//         console.log('fetching user groups')
-//         dispatch(fetchGroups(currentUser.groups))
-//       })
-// }
-
-// ended up doing all the user item fetching on the home.tsx component
+export const createMembership = (data: Membership) => (dispatch: AppDispatch) => {
+  return EntitiesAPIUtil.createMembership(data)
+    .then((membership) => {
+      const memberId = membership.member_id
+      console.log(memberId)
+      EntitiesAPIUtil.fetchUser(memberId)
+        .then((user) => dispatch(receiveUser(user)))  
+    })
+}

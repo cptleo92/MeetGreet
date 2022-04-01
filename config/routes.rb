@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
     resources :topics, only: [:index, :show, :create]
 
-    resources :memberships, only: [:index]
-    resources :attendances, only: [:index]
+    resources :memberships, only: [:index, :create, :update, :destroy]
+    resources :attendances, only: [:index, :create, :destroy]
   end
 end

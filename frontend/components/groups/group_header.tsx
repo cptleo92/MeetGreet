@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsers } from '../../util/entities_api_util';
 import { Group } from '../../types/types';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchOrganizers } from '../../actions/ui_actions';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 
 function GroupHeader({ group }: {group: Group}) {
-  // const [organizers, setOrganizers] = useState<Organizers>([]);
-  // const group = useSelector((state: RootState) => getGroup(state, id))
-
-  // useEffect(() => {
-  //   fetchUsers(group.organizers)
-  //     .then(organizers => setOrganizers(Object.values(organizers)))
-  // }, [group])
 
   const organizers = useSelector((state: RootState) => state.ui.group.organizers)
 

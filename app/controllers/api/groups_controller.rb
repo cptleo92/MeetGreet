@@ -32,7 +32,7 @@ class Api::GroupsController < ApplicationController
       render json: @group.errors.full_messages, status: 422
     end
   end
-
+  
   private
   def group_params
     params.require(:group).permit(:id, :title, :public, :location, :city, :state, :country, :description)

@@ -1,4 +1,4 @@
-import { Event, Group } from "../types/types"
+import { Event, Group, Membership, User } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -45,5 +45,27 @@ export const fetchAttendances = (event: Event) => {
     method: "GET",
     url: "api/attendances",
     data: {id: event.id}
+  })
+}
+
+export const deleteMembership = (id: number) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/memberships/${id}`
+  })
+}
+
+export const createMembership = (data: Membership) => {
+  return $.ajax({
+    method: "POST",
+    url: "api/memberships/",
+    data: {membership: data}
+  })
+}
+
+export const fetchUser = (id: number) => {
+  return $.ajax({
+    method: "GET",
+    url: `api/users/${id}`
   })
 }
