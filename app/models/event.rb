@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   has_many :topics, as: :topicable
 
   def self.starting_soon
-    Event.where('start_time > ?', Time.now()).order(start_time: :asc).take(8)
+    Event.where('start_time > ?', Time.now()).order(start_time: :asc).take(20).shuffle.take(8)
   end
 
   def ensure_group_title_and_host_name   

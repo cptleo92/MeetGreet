@@ -1,5 +1,6 @@
 * {
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 
 h1 {
@@ -285,8 +286,49 @@ p {
 }
 
 .splash-suggestions-list {
-  height: 350px;
-  border: 1px solid gray;    
+  position: relative;
+  // height: 300px;
+  display: flex;
+  overflow-x: hidden;
+  padding: 40px 0;
+  min-width: 1000px;
+}
+
+.splash-event-card {
+  display: flex;
+  flex-direction: column;;
+  min-width: 260px;
+
+  .avatar {
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+  }
+  
+  .attendees {
+    margin-top: 60px;
+  }
+}
+
+.scroll-container {
+  display: flex;
+  align-items: center;
+  min-width: 1020px;
+}
+
+.scroll {
+  color: gray;
+  width: 40px;
+  height: 40px; 
+  border: 1px solid lightgray;
+  &:not(:disabled) {box-shadow: 1px 1px 8px 1px rgb(230,230,230);}
+  border-radius: 50%;
+  margin-top: 5px;
+  // transform: translateY(-0px);
+
+  &:hover {
+    &:not(:disabled) {box-shadow: 1px 1px 10px 2px lightgray;}
+  }
 }
 
 .suggestions-header {
@@ -301,6 +343,31 @@ p {
     font-size: 16px;    
 
     &:hover{text-decoration: underline;}
+  }
+}
+
+
+
+.splash-group-card {
+  min-width: 260px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  height: fit-content;
+  margin-right: 35px;
+  padding: 20px;
+
+  &:last-child {
+    margin-right: 22px;
+  }
+
+  .avatar {
+    margin-right: 20px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
   }
 }
 
@@ -462,8 +529,7 @@ p {
     white-space: nowrap;
     fill: white;
     margin: 20px 20px 20px 0;
-    filter: invert(80%);
+    filter: invert(80%)
   }
   
 }
-

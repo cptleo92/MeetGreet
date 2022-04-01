@@ -1,17 +1,12 @@
 import React from "react";
-import Modal from "./modal";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../actions/modal_actions";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 
 const SplashHeader = () => {
   const dispatch = useDispatch();
-  const modal = useSelector((state: RootState) => state.ui.modal)
 
   return (
     <nav className="splash-header-nav"> 
-      {/* <Modal modal={modal}/> */}
       <img       
         src={window.meetupLogo}
         alt="meetgreet logo"

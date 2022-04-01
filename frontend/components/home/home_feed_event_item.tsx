@@ -12,12 +12,6 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
     return day === today ? "Today" : day
   }
 
-  const renderGroupName = (event: Event) => {
-    return (
-      <p className="group">{event.group_title}</p>
-    )
-  }
-
   const isAttending = (event: Event) => {
     if (event.attendees.includes(user.id)) {
       return (
@@ -50,7 +44,7 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
             <div className="info">
               <p className="date">{stringifyDateLong(event.start_time)}</p>
               <p className="title">{event.title}</p>
-              {renderGroupName(event)}
+              <p className="group">{event.group_title}</p>
               <p className="attendees">{event.attendees.length} attendees</p>
               {isAttending(event)}
             </div>

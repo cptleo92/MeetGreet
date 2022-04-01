@@ -43,6 +43,11 @@ export const stringifyDateLong = (time: string): string => {
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', hour: "numeric", minute: "numeric", timeZoneName: "short" });
 }
 
+export const stringifyDateLongAbrv = (time: string): string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", { weekday: 'short',month: 'short', day: 'numeric', hour: "numeric", minute: "numeric", timeZoneName: "short" });
+}
+
 export const stringifyDateLongNoTZ = (time: string): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", { weekday: 'long',month: 'long', day: 'numeric', hour: "numeric", minute: "numeric"});
