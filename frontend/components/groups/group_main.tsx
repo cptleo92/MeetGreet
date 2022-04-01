@@ -8,8 +8,7 @@ import { useUser } from '../../util/hooks';
 import GroupAbout from './group_about';
 import GroupEvents from "./group_events"
 import GroupMembers from './group_members';
-import TopicButton from '../home/topic_button';
-import { getGroupTopics } from '../../selectors/selectors';
+
 
 function GroupMain({ group }: {group: Group}) {
   const user = useUser();
@@ -53,27 +52,12 @@ function GroupMain({ group }: {group: Group}) {
     } else {
       return (
         <button style={pending} onClick={joinGroup} className="btn-red">
-          {updating ? "Updating..." : "Join this group"}
+          {updating ? "Updating..." : "Join group"}
         </button>
       )
     }
   }
 
-  const groupTopics = useSelector((state: RootState) => getGroupTopics(state, group.id))
-
-  const renderTopics = () => {
-    if (groupTopics.length === 0) {
-      return (
-        <div className="no-preview">
-          <strong>This group has not added any interests</strong>
-        </div>
-      )
-    } else {
-      return (
-        groupTopics.map((topic, idx) => <TopicButton key={idx} topic={topic} />)
-      )
-    }
-  }
 
 
   return (
@@ -98,10 +82,7 @@ function GroupMain({ group }: {group: Group}) {
             <Route path="allevents/*" element={<GroupEvents group={group}/>} />
             <Route path="members/*" element={<GroupMembers group={group}/>} />
           </Routes>
-          <div className="related-topics">
-            <p>Related Topics</p>
-            {renderTopics()}
-          </div>
+        
         </div>
       </div>
     </div>

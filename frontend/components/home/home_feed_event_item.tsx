@@ -1,8 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { getGroups } from '../../selectors/selectors';
-import { RootState } from '../../store/store';
+import { Link } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDate, stringifyDateLong } from '../../util/event_util';
 import { useUser } from '../../util/hooks';
@@ -15,11 +12,9 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
     return day === today ? "Today" : day
   }
 
-  const groupsFromStore = useSelector((state: RootState) => state.entities.groups)
-
   const renderGroupName = (event: Event) => {
     return (
-      <p className="group">{groupsFromStore[event.group_id].title}</p>
+      <p className="group">{event.group_title}</p>
     )
   }
 

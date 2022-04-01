@@ -9,7 +9,6 @@ import { useNavigate, generatePath } from "react-router-dom";
 
 const HomeSidebarEventsPreview = () => {
   const userEvents: Event[] = useSelector((state: RootState) => getUserEvents(state))
-  const groups: GroupEntity = useSelector((state: RootState) => state.entities.groups)  
 
   let firstEvent: Event | null;
   if (userEvents.length === 0) {
@@ -21,13 +20,8 @@ const HomeSidebarEventsPreview = () => {
   }
   const getFirstEventGroup = () => {
     if (firstEvent !== null) {
-      const eventGroup: Group = groups[firstEvent.group_id]
       return (
-        eventGroup.title
-      )
-    } else {
-      return (
-        "Couldn't find group!"
+        firstEvent.group_title
       )
     }
   }

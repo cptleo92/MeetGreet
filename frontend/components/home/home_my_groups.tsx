@@ -1,12 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getUserGroups } from '../../selectors/selectors';
-import { RootState } from '../../store/store';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import HomeGroupsList from './home_groups_list';
 
 function HomeMyGroups() {
-  const myGroups = useSelector((state: RootState) => getUserGroups(state));
 
   return (
     <div className="tab">
