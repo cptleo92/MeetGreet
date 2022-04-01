@@ -19,7 +19,7 @@ export const receiveEvents = (events: EventEntity) => ({
 //   payload: errors
 // })
 
-export const fetchEvents = (filter: number[]) => (dispatch: AppDispatch) => {
+export const fetchEvents = (filter: number[] | string) => (dispatch: AppDispatch) => {
   return EntitiesAPIUtil.fetchEvents(filter)
     .then(
       (events: EventEntity) => dispatch(receiveEvents(events)),

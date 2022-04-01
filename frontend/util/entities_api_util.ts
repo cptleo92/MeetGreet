@@ -8,7 +8,7 @@ export const fetchGroups = (filter: number[] = [0]) => {
   })
 }
 
-export const fetchEvents = (filter: number[] = [0]) => (
+export const fetchEvents = (filter: number[] | string = [0]) => (
   $.ajax({
     method: "GET",
     url: "api/events",

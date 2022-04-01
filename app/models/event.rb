@@ -12,4 +12,8 @@ class Event < ApplicationRecord
   has_many :attendees, through: :attendances, source: :user
 
   has_many :topics, as: :topicable
+
+  def self.starting_soon
+    Event.where('start_time > ?', Time.now()).order(start_time: :asc).take(8)
+  end
 end

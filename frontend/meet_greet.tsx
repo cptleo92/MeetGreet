@@ -11,21 +11,6 @@ import { signup, login, logout } from "./actions/session_actions"
 document.addEventListener("DOMContentLoaded", () => {  
 
   // bootstrapping current user to window so it remembers if a user is logged in
-  // keeping this in in case redux-persist has issues!
-  // ---------------------------
-  // let store;
-  // if (window.currentUser) {
-  //   const preloadedState = {
-  //     entities: {
-  //       users: { [window.currentUser.id]: window.currentUser }       
-  //     },
-  //     session: { currentUserId: window.currentUser.id }
-  //   }
-  //   store = configureStore(preloadedState);
-  //   delete window.currentUser;
-  // } else {
-  //   store = configureStore();
-  // }
 
   let persistedStore;
   if (window.currentUser) {
@@ -46,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.demo = {email: 'demo@fake.com', password: 'password'}
   window.dispatch = store.dispatch;
   // window.signup = signup;
-  window.login = dispatch(login(demo));
+  window.login = login;
   // window.logout = logout;
   // window.getEventsFromGroup = getEventsFromGroup;
 

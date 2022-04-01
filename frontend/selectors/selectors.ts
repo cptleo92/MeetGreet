@@ -48,6 +48,14 @@ export const getUserTopics = (state: RootState, id: number): string[] => {
   return state.entities.users[id].topics
 }
 
+export const getGroupTopics = (state: RootState, id: number): string[] => {
+  return state.entities.groups[id].topics
+}
+
+export const getEventTopics = (state: RootState, id: number): string[] => {
+  return state.entities.events[id].topics
+}
+
 export const getGroup = (state: RootState, id: string | undefined): Group => {
   return state.entities.groups[parseInt(id)];
 }
