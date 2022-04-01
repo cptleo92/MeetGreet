@@ -139,15 +139,24 @@
   justify-content: space-between;
   padding: 20px;
 
-  button {
-    font-size: 1rem;
-    margin-right: 50px;
-    padding: 10px 30px;
-  }
-
   .edit-rsvp {
     background: white;
     border: 2px solid green;
     color: black;
+
+    &:hover {
+      border: 2px solid rgb(170, 31, 31);
+    }
   }
+
+  button {
+    font-size: 1rem;
+    margin-right: 50px;
+    padding: 10px 30px;
+    cursor: pointer;
+
+    .btn-red:hover {
+      background:rgb(170, 31, 31);
+    }
+  } 
 }

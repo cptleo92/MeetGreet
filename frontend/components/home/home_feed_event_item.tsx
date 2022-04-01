@@ -15,7 +15,7 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
     return day === today ? "Today" : day
   }
 
-  const groupsFromStore = useSelector((state: RootState) => getGroups(state))
+  const groupsFromStore = useSelector((state: RootState) => state.entities.groups)
 
   const renderGroupName = (event: Event) => {
     return (

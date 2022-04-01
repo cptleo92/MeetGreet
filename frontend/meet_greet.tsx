@@ -4,7 +4,7 @@ import { configureStore } from './store/store'
 import Root from './components/root'
 
 //TESTING
-// import { signup, login, logout } from "./actions/session_actions"
+import { signup, login, logout } from "./actions/session_actions"
 // import { getUpcomingEvents, getPastEvents } from "./util/event_util"
 // import { getEventsFromGroup } from "./selectors/selectors"
 
@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { store, persistor } = persistedStore;
   // //TESTING
-  // window.demo = {email: 'demo@fake.com', password: 'password'}
-  // window.dispatch = store.dispatch;
+  window.demo = {email: 'demo@fake.com', password: 'password'}
+  window.dispatch = store.dispatch;
   // window.signup = signup;
-  // window.login = login;
+  window.login = dispatch(login(demo));
   // window.logout = logout;
   // window.getEventsFromGroup = getEventsFromGroup;
 

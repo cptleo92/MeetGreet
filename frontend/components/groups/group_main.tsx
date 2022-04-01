@@ -8,7 +8,6 @@ import { useUser } from '../../util/hooks';
 import GroupAbout from './group_about';
 import GroupEvents from "./group_events"
 import GroupMembers from './group_members';
-import { fetchMemberships } from '../../actions/ui_actions';
 
 function GroupMain({ group }: {group: Group}) {
   const user = useUser();
@@ -16,24 +15,14 @@ function GroupMain({ group }: {group: Group}) {
   let membershipsFromStore = useSelector((state: RootState) => state.ui.group.memberships)
   let membership = membershipsFromStore[user.id]
 
-  // const [memberships, setMemberships] = useState(Object.values(membershipsFromStore))
   const [updating, setUpdating] = useState(false);
-
-  // const updateMemberships = () => {
-  //   membershipsFromStore = useSelector((state: RootState) => state.ui.group.memberships)
-  //   setMemberships(Object.values(membershipsFromStore))
-  //   setUpdating(false)
-  // }
 
   const leaveGroup = () => {
     if (membership !== undefined) {
       setUpdating(true)
       const membershipId = membership.id
       dispatch(deleteMembership(membershipId))
-          .then(() => setTimeout(() => {
-            // setUpdating(false)
-            window.location.reload(false)
-          }, 0))
+          .then(() => window.location.reload(false))          
     }
   }
 
@@ -45,10 +34,7 @@ function GroupMain({ group }: {group: Group}) {
     }
     setUpdating(true)
     dispatch(createMembership(data))
-      .then(() => setTimeout(() => {
-        // setUpdating(false)
-        window.location.reload(false)
-      }, 0))
+      .then(() => window.location.reload(false))   
   }
 
   const pending = {
@@ -59,7 +45,7 @@ function GroupMain({ group }: {group: Group}) {
     if (group.members.includes(user.id)) {
       return (
         <button style={pending} onClick={leaveGroup} className="joined">
-          {updating ? "Updating..." : "You're a member"}
+          {updating ? "Updating..." : "Leave group"}
         </button>
       )
     } else {

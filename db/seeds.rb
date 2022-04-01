@@ -9,7 +9,11 @@
 # user seeding with demo user
 User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
 
-199.times do 
+NUM_USERS = 300
+NUM_GROUPS = 100
+NUM_EVENTS = 150 # 2x past events, 1x future events
+
+NUM_USERS.times do 
   User.create!(
     fname: Faker::Name.first_name, 
     lname: Faker::Name.last_name,
@@ -19,7 +23,7 @@ User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lnam
 end
 
 # group seeding
-50.times do 
+NUM_GROUPS.times do 
   rand_title = Faker::Commerce.department
   while Group.find_by(title: rand_title)
     rand_title = Faker::Commerce.department
@@ -35,8 +39,8 @@ end
 
 # making sure every group has an organizer
 # also need to make sure only organizers host events!
-(1..50).to_a.each do |grp_id|
-  user_id = rand(1..200)
+(1..NUM_GROUPS).to_a.each do |grp_id|
+  user_id = rand(1..NUM_USERS)
   membership = Membership.find_by(member_id: user_id, group_id: grp_id)
 
   unless membership
@@ -49,9 +53,9 @@ end
 end
 
 # seeding users as group members
-(1..200).to_a.each do |id|
+(1..NUM_USERS).to_a.each do |id|
     rand(3..8).times do
-    grp_id = rand(1..20)
+    grp_id = rand(1..NUM_GROUPS)
 
     membership = Membership.find_by(member_id: id, group_id: grp_id)
 
@@ -60,17 +64,17 @@ end
         member_id: id,
         group_id: grp_id,
         organizer: (rand(1..6) == 1 ? true : false),
-        created_at: Faker::Time.backward(days: 90)
+        created_at: Faker::Time.backward(days: 120)
       )
     end  
   end
 end
 
-# event seeding
-100.times do
+# future event seeding 
+NUM_EVENTS.times do
   rand_start = Faker::Time.forward(days: 30)
   rand_duration = rand(3600.. (3600 * 3))
-  rand_group = rand(1..5)
+  rand_group = rand(1..NUM_GROUPS)
   rand_organizer = Membership.where(organizer: true, group_id: rand_group).pluck(:member_id)
 
   Event.create!(
@@ -85,9 +89,9 @@ end
 end
 
 # seeding attendances for future events
-(1..200).to_a.each do |id|
+(1..NUM_USERS).to_a.each do |id|
   rand(3..8).times do
-    ev_id = rand(1..100)
+    ev_id = rand(1..NUM_EVENTS)
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
 
@@ -101,13 +105,14 @@ end
   end
 end
 
-200.times do
-  rand_start = Faker::Time.backward(days: 30)
+# past event seeding
+(NUM_EVENTS * 2).times do
+  rand_start = Faker::Time.backward(days: 60)
   rand_duration = rand(3600.. (3600 * 3))
 
   Event.create!(
-    group_id: rand(1..50),
-    host_id: rand(1..200),
+    group_id: rand(1..NUM_GROUPS),
+    host_id: rand(1..NUM_USERS),
     title: Faker::Hipster.sentence,
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
@@ -117,9 +122,9 @@ end
 end
 
 # seeding attendances for past events
-(1..200).to_a.each do |id|
+(1..NUM_USERS).to_a.each do |id|
   rand(3..8).times do
-    ev_id = rand(101..300)
+    ev_id = rand((NUM_EVENTS + 1)..(NUM_EVENTS * 2))
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
 
@@ -146,25 +151,40 @@ events.each do |event|
   end
 end
 
-# seeding topics
-100.times do 
-  rand_id = rand(1..50)
-  rand_type = ["Group", "Event"].sample
+# seeding topics for groups
+(NUM_GROUPS * 3).times do 
+  rand_id = rand(1..NUM_GROUPS)
   rand_name = Faker::Hobby.activity
 
-  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: rand_type)
+  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "Group")
 
   unless topic
     Topic.create!(
       name: rand_name,
       topicable_id: rand_id,
-      topicable_type: rand_type
+      topicable_type: "Group"
     )
   end
 end
 
-200.times do
-  rand_id = rand(1..100)
+# seeding topics for events
+(NUM_EVENTS * 3).times do 
+  rand_id = rand(1..NUM_EVENTS)
+  rand_name = Faker::Hobby.activity
+
+  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "Event")
+
+  unless topic
+    Topic.create!(
+      name: rand_name,
+      topicable_id: rand_id,
+      topicable_type: "Event"
+    )
+  end
+end
+
+(NUM_USERS * 3).times do
+  rand_id = rand(1..NUM_USERS)
   rand_name = Faker::Hobby.activity
 
   topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "User")

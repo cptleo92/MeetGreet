@@ -24,12 +24,26 @@ function GroupPanelOrganizers({ group }: {group: Group}) {
     navigate("members/leadership")
   }
 
+  const multipleOrganizers = () => {
+    if (organizers.length === 2) {
+      return (
+        <>
+          and <strong>{organizers.length - 1} other</strong>
+        </>
+      )
+    } else if (organizers.length > 2) {
+      return (
+        <>
+          and <strong>{organizers.length - 1} others</strong>
+        </>
+      )
+    }
+  }
+
   return (
     <div className="organizers">
-      <h4>Organizers</h4>
-        
-          <p onClick={goToMembers}><strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> and <strong>{organizers.length - 1} others</strong></p>
-        
+      <h4>Organizers</h4>        
+        <p onClick={goToMembers}><strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> {multipleOrganizers()}</p>        
     </div>
   );
 }

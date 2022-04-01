@@ -21,7 +21,6 @@ const HomeFeed = ({ attendingOnly, pastOnly, hosting }: { attendingOnly: boolean
 
   let events;
   if (pastOnly) {
-    console.log('hit')
     events = sortByDate(getPastEvents([...eventsFromStore])).reverse();
   } else {
     events = sortByDate(getUpcomingEvents([...eventsFromStore]))
@@ -61,8 +60,6 @@ const HomeFeed = ({ attendingOnly, pastOnly, hosting }: { attendingOnly: boolean
       )
     }
   }
-
-
 
   return (
     <div className="home-feed">

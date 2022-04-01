@@ -88,5 +88,12 @@ export interface Attendance {
   [id: string]: {
     event_id: number;
     created_at: string;
+    id: number;
   }
+}
+
+// speciifcally the data of an AJAX POST request for creating attendances
+export interface AttendancePost {
+  attendee_id: number;
+  event_id: number;
 }
