@@ -58,7 +58,10 @@ function GroupMain({ group }: {group: Group}) {
     }
   }
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
 
   return (
     <div className="group-main">

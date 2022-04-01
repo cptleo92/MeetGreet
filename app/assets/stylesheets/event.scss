@@ -134,10 +134,21 @@
   }
 }
 
+.footer-bg {
+  height: 100px;
+  background: white;
+}
+
 .event-footer {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  // padding: 20px;
+  
+  .body {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
 
   .edit-rsvp {
     background: white;
@@ -159,4 +170,15 @@
       background:rgb(170, 31, 31);
     }
   } 
+}
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  // margin: 0;
+  background: white;
+  // min-width: 1000px;
+  // width: 100%;
 }

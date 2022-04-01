@@ -6,6 +6,17 @@ import { AttendancePost, Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
 import { useUser } from '../../util/hooks';
 
+// get info footer to stick when off screen
+window.onscroll = () => {
+    const footer = document.querySelector(".event-footer")
+    if (window.scrollY < 389) {
+      footer.classList.add("sticky")
+    } else {
+      footer.classList.remove("sticky")
+    }
+  
+}
+
 function EventsFooter({ event }: { event: Event }) {
   const user = useUser();
   const dispatch = useDispatch();
@@ -62,12 +73,15 @@ function EventsFooter({ event }: { event: Event }) {
   }
 
   return (
-    <footer className="event-footer body">
+    <footer className="event-footer">
+      <div className="body">
+        
       <div className="info">
         <p>{stringifyDateLong(event.start_time)}</p>
         <p className="title">{event.title}</p>
       </div>
       {renderButton()}
+      </div>
     </footer>
   );
 }

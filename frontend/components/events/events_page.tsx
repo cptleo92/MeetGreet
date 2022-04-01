@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Event, Group, UserName, Attendance } from '../../types/types';
 import { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +43,11 @@ function EventsPage({ group, event }: {group: Group, event: Event}) {
   const openAttendeesModal = () => {
     dispatch(openModal("attendees"))
   }
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
   return (
     <div className="content-bg">
       <div className="event-main body">
