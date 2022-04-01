@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_224339) do
+ActiveRecord::Schema.define(version: 2022_04_01_165158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2022_03_30_224339) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "host_name", default: "", null: false
+    t.string "group_title", default: "", null: false
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["host_id"], name: "index_events_on_host_id"
     t.index ["start_time"], name: "index_events_on_start_time"

@@ -14,9 +14,9 @@ export interface User {
 export type Event = {
   id: number;
   group_id: number;
-  // group_title: string;
+  group_title: string;
   host_id: number;
-  // host_name: string;
+  host_name: string;
   title: string;
   description: string;
   location: string;
