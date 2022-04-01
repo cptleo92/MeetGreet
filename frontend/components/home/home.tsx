@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
+import { fetchEvents } from "../../actions/events_actions";
+import { EventEntity, GroupEntity } from "../../types/types";
+import { fetchGroups } from "../../actions/groups_actions"
+import { Route, Routes } from "react-router-dom";
 
 import HomeGreeting from "./home_greeting";
 import HomeMain from "./home_main";
 import Loading from "../misc/loading";
 import HomeMyEvents from "./home_my_events";
-import { fetchEvents } from "../../actions/events_actions";
-import { EventEntity, GroupEntity } from "../../types/types";
-import { fetchGroups } from "../../actions/groups_actions"
-import { AppDispatch } from "../../store/store";
-import { AnyAction } from "redux";
-import { Route, Routes } from "react-router-dom";
-import HomeFeed from "./home_feed";
+import HomeMyGroups from "./home_my_groups";
+
 
 const Home = () => {
   const dispatch = useDispatch(); 
@@ -63,6 +62,7 @@ const Home = () => {
           <Routes>
             <Route index element={<HomeMain />} />
             <Route path="myevents/*" element={<HomeMyEvents />} />
+            <Route path="mygroups/*" element={<HomeMyGroups />} />
           </Routes>
         </>
           

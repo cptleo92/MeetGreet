@@ -1,14 +1,15 @@
 import React from "react";
-import HomeSidebarGroupsPreview from "./home_sidebar_groups_preview";
+import HomeGroupsList from "./home_groups_list";
+import { Link } from "react-router-dom";
 
 const HomeSidebarEvents = () => {
   return (
     <div className="home-sidebar-events">
       <section className="sidebar-header">
         <h4>Your groups</h4>
-        <a>See all your groups</a>
+        <Link to="mygroups">See all your groups</Link>
       </section>
-      <HomeSidebarGroupsPreview />
+      <HomeGroupsList preview={true} organizerOnly={false}/>
     </div>
   )
 }

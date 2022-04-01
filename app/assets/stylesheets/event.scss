@@ -1,3 +1,10 @@
+.event-container header {
+  text-align: center;
+  padding: 20px;
+  background-color: #0098ab;
+  color: white;
+}
+
 .event-header {
   margin: 50px auto;
 
@@ -124,5 +131,23 @@
 
   .rsvp-time {
     color: gray;
+  }
+}
+
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+
+  button {
+    font-size: 1rem;
+    margin-right: 50px;
+    padding: 10px 30px;
+  }
+
+  .edit-rsvp {
+    background: white;
+    border: 2px solid green;
+    color: black;
   }
 }

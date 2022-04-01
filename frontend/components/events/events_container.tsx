@@ -7,9 +7,11 @@ import { fetchAttendances, fetchAttendees } from '../../actions/ui_actions';
 import { RootState } from '../../store/store';
 import { Event, Group } from '../../types/types';
 import { fetchGroups, fetchEvents } from '../../util/entities_api_util';
+import { useUser } from '../../util/hooks';
 import Loading from '../misc/loading';
 import EventsHeader from './events_header';
 import EventsPage from './events_page';
+import EventsFooter from './events_footer';
 
 function EventsContainer() {
   const params = useParams();
@@ -19,6 +21,7 @@ function EventsContainer() {
   const [group, setGroup] = useState<Group>()
   const [event, setEvent] = useState<Event>()
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     setLoading(true);
@@ -46,9 +49,13 @@ function EventsContainer() {
       {loading && <Loading />}
       {!loading &&
         <>
+        {
+          event?.attendees.includes(user.id) && 
+          <header>You are going to this event!</header>
+        }
         <EventsHeader event={event} /> 
         <EventsPage event={event} group={group} />
-        {/* <EventsFooter event={event} /> */}
+        <EventsFooter event={event} />
         </>
       }
     </div>
