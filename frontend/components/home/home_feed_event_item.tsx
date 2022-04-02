@@ -45,7 +45,7 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
               <p className="date">{stringifyDateLong(event.start_time)}</p>
               <p className="title">{event.title}</p>
               <p className="group">{event.group_title}</p>
-              <p className="attendees">{event.attendees.length} attendees</p>
+              <p className="attendees">{event.attendees.length} attendee{event.attendees.length === 1 ? "" : "s"}</p>
               {isAttending(event)}
             </div>
           </div>

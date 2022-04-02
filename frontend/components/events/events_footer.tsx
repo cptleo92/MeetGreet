@@ -5,8 +5,7 @@ import { RootState } from '../../store/store';
 import { AttendancePost, Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
 import { useUser } from '../../util/hooks';
-
-// get info footer to stick when off screen
+import { userNotMemberPrivateGroup } from '../../util/user_util';
 
 function EventsFooter({ event }: { event: Event }) {
   const user = useUser();
@@ -40,13 +39,41 @@ function EventsFooter({ event }: { event: Event }) {
     dispatch(createAttendance(data))
       .then(() => window.location.reload(false))
   }
-  
-  const renderButton = () => {
-    if (inPast()) {
+
+  const renderSpotsLeft = () => {
+    if (event.capacity !== null) {
+      const spotsLeft = event.capacity - event.attendees.length
+      return (
+        <p>{spotsLeft} spot{spotsLeft === 1 ? "" : "s"} left</p>
+        )
+    }
+  }
+
+  const isFull = () => {
+    if (event.capacity !== null) {
+      return event.capacity - event.attendees.length === 0
+    }
+    return false;
+  }
+
+  const renderButton = () => {    
+    if (userNotMemberPrivateGroup(event)) {
+      return (
+        <button className="btn-red">
+          Members only!
+        </button>
+      )
+    } else if (inPast()) {
       return (
         <button className="btn-red">
           Event over!
-          </button>
+        </button>
+      )
+    } else if (isFull()) {
+      return (
+        <button className="btn-red">
+          Event is full!
+        </button>
       )
     } else if (event.attendees.includes(user.id)) {
       return (
@@ -71,6 +98,7 @@ function EventsFooter({ event }: { event: Event }) {
         <p>{stringifyDateLong(event.start_time)}</p>
         <p className="title">{event.title}</p>
       </div>
+      {renderSpotsLeft()}
       {renderButton()}
       </div>
     </footer>

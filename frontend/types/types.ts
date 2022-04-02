@@ -26,11 +26,32 @@ export type Event = {
   country: string | null;
   start_time: string;
   end_time: string;
-  public: boolean;
   capacity: number | null;
   attendees: number[];
   topics: string[];
   avatar: string;
+  public: boolean;
+}
+
+export const _nullEvent: Event = {
+  id: 0,
+  group_id: 0,
+  group_title: "",
+  host_id: 0,
+  host_name: "",
+  title: "",
+  description: "",
+  location: "",
+  city: "",
+  state: "",
+  country: "",
+  start_time: "",
+  end_time: "",
+  capacity: 0,
+  attendees: [],
+  topics: [],
+  avatar: "",
+  public: true
 }
 
 export interface Group {
@@ -47,6 +68,22 @@ export interface Group {
   topics: string[];
   organizers: number[];
   avatar: string;
+}
+
+export const _nullGroup: Group = {
+  id: 0,
+  title: "",
+  description: "",
+  location: "",
+  city: "",
+  state: "",
+  country: "",
+  public: true,
+  members: [],
+  events: [],
+  topics: [],
+  organizers: [],
+  avatar: "",
 }
 
 export interface Topic {
@@ -76,6 +113,7 @@ export interface UserName {
   id: number;
   fname: string;
   lname: string;
+  avatar: string;
 }[]
 
 export interface UserNameEntity {

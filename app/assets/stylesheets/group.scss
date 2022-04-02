@@ -19,6 +19,17 @@
 .members-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.members {
+  width: auto;
+
+  ul {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+  }
 }
 
 .group-image {
@@ -42,11 +53,32 @@
     font-weight: 700;
     cursor: pointer;
   }
+
+  .info {
+    display: flex;
+    align-items: center;    
+  }
+
+  img {
+    margin-right: 10px;
+  }
 }
 
 .group-nav {
   display: flex;
   padding: 20px 0;
+  align-items: center;
+
+  .group-error {
+    margin-left: 20px;
+    color: red;
+    font-size: .8rem;
+  }
+
+  button {
+    height: 40px;
+    white-space: nowrap;
+  }
 }
 
 .group-nav-links {

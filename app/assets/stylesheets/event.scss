@@ -3,6 +3,10 @@
   padding: 20px;
   background-color: #0098ab;
   color: white;
+
+  &.full {
+    background-color: rgb(246, 88, 88);
+  }
 }
 
 .event-header {
@@ -11,6 +15,10 @@
   .date {
     color: gray;
   } 
+
+  .private {
+    color: gray;
+  }
 }
 
 .event-main {
@@ -22,26 +30,24 @@
   h4 {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 50px;
+    margin: 50px 0;
   }
 
   h5 {
     font-weight: 700;
   }
 
-  .description {
-    margin: 50px 0;
-  }
-
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 100px 0 50px 0;
+    margin-top: 100px;
 
     a {
       margin-right: 50px;
     }
+
+
   }
 }
 
@@ -86,7 +92,7 @@
 .attendees-cards {
   display: grid;
   grid-template: 180px 180px / repeat(4, 130px);
-  gap: 20px;
+  gap: 40px;
 }
 
 .attendee-card {
@@ -140,11 +146,11 @@
 .event-footer {
   display: flex;
   justify-content: space-between;
-  // padding: 20px;
   
   .body {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 0;
   }
 
@@ -163,6 +169,7 @@
     margin-right: 50px;
     padding: 10px 30px;
     cursor: pointer;
+    height: 50px;
 
     .btn-red:hover {
       background:rgb(170, 31, 31);

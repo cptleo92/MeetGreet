@@ -7,13 +7,15 @@ import EventsPageGroupCard from './events_page_group_card';
 import EventsPageDetails from './events_page_details';
 import Modal from '../splash/modal';
 import { openModal } from '../../actions/modal_actions';
+import { userNotMemberPrivateGroup } from '../../util/user_util';
+import EventMembersOnly from './event_members_only';
 
-export interface AttendeesWithDate{
-    created_at: string;
-    id: number;
-    fname: string;
-    lname: string;
-    avatar: string;
+export interface AttendeesWithDate {
+  created_at: string;
+  id: number;
+  fname: string;
+  lname: string;
+  avatar: string;
 }
 
 // function to add in "created_at" value to Attendees object
@@ -27,7 +29,7 @@ export function getAttendeesWithJoinDate() {
       created_at: attendancesFromStore[attendee.id.toString()].created_at
     }
   })
-  
+
   // sorting by last joined
   return attendeesWithJoinDate.sort((a, b) => {
     const user1 = new Date(a.created_at).valueOf();
@@ -36,7 +38,7 @@ export function getAttendeesWithJoinDate() {
   })
 }
 
-function EventsPage({ group, event }: {group: Group, event: Event}) {
+function EventsPage({ group, event }: { group: Group, event: Event }) {
   const attendeesWithJoinDate = getAttendeesWithJoinDate();
 
   const modal = useSelector((state: RootState) => state.ui.modal)
@@ -44,32 +46,34 @@ function EventsPage({ group, event }: {group: Group, event: Event}) {
   const openAttendeesModal = () => {
     dispatch(openModal("attendees"))
   }
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-  
+
   return (
     <div className="content-bg">
       <Modal modal={modal} />
       <div className="event-main body">
         <div className="event-main-left">
-          <img className="avatar-big" src={event.avatar}/>
+          <img className="avatar-big" src={event.avatar} />
           <h4>Details</h4>
-          <p className="description">{event.description}</p>
+          <EventMembersOnly event={event} component={<p className="description">{event.description}</p>} />
           <div className="attendees-container">
             <div className="header">
               <h4>Attendees ({event.attendees.length})</h4>
-              <a onClick={openAttendeesModal}>See all</a>              
+              {!userNotMemberPrivateGroup(event) && <a onClick={openAttendeesModal}>See all</a>}
             </div>
-            <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0,8)}/>
+            <EventMembersOnly event={event} component={
+              <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0, 8)} />
+            } />
           </div>
         </div>
         <div className="event-main-right">
           <EventsPageGroupCard group={group} />
           <EventsPageDetails event={event} />
         </div>
-      </div>      
+      </div>
     </div>
   );
 }

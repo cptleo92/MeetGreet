@@ -5,21 +5,23 @@ import { receiveEvents } from '../../actions/events_actions';
 import { receiveGroups } from '../../actions/groups_actions';
 import { fetchAttendances, fetchAttendees } from '../../actions/ui_actions';
 import { RootState } from '../../store/store';
-import { Event, Group } from '../../types/types';
+import { Event, Group, _nullGroup } from '../../types/types';
 import { fetchGroups, fetchEvents } from '../../util/entities_api_util';
 import { useUser } from '../../util/hooks';
 import Loading from '../misc/loading';
 import EventsHeader from './events_header';
 import EventsPage from './events_page';
 import EventsFooter from './events_footer';
+import { _nullEvent } from '../../types/types';
+
 
 function EventsContainer() {
   const params = useParams();
   const group_id = parseInt(params.group_id)
   const id = parseInt(params.id)
   const [loading, setLoading] = useState(true);
-  const [group, setGroup] = useState<Group>()
-  const [event, setEvent] = useState<Event>()
+  const [group, setGroup] = useState<Group>(_nullGroup)
+  const [event, setEvent] = useState<Event>(_nullEvent)
   const dispatch = useDispatch();
   const user = useUser();
 
@@ -44,14 +46,29 @@ function EventsContainer() {
       })
   }, [params])
 
+  const isFull = () => {
+    if (event.capacity !== null) {
+      return event.capacity - event.attendees.length === 0
+    }
+    return false;
+  }
+
+  const isAttending = () => {
+    return event.attendees.includes(user.id)
+  }
+
   return (
     <div className="event-container">
       {loading && <Loading />}
       {!loading &&
         <>
         {
-          event?.attendees.includes(user.id) && 
+          isAttending() && 
           <header>You are going to this event!</header>
+        }
+        {
+          (!isAttending() && isFull()) ?
+          <header className="full">This event is full!</header> : <></>
         }
         <EventsHeader event={event} /> 
         <EventsPage event={event} group={group} />

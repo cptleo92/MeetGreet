@@ -42,8 +42,11 @@ function GroupPanelOrganizers({ group }: {group: Group}) {
 
   return (
     <div className="organizers">
-      <h4>Organizers</h4>        
-        <p onClick={goToMembers}><strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> {multipleOrganizers()}</p>        
+      <h4>Organizers</h4>       
+        <div className="info">
+          <img className="avatar-round-small" src={organizers[0].avatar} />
+          <p onClick={goToMembers}><strong>{organizers[0].fname} {organizers[0].lname || ""}</strong> {multipleOrganizers()}</p>        
+        </div>
     </div>
   );
 }

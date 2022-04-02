@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Group, UserName } from '../../types/types';
+import { useUser } from '../../util/hooks';
 import GroupMembersItem from './group_members_item';
 
 function GroupMembersList({ group, organizers }: { group: Group, organizers: boolean }) {
@@ -21,9 +22,9 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
     })
   }
 
-  const sortByName = (list: UserName[]) => {    
-    let sortedList = [...list]    
-    return sortedList.sort((member1, member2) => {      
+  const sortByName = (list: UserName[]) => {
+    let sortedList = [...list]
+    return sortedList.sort((member1, member2) => {
       const name1 = member1.fname.toUpperCase();
       const name2 = member2.fname.toUpperCase();
       if (name1 < name2) {
@@ -64,18 +65,29 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
     setSearch(searchVal)
 
     if (e.target.value !== "") {
-    setPeopleList(peopleList.filter((member: UserName) => {
-      let lowerFName = member.fname.toLowerCase();
-      let lowerLName = member.lname.toLowerCase();
-      searchVal = searchVal.toLowerCase();
-      return lowerFName.startsWith(searchVal) || lowerLName.startsWith(searchVal)
-    }))} else {     
-      setMembers();   
-    }       
+      setPeopleList(
+        peopleList.filter((member: UserName) => {
+          let lowerFName = member.fname.toLowerCase();
+          let lowerLName = member.lname.toLowerCase();
+          searchVal = searchVal.toLowerCase();
+          return lowerFName.startsWith(searchVal) || lowerLName.startsWith(searchVal)
+        }))
+    } else {
+      setMembers();
+    }
   }
 
   const toggleSort = () => {
     setSortType(!sortType)
+  }
+
+  const user = useUser();
+
+  const userNotMemberPrivateGroup = () => {
+    if (!group.public) {
+      return !user.groups.includes(group.id)
+    }
+    return false;
   }
 
   return (
@@ -95,11 +107,14 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
         />
       </div>
 
-      <ul>
-        {
-          peopleList.map((member: UserName, idx: number) => <GroupMembersItem key={idx} member={member} />)
-        }
-      </ul>
+      {userNotMemberPrivateGroup() ?
+        <div className="locked">This content is available only to members</div> :
+        <ul>
+          {
+            peopleList.map((member: UserName, idx: number) => <GroupMembersItem key={idx} member={member} />)
+          }
+        </ul>
+      }
     </div>
   );
 }

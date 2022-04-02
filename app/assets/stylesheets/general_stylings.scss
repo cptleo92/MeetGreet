@@ -10,6 +10,14 @@ svg.icon {
   color: red;
 }
 
+.locked {
+  background: rgb(221, 221, 221);
+  border-radius: 10px;
+  padding: 50px 20px;
+  color: gray;
+  text-align: center;
+}
+
 input {
   border: 1px solid lightgray;
   border-radius: 3px;

@@ -17,12 +17,14 @@ avatars = [
 ]
 
 demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
-file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
-demo.avatar.attach(io: file, filename: "kendall570.png")
+# file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
+# demo.avatar.attach(io: file, filename: "kendall570.png")
 
-NUM_USERS = 200
+NUM_USERS = 100
 NUM_GROUPS = 100
+MEM_MULT = rand(4..8) # each user will join this many groups
 NUM_EVENTS = 150 # 2x past events, 1x future events
+ATTEND_MULT = rand(6..12) # each user will attend this many events
 
 NUM_USERS.times do 
   User.create!(
@@ -33,12 +35,13 @@ NUM_USERS.times do
   )
 end
 
-rand_avatars = avatars.shuffle
-rand_avatars.length.times do 
-  rand_url = rand_avatars.shift
-  file = URI.open(rand_url)
-  User.find(rand(50..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
-end
+# seeding random avatars (WILL UPLOAD TO AWS SO DON'T SEED TOO OFTEN)
+# rand_avatars = avatars.shuffle
+# rand_avatars.length.times do 
+#   rand_url = rand_avatars.shift
+#   file = URI.open(rand_url)
+#   User.find(rand(50..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
+# end
 
 # group seeding
 NUM_GROUPS.times do 
@@ -50,7 +53,8 @@ NUM_GROUPS.times do
   Group.create!(
     title: rand_title,
     description: Faker::Hipster.paragraph,
-    location: Faker::TvShows::TheExpanse.location
+    location: Faker::TvShows::TheExpanse.location,
+    public: (rand(1..4) == 1 ? false : true) 
   )
   
 end
@@ -72,7 +76,7 @@ end
 
 # seeding users as group members
 (1..NUM_USERS).to_a.each do |id|
-    rand(3..8).times do
+  MEM_MULT.times do
     grp_id = rand(1..NUM_GROUPS)
 
     membership = Membership.find_by(member_id: id, group_id: grp_id)
@@ -102,23 +106,39 @@ NUM_EVENTS.times do
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
     start_time: rand_start,
-    end_time: rand_start + rand_duration
+    end_time: rand_start + rand_duration,
+    capacity: (rand(1..6) === 1 ? rand(10..50) : nil)
   )
 end
 
 # seeding attendances for future events
 (1..NUM_USERS).to_a.each do |id|
-  rand(3..8).times do
+  ATTEND_MULT.times do
     ev_id = rand(1..NUM_EVENTS)
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
+    event = Event.find(ev_id)
+    group = Group.find(event.group_id)
 
-    unless attendance
+    unless attendance || (event.attendees.length >= event.capacity)
       Attendance.create!(
         attendee_id: id,
         event_id: ev_id,
         created_at: Faker::Time.backward(days: 10)
       )
+
+      # if group is private, make sure attendee is in the group as well
+      unless group.public?
+        membership = Membership.find_by(member_id: id, group_id: event.group_id)
+        
+        unless membership
+          Membership.create!(
+            member_id: id,
+            group_id: event.group_id,
+            created_at: Faker::Time.between_dates(from: Faker::Time.backward(days: 70) , to: Faker::Time.backward(days: 20))
+          )
+        end
+      end      
     end  
   end
 end
@@ -135,24 +155,40 @@ end
     description: Faker::Hipster.paragraph,
     location: Faker::Address.city,
     start_time: rand_start,
-    end_time: rand_start + rand_duration
+    end_time: rand_start + rand_duration,
+    capacity: (rand(1..6) === 1 ? 0 : rand(10..30))
   )
 end
 
 # seeding attendances for past events
 (1..NUM_USERS).to_a.each do |id|
-  rand(3..8).times do
+  ATTEND_MULT.times do
     ev_id = rand((NUM_EVENTS + 1)..(NUM_EVENTS * 2))
 
     attendance = Attendance.find_by(attendee_id: id, event_id: ev_id)
+    event = Event.find(ev_id)
+    group = Group.find(event.group_id)
 
-    unless attendance
+    unless attendance || (event.attendees.length >= event.capacity)
       Attendance.create!(
         attendee_id: id,
         event_id: ev_id,
         created_at: Faker::Time.between_dates(from: Faker::Time.backward(days: 60) , to: Faker::Time.backward(days: 30))
       )
     end  
+
+    # if group is private, make sure attendee is in the group as well
+    unless group.public?
+      membership = Membership.find_by(member_id: id, group_id: event.group_id)
+      
+      unless membership
+        Membership.create!(
+          member_id: id,
+          group_id: event.group_id,
+          created_at: Faker::Time.between_dates(from: Faker::Time.backward(days: 70) , to: Faker::Time.backward(days: 20))
+        )
+      end
+    end      
   end
 end
 

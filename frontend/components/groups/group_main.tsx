@@ -8,6 +8,7 @@ import { useUser } from '../../util/hooks';
 import GroupAbout from './group_about';
 import GroupEvents from "./group_events"
 import GroupMembers from './group_members';
+import { openModal } from '../../actions/modal_actions';
 
 
 function GroupMain({ group }: {group: Group}) {
@@ -17,10 +18,26 @@ function GroupMain({ group }: {group: Group}) {
   let membership = membershipsFromStore[user.id]
 
   const [updating, setUpdating] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const leaveGroup = () => {
+    // user can't leave if they're the last organizer
+    if (group.organizers.length === 1 && group.organizers[0] === user.id) {
+      setError(true);
+      setErrorMsg("Group must have at least 1 organizer!")
+      return;
+    }
+
+    // user can't leave if group is private and they're attending an event
+    if (!group.public && group.events.some(eventId => user.events.indexOf(eventId) >= 0)) {
+      setError(true);
+      setErrorMsg("You are attending an event! Cancel your RSVPs before leaving.")
+      return;
+    }
+
     if (membership !== undefined) {
-      setUpdating(true)
+      setUpdating(true) 
       const membershipId = membership.id
       dispatch(deleteMembership(membershipId))
           .then(() => window.location.reload(false))          
@@ -38,20 +55,16 @@ function GroupMain({ group }: {group: Group}) {
       .then(() => window.location.reload(false))   
   }
 
-  const pending = {
-    opacity: 50
-  }
-
   const renderButton = () => {
     if (group.members.includes(user.id)) {
       return (
-        <button style={pending} onClick={leaveGroup} className="joined">
+        <button onClick={leaveGroup} className="joined">
           {updating ? "Updating..." : "Leave group"}
         </button>
       )
     } else {
       return (
-        <button style={pending} onClick={joinGroup} className="btn-red">
+        <button onClick={joinGroup} className="btn-red">
           {updating ? "Updating..." : "Join group"}
         </button>
       )
@@ -61,7 +74,10 @@ function GroupMain({ group }: {group: Group}) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
-  
+
+  const shown = {
+    display: error ? "block" : "none"
+  }
 
   return (
     <div className="group-main">
@@ -76,6 +92,7 @@ function GroupMain({ group }: {group: Group}) {
         </ul> 
 
         {renderButton()}
+        <span style={shown} className="group-error">{errorMsg}</span>
       </nav>
 
       <div className="content-bg">
