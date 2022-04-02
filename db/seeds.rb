@@ -1,7 +1,7 @@
 require 'open-uri'
 
 demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
-file = "https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png"
+file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
 demo.avatar.attach(io: file, filename: "kendall570.png")
 
 NUM_USERS = 200
