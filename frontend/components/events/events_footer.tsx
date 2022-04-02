@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAttendance, deleteAttendance } from '../../actions/users_actions';
 import { RootState } from '../../store/store';
@@ -7,15 +7,6 @@ import { stringifyDateLong } from '../../util/event_util';
 import { useUser } from '../../util/hooks';
 
 // get info footer to stick when off screen
-window.onscroll = () => {
-    const footer = document.querySelector(".event-footer")
-    if (window.scrollY < 389) {
-      footer.classList.add("sticky")
-    } else {
-      footer.classList.remove("sticky")
-    }
-  
-}
 
 function EventsFooter({ event }: { event: Event }) {
   const user = useUser();

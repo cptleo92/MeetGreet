@@ -5,7 +5,7 @@ import { AttendeesWithDate } from './events_page';
 function AttendeesModalItem({ attendee, isOrganizer }: {attendee: AttendeesWithDate, isOrganizer: boolean}) {
   return (
     <div className="attendee-modal-item">
-      <div className="avatar"></div>
+      <img className="avatar-round" src={attendee.avatar}/>
       <div className="attendee-info">
         <p className="name">{attendee.fname} {attendee.lname}</p>
         {isOrganizer && <p>Organizer</p>}

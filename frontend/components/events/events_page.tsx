@@ -13,6 +13,7 @@ export interface AttendeesWithDate{
     id: number;
     fname: string;
     lname: string;
+    avatar: string;
 }
 
 // function to add in "created_at" value to Attendees object
@@ -50,15 +51,16 @@ function EventsPage({ group, event }: {group: Group, event: Event}) {
   
   return (
     <div className="content-bg">
+      <Modal modal={modal} />
       <div className="event-main body">
         <div className="event-main-left">
+          <img className="avatar-big" src={event.avatar}/>
           <h4>Details</h4>
           <p className="description">{event.description}</p>
           <div className="attendees-container">
             <div className="header">
               <h4>Attendees ({event.attendees.length})</h4>
-              <a onClick={openAttendeesModal}>See all</a>
-              <Modal modal={modal} />
+              <a onClick={openAttendeesModal}>See all</a>              
             </div>
             <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0,8)}/>
           </div>

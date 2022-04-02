@@ -148,7 +148,7 @@
   align-items: center;
   border-bottom: 1px solid rgb(230, 230, 230);
   width: 80%;
-  padding: 15px;
+  padding: 15px 0;
 
   &:last-child {
     border: 0;
@@ -158,16 +158,11 @@
     padding-top: 0;
   }
 
-  .avatar {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
-  }
-
   a {
     color: black;
     text-decoration: none;
     font-weight: 700;
+    margin-left: 20px;
   }
 }
 
@@ -182,11 +177,18 @@
 }
 
 .next-event {
+  .header {
+    display: flex;
+    border-bottom: 3px solid lightgray;
+    padding-bottom: 10px;
+  }
+
   h3 {
+    margin-top: 10px;
+    margin-left: 15px;
     font-size: 1.5rem;
     font-weight: 700px;
-    border-bottom: 3px solid lightgray;
-    padding-bottom: 20px;
+   
     // text-align: right;
   }
 

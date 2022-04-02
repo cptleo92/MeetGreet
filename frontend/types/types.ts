@@ -9,6 +9,7 @@ export interface User {
   groups: number[];
   events: number[];
   topics: string[];
+  avatar: string;
 }
 
 export type Event = {
@@ -29,6 +30,7 @@ export type Event = {
   capacity: number | null;
   attendees: number[];
   topics: string[];
+  avatar: string;
 }
 
 export interface Group {
@@ -44,6 +46,7 @@ export interface Group {
   events: number[];
   topics: string[];
   organizers: number[];
+  avatar: string;
 }
 
 export interface Topic {

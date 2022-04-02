@@ -15,6 +15,8 @@ class Event < ApplicationRecord
 
   has_many :topics, as: :topicable
 
+  has_one_attached :avatar
+
   def self.starting_soon
     Event.where('start_time > ?', Time.now()).order(start_time: :asc).take(20).shuffle.take(8)
   end

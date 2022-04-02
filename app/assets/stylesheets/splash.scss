@@ -131,6 +131,7 @@ p {
   img {
     position: relative;
     width: 22vw;
+    min-width: 300px;
     margin-left: 100px;        
   }
 }
@@ -142,6 +143,7 @@ p {
 
   img {
     width: 16vw;
+    min-width: 280px;
     border-radius: 10px; 
   }
 
@@ -320,7 +322,8 @@ p {
   .buttons {
     display: flex;
     flex-direction: column;
-    margin-left: 40px;   
+    margin-left: 30px;   
+    transform: translateY(-50px);
   }
 }
 
@@ -377,6 +380,10 @@ p {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+
+    .info {
+      margin-left: 20px;
+    }
   }
 }
 

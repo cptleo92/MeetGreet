@@ -60,4 +60,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
+  config.active_storage.service = :amazon_dev
 end

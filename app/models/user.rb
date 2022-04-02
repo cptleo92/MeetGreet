@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,6 +27,8 @@ class User < ApplicationRecord
     foreign_key: :host_id
 
   has_many :topics, as: :topicable
+
+  has_one_attached :avatar
 
   def organizings
     Group.joins(:memberships).where('organizer = ? and member_id = ?', true, self.id)
@@ -85,5 +89,4 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64(16)
   end
-
 end

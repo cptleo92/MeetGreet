@@ -40,7 +40,7 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
         (
           <Link key={event.id} to={generateEventPath(event)}>
           <div className="item" >
-            <div className="avatar"></div>
+            <img className="avatar-medium-long" src={event.avatar}/>
             <div className="info">
               <p className="date">{stringifyDateLong(event.start_time)}</p>
               <p className="title">{event.title}</p>

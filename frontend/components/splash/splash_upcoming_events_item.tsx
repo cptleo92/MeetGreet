@@ -15,7 +15,7 @@ function SplashUpcomingEventsItem({ event }: {event: Event}) {
   return (
     <div className="splash-event-card">        
           <div className="item" >
-            <div className="avatar"></div>
+            <img className="avatar-medium-long" src={event.avatar}/>
             <div className="info">
               <p className="date">{stringifyDateLongAbrv(event.start_time)}</p>
               <p className="title">{truncate(event.title)}</p>

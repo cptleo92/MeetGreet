@@ -31,8 +31,7 @@ function GroupHeader({ group }: {group: Group}) {
 
   return (
     <div className="group-header body">
-      <div className="group-image">       
-      </div>
+      <img className="avatar-big" src={group.avatar}/>
 
       <div className="info">
         <h1>{group === undefined ? "" : group.title}</h1>

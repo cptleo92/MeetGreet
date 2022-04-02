@@ -10,6 +10,8 @@ class Group < ApplicationRecord
 
   has_many :topics, as: :topicable
 
+  has_one_attached :avatar
+
   def organizers    
     User.joins(:memberships).where('organizer = ? and group_id = ?', true, self.id)
   end

@@ -10,7 +10,7 @@ const HomeSidebarGroupItem = ({ group }: {group: Group}) => {
 
   return (
     <div className="sidebar-group-item">
-      <div className="avatar"></div>
+      <img className="avatar-round" src={group.avatar}/>
       <a onClick={goToGroup}>{group.title}</a>
     </div>
   )

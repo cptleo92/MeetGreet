@@ -6,13 +6,6 @@ svg.icon {
   left: 10px;
 }
 
-// .layout {
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh;
-//   justify-content: space-between;
-// }
-
 .error {
   color: red;
 }
@@ -93,9 +86,9 @@ a {
 }
 
 .body {
-  width: 45vw;
-  min-width: 1000px;
+  width: 1000px;
   margin: auto;
+  transform: translateX(-100px);
 }
 
 .loading {
@@ -105,13 +98,6 @@ a {
   p {
     font-size: 60px;
   }
-}
-
-.avatar {
-  border: 1px solid gray;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
 }
 
 ::-webkit-scrollbar {

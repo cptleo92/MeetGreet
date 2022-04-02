@@ -1,6 +1,19 @@
 .group-header {
   display: flex;
   margin: 50px auto;
+
+  .info {
+    margin-left: 40px;
+    a { color: black; }
+  
+    li {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      p {font-weight: 300;}
+      strong {font-weight: 700;}
+    }
+  }
 }
 
 .members-header {
@@ -21,18 +34,6 @@
     width: 15px;  
     fill: gray;
     margin-right: 5px;
-  }
-}
-
-.info {
-  a { color: black; }
-
-  li {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    p {font-weight: 300;}
-    strong {font-weight: 700;}
   }
 }
 
@@ -185,6 +186,11 @@
   border-bottom: 1px solid lightgray;
   padding: 30px;
   line-height: 2rem;
+  display: flex;
+
+  .info {
+    margin-left: 25px;
+  }
 }
 
 .member-title {

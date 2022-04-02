@@ -1,15 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
 
-# user seeding with demo user
-User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
+demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
+file = "https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png"
+demo.avatar.attach(io: file, filename: "kendall570.png")
 
-NUM_USERS = 300
+NUM_USERS = 200
 NUM_GROUPS = 100
 NUM_EVENTS = 150 # 2x past events, 1x future events
 
@@ -152,7 +147,7 @@ events.each do |event|
 end
 
 # seeding topics for groups
-(NUM_GROUPS * 3).times do 
+(NUM_GROUPS * 2).times do 
   rand_id = rand(1..NUM_GROUPS)
   rand_name = Faker::Hobby.activity
 
@@ -168,7 +163,7 @@ end
 end
 
 # seeding topics for events
-(NUM_EVENTS * 3).times do 
+(NUM_EVENTS * 2).times do 
   rand_id = rand(1..NUM_EVENTS)
   rand_name = Faker::Hobby.activity
 

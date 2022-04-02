@@ -39,7 +39,10 @@ const HomeSidebarEventsPreview = () => {
     } else {
       return (
         <ul className="next-event">        
+        <div className="header">
+          <img className="avatar-round" src={firstEvent.avatar}/>
           <h3>{getFirstEventGroup()}</h3>    
+        </div>
           <li className="date">{stringifyDateLong(firstEvent.start_time)}</li>                    
           <li className="title">{firstEvent.title}</li>
           <li className="group">{getFirstEventGroup()}</li>

@@ -6,7 +6,7 @@ function SplashPopularGroupsItem({ group }: { group: Group }) {
   return (
     <div className="splash-group-card">
       <div className="item" >
-          <div className="avatar"></div>
+          <img className="avatar-round" src={group.avatar}/>
           <div className="info">
             <p className="title">{group.title}</p>
             <p className="members">{group.members.length} members</p>
