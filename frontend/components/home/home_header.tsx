@@ -4,10 +4,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { logout } from "../../actions/session_actions";
 import { useNavigate } from "react-router-dom";
+import { useLoggedIn, useUser } from "../../util/hooks";
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useUser();
+  const loggedIn = useLoggedIn();
 
   const goHome = () => {
     navigate("/home");
@@ -44,12 +47,13 @@ const HomeHeader = () => {
       </div>
 
       <ul className="splash-header-nav-right">
-        <li className="splash-header-nav-right-login">
+        <li className="login">
           <a onClick={handleLogout}>Log out</a>
         </li>
-        <li className="splash-header-nav-right-signup">
+        <li className="signup">
           <a>Your Profile</a>
         </li>
+        {loggedIn && <img className="avatar-round-small" src={user.avatar} />}
       </ul>
   
     </nav>

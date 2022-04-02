@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.dispatch = store.dispatch;
   // window.signup = signup;
   window.login = login;
-  // window.logout = logout;
+  window.logout = logout;
   // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")

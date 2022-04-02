@@ -25,6 +25,15 @@
       opacity: 80%;
     }
   }
+
+  .splash-header-nav-right {
+    display: flex;
+    align-items: center;
+
+    .signup {
+      margin-right: 20px;
+    }
+  }
 }
 
 .header-search {

@@ -1,5 +1,21 @@
 require 'open-uri'
 
+avatars = [
+  "https://meetgreet-seed-dev.s3.amazonaws.com/amos.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/ashford.png",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/bill.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/Camina_Drummer_.png",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/cat.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/gob.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/greg.jpeg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/holden.png",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/jesse.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/logan.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/Marco_Inaros.png",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/MichaelScott.png",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/miller.jpg"
+]
+
 demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
 file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
 demo.avatar.attach(io: file, filename: "kendall570.png")
@@ -15,6 +31,13 @@ NUM_USERS.times do
     email: Faker::Internet.email,
     password: 'password'
   )
+end
+
+rand_avatars = avatars.shuffle
+rand_avatars.length.times do 
+  rand_url = rand_avatars.shift
+  file = URI.open(rand_url)
+  User.find(rand(50..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
 end
 
 # group seeding
