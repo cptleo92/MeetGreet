@@ -4,7 +4,6 @@ import { login, signup } from '../../actions/session_actions'
 import { RootState } from '../../store/store'
 import SessionFormHeader from './session_form_header'
 import FormErrors from './form_errors'
-import { useNavigate } from 'react-router-dom'
 import { closeModal } from '../../actions/modal_actions'
 
 const UserForm = ({ formType }: {formType: string}) => {
@@ -18,7 +17,6 @@ const UserForm = ({ formType }: {formType: string}) => {
   const [hidden, setHidden] = useState(true);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const update = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({
