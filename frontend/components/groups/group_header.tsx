@@ -3,10 +3,19 @@ import { Group } from '../../types/types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
+import { useUser } from '../../util/hooks';
 
 function GroupHeader({ group }: {group: Group}) {
-
+  const user = useUser();
   const organizers = useSelector((state: RootState) => state.ui.group.organizers)
+
+  const isOrganizer = () => {
+    return organizers.some(organizer => organizer.id === user.id)
+  }
+
+  const handleEdit = () => {
+    navigate("edit")
+  }
 
   const multipleOrganizers = () => {
     if (organizers.length === 2) {
@@ -61,6 +70,10 @@ function GroupHeader({ group }: {group: Group}) {
               </p>                
             } 
           </li>
+          {
+            isOrganizer() && 
+            <button onClick={handleEdit} className="btn-red">Edit Group</button>
+          }
         </ul>
       </div>
     </div>

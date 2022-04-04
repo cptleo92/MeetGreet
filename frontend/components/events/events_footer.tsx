@@ -41,7 +41,7 @@ function EventsFooter({ event }: { event: Event }) {
   }
 
   const renderSpotsLeft = () => {
-    if (event.capacity !== null) {
+    if (event.capacity !== 0) {
       const spotsLeft = event.capacity - event.attendees.length
       return (
         <p>{spotsLeft} spot{spotsLeft === 1 ? "" : "s"} left</p>
@@ -50,7 +50,7 @@ function EventsFooter({ event }: { event: Event }) {
   }
 
   const isFull = () => {
-    if (event.capacity !== null) {
+    if (event.capacity !== 0) {
       return event.capacity - event.attendees.length === 0
     }
     return false;

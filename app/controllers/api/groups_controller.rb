@@ -20,7 +20,16 @@ class Api::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to api_group_url(@group)
+      if params[:topics]
+        topics = params[:topics].map do |topic|
+          Topic.create!(
+            name: topic,
+            topicable_id: @group.id,
+            topicable_type: "Group"
+          )
+        end
+      end
+      render json: @group
     else
       render json: @group.errors.full_messages, status: 422
     end
@@ -29,7 +38,17 @@ class Api::GroupsController < ApplicationController
   def update
     @group = Group.find_by(id: params[:id])
     if @group.update(group_params)
-      redirect_to api_group_url(@group)
+      if params[:topics]
+        topics = params[:topics].map do |topic| 
+          Topic.find_or_create_by(
+            name: topic,
+            topicable_id: params[:id],
+            topicable_type: "Group"
+          )  
+        end
+      end
+      @group.topics = topics || []
+      render json: @group
     else
       render json: @group.errors.full_messages, status: 422
     end

@@ -1,5 +1,5 @@
 json.partial! 'api/users/user', user: @user
-json.extract! @user, :birthdate, :location, :description
+json.extract! @user, :location
 
 if @user.avatar.attached?
   json.avatar url_for(@user.avatar)

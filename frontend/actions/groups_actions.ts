@@ -7,7 +7,7 @@ import { AnyAction } from "redux"
 import * as EntitiesAPIUtil from "../util/entities_api_util"
 import { Group, GroupEntity } from "../types/types"
 import { AppDispatch } from "../store/store"
-import { newGroupType } from "../components/groups/group_create"
+import { newGroupType } from "../components/groups/group_form"
 
 export const receiveGroups = (groups: GroupEntity) => ({
   type: RECEIVE_GROUPS,
@@ -25,15 +25,22 @@ const receiveGroupErrors = (errors: string[]): AnyAction => ({
 })
 
 export const fetchGroups = (filter: number[]) => (dispatch: AppDispatch) => {
-
   return EntitiesAPIUtil.fetchGroups(filter)
     .then(
       (groups: GroupEntity) => dispatch(receiveGroups(groups))
     )
 }
 
-export const createGroup = (group: newGroupType) => (dispatch: AppDispatch) => {
-  return EntitiesAPIUtil.createGroup(group)
+export const createGroup = (group: newGroupType, topics: string[]) => (dispatch: AppDispatch) => {
+  return EntitiesAPIUtil.createGroup(group, topics)
+    .then(
+      (group: Group) => dispatch(receiveGroups({[group.id]: group})),
+      err => dispatch(receiveGroupErrors(err.responseJSON))
+    )
+}
+
+export const updateGroup = (group: Group, topics: string[]) => (dispatch: AppDispatch) => {
+  return EntitiesAPIUtil.updateGroup(group, topics)
     .then(
       (group: Group) => dispatch(receiveGroups({[group.id]: group})),
       err => dispatch(receiveGroupErrors(err.responseJSON))

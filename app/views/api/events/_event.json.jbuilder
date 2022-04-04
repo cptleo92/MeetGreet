@@ -6,7 +6,7 @@ rand_avatar = [
   "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-wendy-wei-1190297.jpg",
 ]
 
-json.extract! event, :id, :group_id, :group_title, :host_id, :host_name, :title, :description, :location, :city, :state, :country, :start_time, :end_time, :capacity
+json.extract! event, :id, :group_id, :group_title, :host_id, :host_name, :title, :description, :location, :start_time, :end_time, :capacity
 group = Group.find(event.group_id)
 json.public group.public
 

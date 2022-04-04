@@ -115,3 +115,17 @@ a {
 ::-webkit-scrollbar-thumb {
   background: rgba(0,0,0,.4);
 }
+
+.back {
+  color: gray;
+  border-radius: 50%;
+  width: fit-content;
+  height: auto;
+  margin-top: 20px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  } 
+}

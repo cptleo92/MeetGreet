@@ -251,3 +251,51 @@
 .related-topics {
   margin-top: auto;
 }
+
+.form-header {
+  margin: 50px 0;
+}
+
+.form-line {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 20px;
+
+  input {
+    text-indent: 0;
+  }
+
+  textarea {
+    padding: 10px;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  #description {
+    height: 200px;
+  }
+
+  input[type=radio] {
+    min-width: 0;
+  }
+
+  .form-info {
+    color: gray;
+    margin: 10px 0;
+  }
+
+  .topic {
+    margin-left: 10px;
+  }
+
+  .topic-button {
+    width: fit-content;
+
+    &:hover {
+      background: red;
+    }
+  }
+}

@@ -11,8 +11,6 @@ import HomeMain from "./home_main";
 import Loading from "../misc/loading";
 import HomeMyEvents from "./home_my_events";
 import HomeMyGroups from "./home_my_groups";
-
-
 const Home = () => {
   const dispatch = useDispatch(); 
   const [loading, setLoading] = useState(true);
@@ -46,7 +44,7 @@ const Home = () => {
             dispatch(fetchGroups(currentUser.groups))
               .then(({ payload }: {payload: GroupEntity}) => {
                 dispatch(fetchAllEventsForUser(payload))
-                .then(() => setLoading(false))
+                .then(() => setLoading(false))                     
               })              
             })
           })      
@@ -55,9 +53,9 @@ const Home = () => {
   return (
     <div className="home">
       <div className="body">
-        
         { !loading &&
         <>
+          
             <HomeGreeting />
           <Routes>
             <Route index element={<HomeMain />} />
@@ -67,7 +65,6 @@ const Home = () => {
         </>
           
         }
-
 
         {loading && <Loading />}
       </div>

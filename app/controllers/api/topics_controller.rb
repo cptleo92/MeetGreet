@@ -26,7 +26,7 @@ class Api::TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:id, :group_id, :host_id, :start_time, :end_time, :capacity, :title, :public, :location, :city, :state, :country, :description)
+    params.require(:topic).permit(:id, :name, :topicable_id, :topicable_type)
   end
 
 end

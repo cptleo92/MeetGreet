@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
-  validates :group_id, :host_id, :title, :description, :location, :group_title, :host_name, :start_time,   :end_time, presence: true
+  validates :group_id, :host_id, :title, :description, :location, :group_title, :capacity, :host_name, :start_time, :end_time, presence: true
+  validates :capacity, numericality: true
 
   before_validation :ensure_group_title_and_host_name
 
@@ -12,7 +13,7 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :attendees, through: :attendances, source: :user
 
-  has_many :topics, as: :topicable
+  has_many :topics, as: :topicable, dependent: :destroy
 
   has_one_attached :avatar
 

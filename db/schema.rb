@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_192758) do
+ActiveRecord::Schema.define(version: 2022_04_04_233835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,14 +48,11 @@ ActiveRecord::Schema.define(version: 2022_04_02_192758) do
     t.integer "group_id", null: false
     t.integer "host_id", null: false
     t.string "title", null: false
-    t.text "description"
+    t.text "description", null: false
     t.string "location", null: false
-    t.string "city"
-    t.string "state"
-    t.string "country"
     t.datetime "start_time", null: false
     t.datetime "end_time", null: false
-    t.integer "capacity"
+    t.integer "capacity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "host_name", default: "", null: false
@@ -68,10 +65,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_192758) do
   create_table "groups", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "public", default: true, null: false
-    t.string "location"
-    t.string "city"
-    t.string "state"
-    t.string "country"
+    t.string "location", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -116,9 +110,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_192758) do
   create_table "users", force: :cascade do |t|
     t.string "fname", null: false
     t.string "lname", default: "", null: false
-    t.string "location"
-    t.date "birthdate"
-    t.text "description"
+    t.string "location", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "session_token", null: false

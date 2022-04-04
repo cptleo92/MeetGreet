@@ -1,5 +1,5 @@
-import { newGroupType } from "../components/groups/group_create"
-import { AttendancePost, Event, Group, Membership, User } from "../types/types"
+import { newGroupType } from "../components/groups/group_form"
+import { AttendancePost, Event, Group, Membership, Topic, User } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -86,10 +86,27 @@ export const createAttendance = (data: AttendancePost) => {
   })
 }
 
-export const createGroup = (group: newGroupType) => {
+export const createGroup = (group: newGroupType, topics: string[]) => {
   return $.ajax({
     method: "POST",
     url: "api/groups",
-    data: {group}
+    data: {group: group, topics: topics}
+  })
+}
+
+export const updateGroup = (group: Group, topics: string[]) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/groups/${group.id}`,
+    data: {group: group, topics: topics}
+  })
+}
+
+
+export const createTopic = (topic: Topic) => {
+  return $.ajax({
+    method: "POST",
+    url: "api/topics",
+    data: {topic}
   })
 }

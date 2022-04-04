@@ -16,6 +16,10 @@
 .home-header {
   border-bottom: 1px solid lightgray;
 
+  .create-group {
+    text-decoration: underline;
+  }
+
   .splash-header-logo {
     width: 50px;
     margin-right: 40px;
@@ -30,7 +34,7 @@
     display: flex;
     align-items: center;
 
-    .signup {
+    .login {
       margin-right: 20px;
     }
   }

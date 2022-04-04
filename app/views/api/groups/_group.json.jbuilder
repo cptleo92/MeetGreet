@@ -6,18 +6,10 @@ rand_avatar = [
   "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-wendy-wei-1190297.jpg",  
 ]
 
-json.extract! group, :id, :title, :public, :location, :city, :state, :country, :description
+json.extract! group, :id, :title, :public, :location, :description
 
 if group.avatar.attached?
   json.avatar url_for(group.avatar)
 else
   json.avatar rand_avatar.sample
 end
-
-
-# json.extract! group, :id, :title, :public, :location, :city, :state, :country, :description, :events, :topics
-# json.members do
-#   json.array! group.members do |member|
-#     json.partial! 'api/users/user', user: member
-#   end
-# end

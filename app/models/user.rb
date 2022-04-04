@@ -8,7 +8,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   attr_reader :password
 
-  validates :fname, :password_digest, :session_token, presence: true
+  validates :fname, :location, :password_digest, :session_token, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
@@ -26,7 +26,7 @@ class User < ApplicationRecord
     class_name: "Event",
     foreign_key: :host_id
 
-  has_many :topics, as: :topicable
+  has_many :topics, as: :topicable, dependent: :destroy
 
   has_one_attached :avatar
 

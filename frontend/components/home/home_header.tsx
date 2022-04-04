@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import { logout } from "../../actions/session_actions";
 import { useNavigate } from "react-router-dom";
 import { useLoggedIn, useUser } from "../../util/hooks";
+import { openModal } from "../../actions/modal_actions";
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
@@ -19,6 +18,10 @@ const HomeHeader = () => {
   const handleLogout = () => {
     goHome();
     dispatch(logout());
+  }
+
+  const handleCreateGroup = () => {
+    loggedIn ? navigate("groups/new") : dispatch(openModal("login"))
   }
 
   return (
@@ -47,12 +50,12 @@ const HomeHeader = () => {
       </div>
 
       <ul className="splash-header-nav-right">
+        <li className="create-group">
+          <a onClick={handleCreateGroup}>Create a new group!</a>
+        </li>
         <li className="login">
           <a onClick={handleLogout}>Log out</a>
-        </li>
-        <li className="signup">
-          <a>Your Profile</a>
-        </li>
+        </li>      
         {loggedIn && <img className="avatar-round-small" src={user.avatar} />}
       </ul>
   

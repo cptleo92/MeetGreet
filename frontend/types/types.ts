@@ -3,9 +3,7 @@ export interface User {
   fname: string;
   lname: string;
   email: string;
-  birthdate: string | null;
   location: string | null;
-  description: string | null;
   groups: number[];
   events: number[];
   topics: string[];
@@ -21,12 +19,9 @@ export type Event = {
   title: string;
   description: string;
   location: string;
-  city: string | null;
-  state: string | null;
-  country: string | null;
   start_time: string;
   end_time: string;
-  capacity: number | null;
+  capacity: number;
   attendees: number[];
   topics: string[];
   avatar: string;
@@ -42,9 +37,6 @@ export const _nullEvent: Event = {
   title: "",
   description: "",
   location: "",
-  city: "",
-  state: "",
-  country: "",
   start_time: "",
   end_time: "",
   capacity: 0,
@@ -59,9 +51,6 @@ export interface Group {
   title: string;
   description: string;
   location: string;
-  city: string | null;
-  state: string | null;
-  country: string | null;
   public: boolean;
   members: number[];
   events: number[];
@@ -75,9 +64,6 @@ export const _nullGroup: Group = {
   title: "",
   description: "",
   location: "",
-  city: "",
-  state: "",
-  country: "",
   public: true,
   members: [],
   events: [],
@@ -87,7 +73,7 @@ export const _nullGroup: Group = {
 }
 
 export interface Topic {
-  id: number;
+  id?: number;
   name: string;
   topicable_id: number;
   topicable_type: string;

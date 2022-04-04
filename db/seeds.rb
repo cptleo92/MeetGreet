@@ -16,7 +16,16 @@ avatars = [
   "https://meetgreet-seed-dev.s3.amazonaws.com/miller.jpg"
 ]
 
-demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo')
+locations = [
+  "NYC",
+  "Boston",
+  "Los Angeles",
+  "Toronto",
+  "Ceres Station",
+  "Mars"
+]
+
+demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo', location: "NYC")
 # file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
 # demo.avatar.attach(io: file, filename: "kendall570.png")
 
@@ -30,6 +39,7 @@ NUM_USERS.times do
   User.create!(
     fname: Faker::Name.first_name, 
     lname: Faker::Name.last_name,
+    location: locations.sample,
     email: Faker::Internet.email,
     password: 'password'
   )
@@ -53,7 +63,7 @@ NUM_GROUPS.times do
   Group.create!(
     title: rand_title,
     description: Faker::Hipster.paragraph,
-    location: Faker::TvShows::TheExpanse.location,
+    location: locations.sample,
     public: (rand(1..4) == 1 ? false : true) 
   )
   
@@ -104,10 +114,10 @@ NUM_EVENTS.times do
     host_id: rand_organizer.sample,
     title: Faker::Book.title,
     description: Faker::Hipster.paragraph,
-    location: Faker::Address.city,
+    location: Group.find(rand_group).location,
     start_time: rand_start,
     end_time: rand_start + rand_duration,
-    capacity: (rand(1..6) === 1 ? rand(10..50) : nil)
+    capacity: (rand(1..4) === 1 ? rand(10..30) : 0)
   )
 end
 
@@ -120,7 +130,7 @@ end
     event = Event.find(ev_id)
     group = Group.find(event.group_id)
 
-    unless attendance || (event.attendees.length >= event.capacity)
+    unless attendance || (event.capacity != 0 && (event.attendees.length >= event.capacity))
       Attendance.create!(
         attendee_id: id,
         event_id: ev_id,
@@ -147,13 +157,14 @@ end
 (NUM_EVENTS * 2).times do
   rand_start = Faker::Time.backward(days: 60)
   rand_duration = rand(3600.. (3600 * 3))
+  rand_group = rand(1..NUM_GROUPS)
 
   Event.create!(
-    group_id: rand(1..NUM_GROUPS),
+    group_id: rand_group,
     host_id: rand(1..NUM_USERS),
     title: Faker::Hipster.sentence,
     description: Faker::Hipster.paragraph,
-    location: Faker::Address.city,
+    location: Group.find(rand_group).location,
     start_time: rand_start,
     end_time: rand_start + rand_duration,
     capacity: (rand(1..6) === 1 ? 0 : rand(10..30))
@@ -169,7 +180,7 @@ end
     event = Event.find(ev_id)
     group = Group.find(event.group_id)
 
-    unless attendance || (event.attendees.length >= event.capacity)
+    unless attendance || (event.capacity != 0 && (event.attendees.length >= event.capacity))
       Attendance.create!(
         attendee_id: id,
         event_id: ev_id,

@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  validates :title, :description, presence: true
+  validates :title, :description, :location, presence: true
   validates :title, uniqueness: true
   validates :public, inclusion: { in: [true, false] }
 
@@ -8,7 +8,7 @@ class Group < ApplicationRecord
 
   has_many :events
 
-  has_many :topics, as: :topicable
+  has_many :topics, as: :topicable, dependent: :destroy
 
   has_one_attached :avatar
 

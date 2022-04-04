@@ -47,7 +47,7 @@ function EventsContainer() {
   }, [params])
 
   const isFull = () => {
-    if (event.capacity !== null) {
+    if (event.capacity !== 0) {
       return event.capacity - event.attendees.length === 0
     }
     return false;

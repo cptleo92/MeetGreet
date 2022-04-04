@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "../../actions/modal_actions";
 import UserForm from "../user_forms/user_form";
 import AttendeesModal from "../events/attendees_modal";
+import HomeGetUserLocation from "../home/home_get_user_location";
 
 const Modal = ({ modal }: {modal: string}) => { 
 
@@ -23,6 +24,8 @@ const Modal = ({ modal }: {modal: string}) => {
     case 'attendees':
       component = <AttendeesModal />
       break;
+    case 'user-location':
+      component = <HomeGetUserLocation />
     default:
       return null;
   }
@@ -35,7 +38,7 @@ const Modal = ({ modal }: {modal: string}) => {
         onClick={e => e.stopPropagation()}>
         { component }
       </div>
- 
+
     </div>
   )
 }

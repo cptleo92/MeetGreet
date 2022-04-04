@@ -11,7 +11,8 @@ const UserForm = ({ formType }: {formType: string}) => {
     email: "",
     password: "",
     fname: "",
-    lname: ""
+    lname: "",
+    location: ""
   })
 
   const [hidden, setHidden] = useState(true);
@@ -70,7 +71,7 @@ const UserForm = ({ formType }: {formType: string}) => {
       { formType === "signup" && 
         <>
         <label htmlFor="fname">First name</label>
-        <div className="fname-field">
+        <div className="input-field">
           <svg 
             className="icon"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -86,7 +87,7 @@ const UserForm = ({ formType }: {formType: string}) => {
         </div>
 
         <label htmlFor="lname">Last name</label>
-        <div className="lname-field">
+        <div className="input-field">
           <svg 
             className="icon"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -100,11 +101,26 @@ const UserForm = ({ formType }: {formType: string}) => {
           name="lname"  
           />
         </div>
+
+        <label>
+          Location
+          <div className="input-field">
+          <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            {/* Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc */}
+            <path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z"/></svg>
+          <input
+            type="text"
+            value={input.location}
+            onChange={update}
+            name="location"
+            />
+          </div>
+        </label>
         </>
       }
 
       <label htmlFor="email">Email</label>
-      <div className="email-field">
+      <div className="input-field">
         <svg 
           className="icon"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">{/*Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.*/}<path d="M0 128C0 92.65 28.65 64 64 64H448C483.3 64 512 92.65 512 128V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V128zM48 128V150.1L220.5 291.7C241.1 308.7 270.9 308.7 291.5 291.7L464 150.1V127.1C464 119.2 456.8 111.1 448 111.1H64C55.16 111.1 48 119.2 48 127.1L48 128zM48 212.2V384C48 392.8 55.16 400 64 400H448C456.8 400 464 392.8 464 384V212.2L322 328.8C283.6 360.3 228.4 360.3 189.1 328.8L48 212.2z"/></svg>
@@ -118,7 +134,7 @@ const UserForm = ({ formType }: {formType: string}) => {
       </div>    
 
       <label htmlFor="password">Password</label>
-      <div className="password-field">
+      <div className="input-field password">
       <svg 
         //toggle show/hide password
         className="icon"

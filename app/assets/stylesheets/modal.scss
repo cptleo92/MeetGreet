@@ -78,19 +78,19 @@
     margin: 10px 0;
   }
 
-  .email-field, .password-field, .fname-field, .lname-field {
+  .input-field {
     position: relative;    
     display: flex;
     align-items: center;
     justify-content: center;
 
     svg {width: 18px;}
-  }
 
-  svg:hover {
-    cursor: pointer;
-    opacity: 90%;    
-  }
+    &.password svg:hover {
+      cursor: pointer;
+      opacity: 90%;    
+    }
+  }  
 
   .demo {
     text-align: center;
