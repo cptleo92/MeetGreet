@@ -1,3 +1,4 @@
+import { newGroupType } from "../components/groups/group_create"
 import { AttendancePost, Event, Group, Membership, User } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
@@ -82,5 +83,13 @@ export const createAttendance = (data: AttendancePost) => {
     method: "POST",
     url: "api/attendances/",
     data: {attendance: data}
+  })
+}
+
+export const createGroup = (group: newGroupType) => {
+  return $.ajax({
+    method: "POST",
+    url: "api/groups",
+    data: {group}
   })
 }

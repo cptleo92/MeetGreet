@@ -16,8 +16,8 @@ function GroupAbout({ group }: {group: Group}) {
   const renderTopics = () => {
     if (groupTopics.length === 0) {
       return (
-        <div className="no-preview">
-          <strong>This group has not added any interests</strong>
+        <div className="group-no-topics">
+          <p>This group has not added any interests</p>
         </div>
       )
     } else {
@@ -43,7 +43,7 @@ function GroupAbout({ group }: {group: Group}) {
       <GroupEventsList group={group} preview={true} pastOnly={false} />
     </div>
         <div className="related-topics">
-        <p>Related Topics</p>
+        <h4>Related Topics</h4>
         {renderTopics()}
     </div>
     </>

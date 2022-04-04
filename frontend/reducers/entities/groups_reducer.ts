@@ -7,9 +7,9 @@ const _nullState: GroupEntity = {}
 
 export default (state = _nullState, {type, payload}: AnyAction) => {
   Object.freeze(state);
-  switch (type) {
+  switch (type) {    
     case RECEIVE_GROUPS:
-      return Object.assign({}, state, payload)
+      return Object.assign({}, state, payload)      
     case LOGOUT_USER:
       return _nullState;
     default:

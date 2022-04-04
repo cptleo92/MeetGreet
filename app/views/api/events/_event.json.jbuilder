@@ -16,5 +16,5 @@ else
   json.avatar rand_avatar.sample
 end
 
-json.attendees event.attendees.pluck("id")
-json.topics event.topics.pluck("name")
+json.attendees event.attendees.pluck("id") || []
+json.topics event.topics.pluck("name") || []
