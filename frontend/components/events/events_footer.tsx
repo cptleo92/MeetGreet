@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createAttendance, deleteAttendance } from '../../actions/users_actions';
 import { RootState } from '../../store/store';
 import { AttendancePost, Event } from '../../types/types';
@@ -26,9 +27,11 @@ function EventsFooter({ event }: { event: Event }) {
       setUpdating(true)
       const attendanceId = attendance.id
       dispatch(deleteAttendance(attendanceId))
-        .then(() => window.location.reload(false))
+        .then(() => navigate(0))
     }
   }
+
+  const navigate = useNavigate();
 
   const attendEvent = () => {
     const data: AttendancePost = {
@@ -37,7 +40,7 @@ function EventsFooter({ event }: { event: Event }) {
     }
     setUpdating(true)
     dispatch(createAttendance(data))
-      .then(() => window.location.reload(false))
+      .then(() => navigate(0))
   }
 
   const renderSpotsLeft = () => {

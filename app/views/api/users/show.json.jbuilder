@@ -4,7 +4,7 @@ json.extract! @user, :location
 if @user.avatar.attached?
   json.avatar url_for(@user.avatar)
 else
-  json.avatar Faker::Avatar.image
+  json.avatar url_for("https://meetgreet-seed-dev.s3.amazonaws.com/profile_avatar_placeholder_large.png")
 end
 
 json.groups @user.groups.pluck("id") || []

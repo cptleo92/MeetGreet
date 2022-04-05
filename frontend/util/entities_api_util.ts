@@ -1,5 +1,5 @@
 import { newGroupType } from "../components/groups/group_form"
-import { AttendancePost, Event, Group, Membership, Topic, User } from "../types/types"
+import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -60,6 +60,14 @@ export const createMembership = (data: Membership) => {
   return $.ajax({
     method: "POST",
     url: "api/memberships/",
+    data: {membership: data}
+  })
+}
+
+export const updateMembership = (data: MembershipUpdate) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/memberships/${data.id}`,
     data: {membership: data}
   })
 }

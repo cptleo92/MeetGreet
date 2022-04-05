@@ -1,7 +1,8 @@
 import { AppDispatch } from "../store/store";
-import { AttendancePost, Membership } from "../types/types";
+import { AttendancePost, Membership, MembershipUpdate } from "../types/types";
 import * as EntitiesAPIUtil from "../util/entities_api_util"
 import { receiveUser } from "./session_actions";
+import { receiveMembership } from "./ui_actions";
 
 export const deleteMembership = (membershipId: number) => (dispatch: AppDispatch) => {
   return EntitiesAPIUtil.deleteMembership(membershipId)
@@ -20,6 +21,13 @@ export const createMembership = (data: Membership) => (dispatch: AppDispatch) =>
         .then((user) => dispatch(receiveUser(user)))  
     })
 }
+
+// export const updateMembership = (data: MembershipUpdate) => (dispatch: AppDispatch) => {
+//   return EntitiesAPIUtil.updateMembership(data)
+//     .then((membership) => {
+//       dispatch(receiveMembership(membership))
+//     })
+// } 
 
 export const deleteAttendance = (attendanceId: number) => (dispatch: AppDispatch) => {
   return EntitiesAPIUtil.deleteAttendance(attendanceId)

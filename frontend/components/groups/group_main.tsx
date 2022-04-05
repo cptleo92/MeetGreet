@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { NavLink, Routes, Route, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { Group, Membership } from '../../types/types';
 import { deleteMembership, createMembership } from '../../actions/users_actions'
@@ -14,6 +14,7 @@ import { openModal } from '../../actions/modal_actions';
 function GroupMain({ group }: {group: Group}) {
   const user = useUser();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let membershipsFromStore = useSelector((state: RootState) => state.ui.group.memberships)
   let membership = membershipsFromStore[user.id]
 
@@ -40,7 +41,7 @@ function GroupMain({ group }: {group: Group}) {
       setUpdating(true) 
       const membershipId = membership.id
       dispatch(deleteMembership(membershipId))
-          .then(() => window.location.reload(false))          
+        .then(() => navigate(0))       
     }
   }
 
@@ -52,7 +53,7 @@ function GroupMain({ group }: {group: Group}) {
     }
     setUpdating(true)
     dispatch(createMembership(data))
-      .then(() => window.location.reload(false))   
+      .then(() => navigate(0))
   }
 
   const renderButton = () => {

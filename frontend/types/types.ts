@@ -107,10 +107,17 @@ export interface UserNameEntity {
 }
 
 export interface Membership {
+  id?: number;
   member_id: number;
   group_id: number;
   organizer: boolean;
   created_at?: string;
+}
+
+
+export interface MembershipUpdate {
+  id: number;
+  organizer: boolean;
 }
 
 export interface Attendance {

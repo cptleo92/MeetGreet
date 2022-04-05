@@ -1,6 +1,7 @@
 export const RECEIVE_ORGANIZERS = "RECEIVE_ORGANIZERS"
 export const RECEIVE_MEMBERS = "RECEIVE_MEMBERS"
 export const RECEIVE_MEMBERSHIPS = "RECEIVE_MEMBERSHIPS"
+export const RECEIVE_MEMBERSHIP = "RECEIVE_MEMBERSHIP"
 export const RECEIVE_ATTENDEES = "RECEIVE_ATTENDEES"
 export const RECEIVE_ATTENDANCES = "RECEIVE_ATTENDANCES"
 
@@ -21,6 +22,11 @@ const receiveMembers = (members: UserName[]) => ({
 const receiveMemberships = (memberships: Membership[]) => ({
   type: RECEIVE_MEMBERSHIPS,
   payload: memberships
+})
+
+export const receiveMembership = (membership: Membership) => ({
+  type: RECEIVE_MEMBERSHIPS,
+  payload: membership
 })
 
 const receiveAttendees = (attendees: UserName[]) => ({
