@@ -11,6 +11,7 @@ import Layout from './layout';
 import EventsContainer from './events/events_container';
 import GroupForm from './groups/group_form';
 
+
 export default function App() {
   const currentUser = useSelector((state: RootState) => state.session.currentUserId )
   const loggedIn = Boolean(currentUser)

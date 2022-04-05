@@ -12,7 +12,7 @@ import Loading from "../misc/loading";
 import HomeMyEvents from "./home_my_events";
 import HomeMyGroups from "./home_my_groups";
 const Home = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const currentUser = useUser();
 
@@ -31,7 +31,7 @@ const Home = () => {
     let allEventsOfUserGroups: number[] = [];
     const groupsArray = Object.values(userGroups)
     for (let i = 0; i < groupsArray.length; i++) {
-      allEventsOfUserGroups = allEventsOfUserGroups.concat(groupsArray[i].events)      
+      allEventsOfUserGroups = allEventsOfUserGroups.concat(groupsArray[i].events)
     }
     return dispatch(fetchEvents(allEventsOfUserGroups))
   }
@@ -39,35 +39,33 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchEvents(currentUser.events))
       .then(({ payload }: { payload: EventEntity }) => {
-        dispatch(fetchGroupsOfEvents(payload))      
+        dispatch(fetchGroupsOfEvents(payload))
           .then(() => {
             dispatch(fetchGroups(currentUser.groups))
-              .then(({ payload }: {payload: GroupEntity}) => {
+              .then(({ payload }: { payload: GroupEntity }) => {
                 dispatch(fetchAllEventsForUser(payload))
-                .then(() => setLoading(false))                     
-              })              
-            })
-          })      
+                  .then(() => setLoading(false))
+              })
+          })
+      })
   }, [])
 
   return (
     <div className="home">
-      <div className="body">
-        { !loading &&
-        <>
-          
-            <HomeGreeting />
+      {!loading &&
+        <div className="body">
+          <HomeGreeting />
           <Routes>
             <Route index element={<HomeMain />} />
             <Route path="myevents/*" element={<HomeMyEvents />} />
             <Route path="mygroups/*" element={<HomeMyGroups />} />
           </Routes>
-        </>
-          
-        }
+        </div>
 
-        {loading && <Loading />}
-      </div>
+      }
+
+      {loading && <Loading />}
+
     </div>
   )
 }

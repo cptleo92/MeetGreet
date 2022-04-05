@@ -40,11 +40,14 @@
 }
 
 .page-container, li {
-
   svg {
     width: 15px;  
     fill: gray;
     margin-right: 5px;
+  }
+
+  .loader svg {
+    width: 300px;
   }
 }
 
