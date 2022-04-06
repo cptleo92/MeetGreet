@@ -143,3 +143,8 @@ export interface AttendancePost {
   attendee_id: number;
   event_id: number;
 }
+
+export interface SearchParams {
+  keyword: string;
+  location: string;
+}

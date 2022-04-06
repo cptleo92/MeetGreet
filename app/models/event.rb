@@ -22,6 +22,26 @@ class Event < ApplicationRecord
     Event.where('start_time > ?', Time.now()).order(start_time: :asc).take(20).shuffle.take(8)
   end
 
+  def self.search(query)
+    keywords = query[:keyword].split(" ")
+
+    events = []
+
+    keywords.each do |keyword|
+      events += Event.where('title ~* :search OR description ~* :search', search: keyword)
+      events += Event.joins(:topics).where("topics.name ~* ?", "#{keyword}")
+    end
+
+    unless query[:location] == "" || query[:location].nil?
+      events.filter! do |event|
+        (event.location.downcase == query[:location].downcase) ||
+        (event.group.location.downcase == query[:location].downcase)
+      end
+    end
+
+    return events
+  end
+
   def ensure_group_title_and_host_name   
     self.group_title = Group.find(group_id).title
     self.host_name = User.find(host_id).fname + " " + User.find(host_id).lname
@@ -44,5 +64,7 @@ class Event < ApplicationRecord
         errors.add(:capacity,"cannot be set lower than current amount of attendees")
     end
   end
+
+  
 
 end

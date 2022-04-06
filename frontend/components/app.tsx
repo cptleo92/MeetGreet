@@ -11,6 +11,7 @@ import Layout from './layout';
 import EventsContainer from './events/events_container';
 import GroupForm from './groups/group_form';
 import EventForm from './events/event_form';
+import Search from './misc/search';
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/home/*" element={<Home />} />
         </Route>
 
+        <Route path="/search/*" element={<Search />}/>
         <Route path="/groups/:id/*" element={<GroupContainer />}/>
         <Route path="/groups/new" element={<GroupForm type="new"/>}/>
         <Route path="/groups/:id/edit" element={<GroupForm type="edit"/>}/>

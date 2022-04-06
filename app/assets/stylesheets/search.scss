@@ -1,0 +1,49 @@
+.search {
+  padding: 80px;
+
+  a {
+    color: black;
+  }
+}
+
+.entities {
+  display: flex;
+  cursor: pointer;
+
+  li {
+    margin-right: 30px;
+  }
+
+  .active {
+    color: #008294;
+    text-decoration: underline;
+  }
+}
+
+.results {
+  width: 700px;
+  max-height: 100vh;
+  overflow: scroll;
+}
+
+.search-item {
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px solid rgb(230,230,230);
+  cursor: pointer;
+
+  h3 {
+    margin-bottom: 5px;
+  }
+
+  .location {
+    text-transform: uppercase;
+    color: #877457;
+    font-weight: 700;
+  }
+
+  .description {
+    margin: 10px 0;
+    color: gray;
+  }
+}

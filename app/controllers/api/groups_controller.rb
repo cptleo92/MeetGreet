@@ -1,15 +1,19 @@
 class Api::GroupsController < ApplicationController
   def index
-    filter = params[:filter]
+    if params[:search]
+      @groups = Group.search(params[:search])
+    else
+      filter = params[:filter]
 
-    if filter == "splash"
-      @groups = Group.popular
-    elsif filter == ["0"]
-      @groups = Group.all
-    elsif filter.is_a?(Array) && filter.length > 0
-      @groups = Group.where('id IN (?)', filter)
-    elsif filter.nil?
-      render json: []
+      if filter == "splash"
+        @groups = Group.popular
+      elsif filter == ["0"]
+        @groups = Group.all
+      elsif filter.is_a?(Array) && filter.length > 0
+        @groups = Group.where('id IN (?)', filter)
+      elsif filter.nil?
+        render json: []
+      end
     end
   end
 

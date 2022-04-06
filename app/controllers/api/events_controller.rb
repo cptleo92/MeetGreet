@@ -1,15 +1,19 @@
 class Api::EventsController < ApplicationController
   def index
-    filter = params[:filter]
+    if params[:search]
+      @events = Event.search(params[:search])
+    else
+      filter = params[:filter]
 
-    if filter == "splash"
-      @events = Event.starting_soon
-    elsif filter == ["0"]
-      @events = Event.all
-    elsif filter.is_a?(Array) && filter.length > 0
-      @events = Event.where('id IN (?)', filter)
-    elsif filter.nil?
-      render json: []
+      if filter == "splash"
+        @events = Event.starting_soon
+      elsif filter == ["0"]
+        @events = Event.all
+      elsif filter.is_a?(Array) && filter.length > 0
+        @events = Event.where('id IN (?)', filter)
+      elsif filter.nil?
+        render json: []
+      end
     end
   end
 

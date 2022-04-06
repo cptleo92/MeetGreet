@@ -35,4 +35,21 @@ class Group < ApplicationRecord
     result = result.map{|res| Group.find(res)} # turn it into an array of Groups
     return result
   end
+
+  def self.search(query)
+    keywords = query[:keyword].split(" ")
+
+    groups = []
+
+    keywords.each do |keyword|
+      groups += Group.where('title ~* :search OR description ~* :search', search: keyword)
+      groups += Group.joins(:topics).where("topics.name ~* ?", "#{keyword}")
+    end
+
+    unless query[:location] == "" || query[:location].nil?
+      groups.filter! {|group| group.location.downcase == query[:location].downcase }
+    end
+
+    return groups
+  end
 end
