@@ -9,7 +9,7 @@ function GroupPanelPending({ group }: {group: Group}) {
   const pending = memberships.filter(membership => membership.status === "PENDING")
 
   return (
-    <div className="pending">
+    <div className="pending-container">
       <h4>Pending</h4>
       <ul className="pending-list">
         {

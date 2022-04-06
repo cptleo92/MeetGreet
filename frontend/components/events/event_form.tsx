@@ -46,8 +46,8 @@ function EventForm({ type }: { type: string }) {
 
   const [input, setInput] = useState<newEventType>(event)
   const [inputTopic, setInputTopic] = useState("")
-  const [startDate, setStartDate] = useState(new Date(event.start_time));
-  const [endDate, setEndDate] = useState(new Date(event.end_time));
+  const [startDate, setStartDate] = useState(type === "new" ? new Date() : new Date(event.start_time));
+  const [endDate, setEndDate] = useState(type === "new" ? new Date() : new Date(event.end_time));
 
   const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput({
