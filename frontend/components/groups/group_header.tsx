@@ -17,6 +17,10 @@ function GroupHeader({ group }: {group: Group}) {
     navigate("edit")
   }
 
+  const handleCreateEvent = () => {
+    navigate("events/new")
+  }
+
   const multipleOrganizers = () => {
     if (organizers.length === 2) {
       return (
@@ -74,7 +78,7 @@ function GroupHeader({ group }: {group: Group}) {
             isOrganizer() && 
             <>
               <button onClick={handleEdit} className="btn-red">Edit Group</button>
-              <button className="btn-red">Host an event!</button>
+              <button onClick={handleCreateEvent} className="btn-red">Host an event!</button>
             </>
           }
         </ul>

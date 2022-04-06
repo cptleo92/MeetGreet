@@ -10,6 +10,7 @@ import GroupContainer from './groups/group_container';
 import Layout from './layout';
 import EventsContainer from './events/events_container';
 import GroupForm from './groups/group_form';
+import EventForm from './events/event_form';
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/groups/:id/*" element={<GroupContainer />}/>
         <Route path="/groups/new" element={<GroupForm type="new"/>}/>
         <Route path="/groups/:id/edit" element={<GroupForm type="edit"/>}/>
+        <Route path="/groups/:id/events/new" element={<EventForm type="new"/>}/>
 
         <Route path="/groups/:group_id/events/:id/*" element={<EventsContainer />} />
 

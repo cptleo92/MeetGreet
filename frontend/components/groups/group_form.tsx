@@ -1,4 +1,3 @@
-import { group } from 'console';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { Group, GroupEntity, Topic } from '../../types/types';
 import { useUser } from '../../util/hooks';
 import { createMembership } from '../../actions/users_actions';
 import FormErrors from '../user_forms/form_errors';
-import { createTopic } from '../../util/entities_api_util';
+
 
 export interface newGroupType {
   id?: number;
@@ -39,10 +38,6 @@ function GroupForm({ type }: { type: string }) {
   const [input, setInput] = useState<newGroupType>(group)
 
   const [inputTopic, setInputTopic] = useState("")
-  const [inputTopics, setInputTopics] = useState<string[]>(
-    type === "new" ? [] : group.topics
-  )
-
 
   const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput({
@@ -67,8 +62,6 @@ function GroupForm({ type }: { type: string }) {
     }
   }
 
-  console.log(input)
-
   const removeTopic = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const topic = e.target.value;
     setInput(prevInput => ({
@@ -77,19 +70,6 @@ function GroupForm({ type }: { type: string }) {
       })
     )
   }
-
-  // const makeNewTopics = (groupId: number) => {
-  //   const newTopics: Topic[] = inputTopics.map(inputTopic => ({
-  //     name: inputTopic,
-  //     topicable_id: groupId,
-  //     topicable_type: "Group"
-  //   }))
-    
-  //   newTopics.forEach(newTopic => {
-  //     createTopic(newTopic)
-  //     .then(data => console.log(data))
-  //   })
-  // }
 
   const navigate = useNavigate();
 
