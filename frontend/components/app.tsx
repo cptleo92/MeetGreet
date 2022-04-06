@@ -33,7 +33,8 @@ export default function App() {
         <Route path="/groups/:id/*" element={<GroupContainer />}/>
         <Route path="/groups/new" element={<GroupForm type="new"/>}/>
         <Route path="/groups/:id/edit" element={<GroupForm type="edit"/>}/>
-        <Route path="/groups/:id/events/new" element={<EventForm type="new"/>}/>
+        <Route path="/groups/:group_id/events/new" element={<EventForm type="new"/>}/>
+        <Route path="/groups/:group_id/events/:event_id/edit" element={<EventForm type="edit"/>}/>
 
         <Route path="/groups/:group_id/events/:id/*" element={<EventsContainer />} />
 

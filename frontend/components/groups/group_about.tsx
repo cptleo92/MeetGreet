@@ -10,7 +10,7 @@ import { RootState } from '../../store/store';
 import { useUser } from '../../util/hooks';
 import GroupPanelPending from './group_panel_pending';
 
-function GroupAbout({ group }: {group: Group}) {
+function GroupAbout({ group }: { group: Group }) {
   const user = useUser();
 
   const pending = () => {
@@ -35,24 +35,24 @@ function GroupAbout({ group }: {group: Group}) {
 
   return (
     <>
-    <div className="group-about">
-      <div className="description">
-        <h4>What we're about</h4>
-        <p>{group === undefined ? "" : group.description}</p>
-      </div>
+      <div className="group-about">
+        <div className="description">
+          <h4>What we're about</h4>
+          <p>{group === undefined ? "" : group.description}</p>
+        </div>
 
-      <div className="members-panel">
-        <GroupPanelOrganizers group={group}/>
-        <GroupPanelMembers group={group} />
-        {pending() && <GroupPanelPending group={group} />}
-      </div>
+        <div className="members-panel">
+          <GroupPanelOrganizers group={group} />
+          <GroupPanelMembers group={group} />
+          {pending() && <GroupPanelPending group={group} />}
+        </div>
 
-      <GroupEventsList group={group} preview={true} pastOnly={false} />
-    </div>
-        <div className="related-topics">
+        <GroupEventsList group={group} preview={true} pastOnly={false} />
+      </div>
+      <div className="related-topics">
         <h4>Related Topics</h4>
         {renderTopics()}
-    </div>
+      </div>
     </>
   );
 }

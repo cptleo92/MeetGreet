@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker"
+import { useUser } from '../../util/hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import FormErrors from '../user_forms/form_errors';
+import { createEvent, updateEvent } from '../../actions/events_actions';
+import { AttendancePost, EventEntity } from '../../types/types';
+import { createAttendance } from '../../actions/users_actions';
 
 export interface newEventType {
   id?: number;
@@ -11,6 +18,8 @@ export interface newEventType {
   end_time: string;
   capacity: number;
   topics?: string[];
+  group_id: number;
+  host_id: number;
 }
 
 const _nullEvent = {
@@ -20,21 +29,25 @@ const _nullEvent = {
   start_time: "",
   end_time: "",
   capacity: 0,
-  topics: []
+  topics: [],
+  group_id: 0,
+  host_id: 0
 }
 
 function EventForm({ type }: { type: string }) {
-  const { pathname } = useLocation();
-
-  // const event = pathname.includes("new") ? _nullEvent : 
-  const event = _nullEvent;
-
+  const { group_id, event_id } = useParams();
+  
+  const errors = useSelector((state: RootState) => state.errors.event)
+  const events = useSelector((state: RootState) => state.entities.events)
+  const event = event_id ? events[event_id] : _nullEvent
+  const user = useUser();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState<newEventType>(event)
   const [inputTopic, setInputTopic] = useState("")
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(event.start_time));
+  const [endDate, setEndDate] = useState(new Date(event.end_time));
 
   const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput({
@@ -69,7 +82,36 @@ function EventForm({ type }: { type: string }) {
   }
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(startDate);
+    e.preventDefault();
+
+    const newEvent: newEventType = {
+      title: input.title,
+      description: input.description,
+      location: input.location,
+      capacity: Number(input.capacity),
+      start_time: startDate.toISOString(),
+      end_time: endDate.toISOString(),      
+      group_id: Number(group_id),
+      host_id: user.id
+    }    
+
+    if (type === "new") {
+      dispatch(createEvent(newEvent, input.topics))
+        .then(({ payload }: { payload: EventEntity }) => {
+          const eventId = Number(Object.keys(payload)[0])
+
+          const newAttendance: AttendancePost = {
+            attendee_id: user.id,
+            event_id: eventId
+          }
+
+          dispatch(createAttendance(newAttendance))
+            .then(() => navigate(`/groups/${group_id}/events/${eventId}`))
+        })
+    } else {
+      dispatch(updateEvent({...newEvent, id: event_id}, input.topics))
+        .then(() => navigate(`/groups/${group_id}/events/${event_id}`))
+    }
   }
 
   return (
@@ -189,6 +231,8 @@ function EventForm({ type }: { type: string }) {
           }
         </button>
       </form>
+
+      {errors && <FormErrors formType="event" />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   validates :group_id, :host_id, :title, :description, :location, :group_title, :capacity, :host_name, :start_time, :end_time, presence: true
   validates :capacity, numericality: { greater_than_or_equal_to: 0 }
+  validate :end_time_must_be_after_start_time, :start_time_must_be_after_now, :capacity_higher_than_attendees
 
   before_validation :ensure_group_title_and_host_name
 
@@ -25,4 +26,23 @@ class Event < ApplicationRecord
     self.group_title = Group.find(group_id).title
     self.host_name = User.find(host_id).fname + " " + User.find(host_id).lname
   end
+
+  def end_time_must_be_after_start_time
+    if self.end_time < self.start_time
+      errors.add(:end_time, "must be after the start time")
+    end
+  end
+
+  def start_time_must_be_after_now
+    if self.start_time < Time.now
+      errors.add(:start_time, "must be in the future")
+    end
+  end
+
+  def capacity_higher_than_attendees
+    if self.capacity < self.attendees.length && self.capacity != 0
+        errors.add(:capacity,"cannot be set lower than current amount of attendees")
+    end
+  end
+
 end

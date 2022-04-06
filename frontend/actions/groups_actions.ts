@@ -1,6 +1,5 @@
 export const RECEIVE_GROUPS = "RECEIVE_GROUPS"
 export const RECEIVE_GROUP_ERRORS = "RECEIVE_GROUP_ERRORS"
-export const RECEIVE_GROUP = "RECEIVE_GROUP"
 export const START_LOADING_GROUPS = "START_LOADING_GROUPS"
 
 import { AnyAction } from "redux"
@@ -13,11 +12,6 @@ export const receiveGroups = (groups: GroupEntity) => ({
   type: RECEIVE_GROUPS,
   payload: groups
 })
-
-// const receiveGroup = (group: Group) => ({
-//   type: RECEIVE_GROUP,
-//   payload: group
-// })
 
 const receiveGroupErrors = (errors: string[]): AnyAction => ({
   type: RECEIVE_GROUP_ERRORS,

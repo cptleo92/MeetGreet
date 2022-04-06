@@ -17,6 +17,8 @@ const FormErrors = ({ formType }: {formType: string}) => {
         return state.errors.user;
       case "group":
         return state.errors.group;
+      case "event":
+        return state.errors.event;
       default:
         return;
     }

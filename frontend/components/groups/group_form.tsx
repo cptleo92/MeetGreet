@@ -27,16 +27,15 @@ const _nullGroup = {
 }
 
 function GroupForm({ type }: { type: string }) {
-  const { id }  = useParams();
+  const { id } = useParams();
 
-  const groups = useSelector((state: RootState) => state.entities.groups) 
-  const group = id ? groups[id] : _nullGroup 
+  const groups = useSelector((state: RootState) => state.entities.groups)
+  const group = id ? groups[id] : _nullGroup
 
   const dispatch = useDispatch();
   const user = useUser();
 
   const [input, setInput] = useState<newGroupType>(group)
-
   const [inputTopic, setInputTopic] = useState("")
 
   const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,7 +56,7 @@ function GroupForm({ type }: { type: string }) {
           ...prevInput,
           topics: [...prevInput.topics, inputTopic]
         }))
-      setInputTopic("")
+        setInputTopic("")
       }
     }
   }
@@ -67,7 +66,7 @@ function GroupForm({ type }: { type: string }) {
     setInput(prevInput => ({
       ...prevInput,
       topics: prevInput.topics.filter(prevTopic => prevTopic !== topic)
-      })
+    })
     )
   }
 
@@ -86,27 +85,23 @@ function GroupForm({ type }: { type: string }) {
     if (type === "new") {
 
       dispatch(createGroup(newGroup, input.topics))
-      .then(({ payload }: { payload: GroupEntity }) => {
-        const groupId = parseInt(Object.keys(payload)[0])
-        
-        // create membership for current user as organizer
-        const newMembership = {
-          member_id: user.id,
-          group_id: groupId,
-          organizer: true
-        }                 
-        
-        // makeNewTopics(groupId)        
-        
-        dispatch(createMembership(newMembership))
-        // .then(() => navigate('/groups/new/success'))
-        .then(() => navigate(`/groups/${groupId}`))
-      })
+        .then(({ payload }: { payload: GroupEntity }) => {
+          const groupId = parseInt(Object.keys(payload)[0])
 
-    } else { 
-      // makeNewTopics(newGroup.id)
-      // newGroup.topics = inputTopics;
-      dispatch(updateGroup({...newGroup, id: input.id}, input.topics))
+          // create membership for current user as organizer
+          const newMembership = {
+            member_id: user.id,
+            group_id: groupId,
+            organizer: true
+          }
+
+          dispatch(createMembership(newMembership))
+            // .then(() => navigate('/groups/new/success'))
+            .then(() => navigate(`/groups/${groupId}`))
+        })
+
+    } else {
+      dispatch(updateGroup({ ...newGroup, id: input.id }, input.topics))
         .then(() => navigate(`/groups/${input.id}`))
     }
   }
@@ -118,7 +113,7 @@ function GroupForm({ type }: { type: string }) {
       <div className="back" onClick={() => navigate(-1)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           {/* ! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
-          <path d="M447.1 256C447.1 273.7 433.7 288 416 288H109.3l105.4 105.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L109.3 224H416C433.7 224 447.1 238.3 447.1 256z"/></svg>
+          <path d="M447.1 256C447.1 273.7 433.7 288 416 288H109.3l105.4 105.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L109.3 224H416C433.7 224 447.1 238.3 447.1 256z" /></svg>
       </div>
       <h2 className="form-header">
         {
@@ -161,7 +156,7 @@ function GroupForm({ type }: { type: string }) {
 
         <div className="form-line radio">
           <label>Public?</label>
-          <p className="form-info">If set to NO, members have to request to join the group. Only group members can attend events from this group and view information about this group's events.<br/>If unchecked, this defaults to NO!</p>
+          <p className="form-info">If set to NO, members have to request to join the group. Only group members can attend events from this group and view information about this group's events.<br />If unchecked, this defaults to NO!</p>
           <label>
             <input
               type="radio"
@@ -213,9 +208,9 @@ function GroupForm({ type }: { type: string }) {
           </ul>
         </div>
         <button type="button" onClick={submit} className="btn-red">
-        {
-          type === "new" ? "Create group!" : "Update group!"
-        }
+          {
+            type === "new" ? "Create group!" : "Update group!"
+          }
         </button>
       </form>
 

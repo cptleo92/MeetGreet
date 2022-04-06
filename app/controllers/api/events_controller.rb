@@ -20,7 +20,16 @@ class Api::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to api_event_url(@event)
+      if params[:topics]
+        topics = params[:topics].map do |topic|
+          Topic.create!(
+            name: topic,
+            topicable_id: @event.id,
+            topicable_type: "Event"
+          )
+        end
+      end      
+      render json: @event
     else
       render json: @event.errors.full_messages, status: 422
     end
@@ -29,7 +38,17 @@ class Api::EventsController < ApplicationController
   def update
     @event = Event.find_by(id: params[:id])
     if @event.update(event_params)
-      redirect_to api_event_url(@event)
+      if params[:topics]
+        topics = params[:topics].map do |topic|
+          Topic.find_or_create_by(
+            name: topic,
+            topicable_id: params[:id],
+            topicable_type: "Event"
+          )
+        end
+      end
+      @event.topics = topics || []
+      render json: @event
     else
       render json: @event.errors.full_messages, status: 422
     end
@@ -37,7 +56,7 @@ class Api::EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:id, :group_id, :host_id, :start_time, :end_time, :capacity, :title, :public, :location, :city, :state, :country, :description)
+    params.require(:event).permit(:id, :group_id, :host_id, :start_time, :end_time, :capacity, :title, :location, :description)
   end
 
 end

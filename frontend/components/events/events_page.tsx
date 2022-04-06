@@ -9,6 +9,7 @@ import Modal from '../splash/modal';
 import { openModal } from '../../actions/modal_actions';
 import { userNotMemberPrivateGroup } from '../../util/user_util';
 import EventMembersOnly from './event_members_only';
+import TopicButton from '../home/topic_button';
 
 export interface AttendeesWithDate {
   created_at: string;
@@ -51,6 +52,22 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
     window.scrollTo(0, 0);
   }, [])
 
+  const eventTopics = useSelector((state: RootState) => state.entities.events[event.id].topics)
+
+  const renderTopics = () => {
+    if (eventTopics.length === 0) {
+      return (
+        <div className="group-no-topics">
+          <p>This event has not added any interests</p>
+        </div>
+      )
+    } else {
+      return (
+        eventTopics.map((topic, idx) => <TopicButton key={idx} topic={topic} />)
+      )
+    }
+  }
+
   return (
     <div className="content-bg">
       <Modal modal={modal} />
@@ -67,6 +84,10 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
             <EventMembersOnly event={event} component={
               <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0, 8)} />
             } />
+          </div>
+          <div className="related-topics">
+            <h4>Related Topics</h4>
+            {renderTopics()}
           </div>
         </div>
         <div className="event-main-right">
