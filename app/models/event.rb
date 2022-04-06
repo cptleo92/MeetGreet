@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   validates :group_id, :host_id, :title, :description, :location, :group_title, :capacity, :host_name, :start_time, :end_time, presence: true
   validates :capacity, numericality: { greater_than_or_equal_to: 0 }
-  validate :end_time_must_be_after_start_time, :start_time_must_be_after_now, :capacity_higher_than_attendees
+  # validate :end_time_must_be_after_start_time, :start_time_must_be_after_now, :capacity_higher_than_attendees
 
   before_validation :ensure_group_title_and_host_name
 
