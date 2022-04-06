@@ -5,11 +5,12 @@ import { RootState } from '../../store/store';
 import { UserName } from '../../types/types';
 import { stringifyDateMedium } from '../../util/event_util';
 import { useUser } from '../../util/hooks';
+import { useNavigate } from 'react-router-dom';
 
 function GroupMembersItem({ member }: {member: UserName}) {
   const memberships = useSelector((state: RootState) => state.ui.group.memberships)
   const isOrganizer = memberships[member.id].organizer
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useUser();
 
   let userIsOrganizer = false;
@@ -29,7 +30,7 @@ function GroupMembersItem({ member }: {member: UserName}) {
       organizer: true
     }
     updateMembership(membershipData)
-      .then(() => window.location.reload(false))
+      .then(() => navigate(0))
   }
 
   return (

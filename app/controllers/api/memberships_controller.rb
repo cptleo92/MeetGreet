@@ -29,6 +29,6 @@ class Api::MembershipsController < ApplicationController
 
   private
   def membership_params
-    params.require(:membership).permit(:member_id, :group_id, :organizer)
+    params.require(:membership).permit(:member_id, :group_id, :organizer, :status)
   end
 end

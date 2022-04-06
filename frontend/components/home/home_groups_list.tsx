@@ -9,6 +9,14 @@ import HomeSidebarGroupItem from "./home_sidebar_group_item";
 const HomeGroupsList = ({preview, organizerOnly}: { preview: boolean, organizerOnly: boolean}) => {
   const user = useUser();
   let userGroups: Group[] = useSelector((state: RootState) => getUserGroups(state))
+
+  // push pending groups to top if user is organizer
+  userGroups.sort((groupA, groupB) => {
+    if (groupA.organizers.includes(user.id) && groupA.pending.length !== 0) {
+      return -1;
+    }
+    return 0;
+  })
   
   if (preview) {
     userGroups = userGroups.slice(0, 5)
@@ -17,6 +25,8 @@ const HomeGroupsList = ({preview, organizerOnly}: { preview: boolean, organizerO
   if (organizerOnly) {
     userGroups = userGroups.filter(group => group.organizers.includes(user.id))
   }
+
+  
 
   const renderGroups = () => {
     if (userGroups.length === 0) {

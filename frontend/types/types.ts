@@ -57,6 +57,7 @@ export interface Group {
   topics: string[];
   organizers: number[];
   avatar: string;
+  pending: number[];
 }
 
 export const _nullGroup: Group = {
@@ -70,6 +71,7 @@ export const _nullGroup: Group = {
   topics: [],
   organizers: [],
   avatar: "",
+  pending: []
 }
 
 export interface Topic {
@@ -107,17 +109,25 @@ export interface UserNameEntity {
 }
 
 export interface Membership {
-  id?: number;
+  id: number;
   member_id: number;
   group_id: number;
   organizer: boolean;
-  created_at?: string;
+  created_at: string;
+  status: string;
+  member_name: string;
+  member_avatar: string;
+}
+
+export interface MembershipObject {
+  [id: number]: Membership
 }
 
 
 export interface MembershipUpdate {
   id: number;
   organizer: boolean;
+  status: string;
 }
 
 export interface Attendance {

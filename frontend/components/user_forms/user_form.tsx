@@ -86,7 +86,7 @@ const UserForm = ({ formType }: {formType: string}) => {
           />
         </div>
 
-        <label htmlFor="lname">Last name</label>
+        <label htmlFor="lname">Last name <em>(optional)</em></label>
         <div className="input-field">
           <svg 
             className="icon"

@@ -7,9 +7,15 @@ import TopicButton from '../home/topic_button';
 import { getGroupTopics } from '../../selectors/selectors';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { useUser } from '../../util/hooks';
+import GroupPanelPending from './group_panel_pending';
 
 function GroupAbout({ group }: {group: Group}) {
+  const user = useUser();
 
+  const pending = () => {
+    return group.organizers.includes(user.id) && group.pending.length !== 0
+  }
 
   const groupTopics = useSelector((state: RootState) => getGroupTopics(state, group.id))
 
@@ -38,6 +44,7 @@ function GroupAbout({ group }: {group: Group}) {
       <div className="members-panel">
         <GroupPanelOrganizers group={group}/>
         <GroupPanelMembers group={group} />
+        {pending() && <GroupPanelPending group={group} />}
       </div>
 
       <GroupEventsList group={group} preview={true} pastOnly={false} />

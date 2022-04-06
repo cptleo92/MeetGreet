@@ -25,9 +25,22 @@ locations = [
   "Mars"
 ]
 
-demo = User.create!(email: 'demo@fake.com', password: 'password', fname: 'Tester', lname: 'McDemo', location: "NYC")
+demo = User.create!(
+  email: 'demo@fake.com', 
+  password: 'password', 
+  fname: 'Tester', 
+  lname: 'McDemo', 
+  location: "NYC"
+)
 # file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
 # demo.avatar.attach(io: file, filename: "kendall570.png")
+
+demo_group = Group.create!(
+  title: Faker::Emotion.adjective.capitalize + " " + Faker::Commerce.department,
+  description: Faker::Hipster.paragraph,
+  location: locations.sample,
+  public: false
+)
 
 NUM_USERS = 100
 NUM_GROUPS = 100
@@ -55,7 +68,7 @@ end
 
 # group seeding
 NUM_GROUPS.times do 
-  rand_title = Faker::Commerce.department
+  rand_title = Faker::Emotion.adjective.capitalize + " " + Faker::Commerce.department
   while Group.find_by(title: rand_title)
     rand_title = Faker::Commerce.department
   end
@@ -82,6 +95,38 @@ end
       organizer: true
     )
   end
+end
+
+# make demo user organizer of demo group
+membership = Membership.find_by(member_id: 1, group_id: 1)
+
+if membership
+  membership.update(organizer: true)
+else
+  Membership.create!(
+    member_id: 1,
+    group_id: 1,
+    organizer: true
+  )
+end
+
+
+# add some pending requests to demo user's groups
+3.times do
+  user_id = rand(2..NUM_USERS)
+  membership = Membership.find_by(member_id: user_id, group_id: 1)
+
+  if membership
+    membership.update(organizer: false, status: "PENDING")
+  else
+    Membership.create!(
+      member_id: user_id,
+      group_id: 1,
+      organizer: false,
+      status: "PENDING"
+    )
+  end
+  
 end
 
 # seeding users as group members

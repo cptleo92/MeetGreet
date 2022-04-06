@@ -34,6 +34,11 @@ class User < ApplicationRecord
     Group.joins(:memberships).where('organizer = ? and member_id = ?', true, self.id)
   end
 
+  def groups
+    approved_memberships = Membership.where(member_id: self.id, status: "APPROVED").pluck(:group_id)
+    return User.where('id IN (?)', approved_memberships)
+  end
+
   def similar_groups
     topics = self.topics.pluck(:name)
     

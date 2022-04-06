@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { batch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
-import { RootState } from '../../store/store';
 import GroupHeader from './group_header';
 import GroupMain from './group_main';
 import { fetchGroups } from '../../util/entities_api_util';

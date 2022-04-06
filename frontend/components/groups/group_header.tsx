@@ -72,7 +72,10 @@ function GroupHeader({ group }: {group: Group}) {
           </li>
           {
             isOrganizer() && 
-            <button onClick={handleEdit} className="btn-red">Edit Group</button>
+            <>
+              <button onClick={handleEdit} className="btn-red">Edit Group</button>
+              <button className="btn-red">Host an event!</button>
+            </>
           }
         </ul>
       </div>

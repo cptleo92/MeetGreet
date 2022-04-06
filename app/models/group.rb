@@ -16,6 +16,15 @@ class Group < ApplicationRecord
     User.joins(:memberships).where('organizer = ? and group_id = ?', true, self.id)
   end
 
+  def members
+    approved_memberships = Membership.where(group_id: self.id, status: "APPROVED").pluck(:member_id)
+    return User.where('id IN (?)', approved_memberships)
+  end
+
+  def pending
+    Membership.where(group_id: self.id, status: "PENDING").pluck(:member_id)
+  end
+
   def self.popular
     popularHash = {}
     Group.all.each do |group|

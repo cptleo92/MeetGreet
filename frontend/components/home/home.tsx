@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
 import { fetchEvents } from "../../actions/events_actions";
-import { EventEntity, GroupEntity } from "../../types/types";
+import { EventEntity, Group, GroupEntity } from "../../types/types";
 import { fetchGroups } from "../../actions/groups_actions"
 import { Route, Routes } from "react-router-dom";
 
@@ -11,6 +11,8 @@ import HomeMain from "./home_main";
 import Loading from "../misc/loading";
 import HomeMyEvents from "./home_my_events";
 import HomeMyGroups from "./home_my_groups";
+import { RootState } from "../../store/store";
+
 const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);

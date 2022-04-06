@@ -131,10 +131,10 @@ a {
 }
 
 .loader {
-  // display: flex;
-  // justify-content: center;
-  margin: 100px auto;
-  width: 50vw;
+  display: flex;
+  justify-content: center;
+  margin: 200px 0;
+  // width: 50vw;
   height: 100vh;
 
   .loading-text {

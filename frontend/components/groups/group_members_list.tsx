@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { Group, UserName } from '../../types/types';
+import { Group, Membership, MembershipObject, User, UserName } from '../../types/types';
 import { useUser } from '../../util/hooks';
 import GroupMembersItem from './group_members_item';
 
 function GroupMembersList({ group, organizers }: { group: Group, organizers: boolean }) {
-  const membersFromStore = useSelector((state: RootState) => state.ui.group.members)
+  const membersFromStore: User[] = useSelector((state: RootState) => state.ui.group.members)
   const organizersFromStore = useSelector((state: RootState) => state.ui.group.organizers)
-  const memberships = useSelector((state: RootState) => state.ui.group.memberships)
+  const memberships: MembershipObject = useSelector((state: RootState) => state.ui.group.memberships)
 
   const [peopleList, setPeopleList] = useState(membersFromStore);
   const [sortType, setSortType] = useState(true); // default sort by name
@@ -51,6 +51,10 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
         setPeopleList(sortByDate(membersFromStore))
       }
     }
+
+    setPeopleList(prevPeopleList => {
+      return prevPeopleList.filter(member => memberships[member.id].status === "APPROVED")
+    })
   }
 
   useEffect(() => {

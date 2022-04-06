@@ -15,7 +15,7 @@ function GroupMain({ group }: {group: Group}) {
   const user = useUser();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let membershipsFromStore = useSelector((state: RootState) => state.ui.group.memberships)
+  let membershipsFromStore: Membership[] = useSelector((state: RootState) => state.ui.group.memberships)
   let membership = membershipsFromStore[user.id]
 
   const [updating, setUpdating] = useState(false);
@@ -46,10 +46,12 @@ function GroupMain({ group }: {group: Group}) {
   }
 
   const joinGroup = () => {
+    const status = group.public ? "APPROVED" : "PENDING"
     const data: Membership = {
       member_id: user.id,
       group_id: group.id,
-      organizer: false
+      organizer: false,
+      status: status
     }
     setUpdating(true)
     dispatch(createMembership(data))
@@ -57,6 +59,36 @@ function GroupMain({ group }: {group: Group}) {
   }
 
   const renderButton = () => {
+    if (membership === undefined) {
+      return (
+        <button onClick={joinGroup} className="btn-red">
+          {updating ? "Updating..." : "Join group"}
+        </button>
+      )
+    } else {
+      switch (membership.status) {
+        case "APPROVED":
+          return (
+            <button onClick={leaveGroup} className="joined">
+              {updating ? "Updating..." : "Leave group"}
+            </button>
+          )
+        case "PENDING":
+          return (
+            <button className="requested">
+              {updating ? "Updating..." : "Requested"}
+            </button>
+          )
+        case "REJECTED":
+          return (
+            <button className="rejected">
+              {updating ? "Updating..." : "Request Denied"}
+            </button>
+          )
+      }
+    
+    }
+
     if (group.members.includes(user.id)) {
       return (
         <button onClick={leaveGroup} className="joined">
