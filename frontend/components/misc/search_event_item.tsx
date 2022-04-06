@@ -2,10 +2,11 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
-import { useUser } from '../../util/hooks';
+import { useLoggedIn, useUser } from '../../util/hooks';
 
 function SearchEventItem({ event }: { event: Event }) {
   const user = useUser();
+  const loggedIn = useLoggedIn();
 
   const isAttending = (event: Event) => {
     if (event.attendees.includes(user.id)) {
@@ -35,7 +36,7 @@ function SearchEventItem({ event }: { event: Event }) {
             <p className="title">{event.title}</p>
             <p className="group">{event.group_title}</p>
             <p className="attendees">{event.attendees.length} attendee{event.attendees.length === 1 ? "" : "s"}</p>
-            {isAttending(event)}
+            {loggedIn && isAttending(event)}
           </div>
         </div>
       </Link>

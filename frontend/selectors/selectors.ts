@@ -2,6 +2,8 @@ import Root from "../components/root";
 import { RootState } from "../store/store";
 import { Event, Group } from "../types/types";
 
+
+
 export const getCurrentUser = (state: RootState) => {
   const currentUserId: number = state.session.currentUserId
   return state.entities.users[currentUserId]

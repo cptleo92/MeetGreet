@@ -5,14 +5,18 @@ import { createAttendance, deleteAttendance } from '../../actions/users_actions'
 import { RootState } from '../../store/store';
 import { AttendancePost, Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
-import { useUser } from '../../util/hooks';
+import { useLoggedIn, useUser } from '../../util/hooks';
 import { userNotMemberPrivateGroup } from '../../util/user_util';
 
 function EventsFooter({ event }: { event: Event }) {
   const user = useUser();
   const dispatch = useDispatch();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
+
   let attendancesFromStore = useSelector((state: RootState) => state.ui.event.attendances)
-  let attendance = attendancesFromStore[user.id];
+  let attendance = attendancesFromStore[userId];
+  
 
   const [updating, setUpdating] = useState(false);
   
@@ -35,7 +39,7 @@ function EventsFooter({ event }: { event: Event }) {
 
   const attendEvent = () => {
     const data: AttendancePost = {
-      attendee_id: user.id,
+      attendee_id: userId,
       event_id: event.id
     }
     setUpdating(true)
@@ -78,7 +82,7 @@ function EventsFooter({ event }: { event: Event }) {
           Event is full!
         </button>
       )
-    } else if (event.attendees.includes(user.id)) {
+    } else if (event.attendees.includes(userId)) {
       return (
         <button onClick={leaveEvent} className="btn-red edit-rsvp">
           {updating ? "Updating..." : "Cancel RSVP"}
@@ -102,7 +106,7 @@ function EventsFooter({ event }: { event: Event }) {
         <p className="title">{event.title}</p>
       </div>
       {renderSpotsLeft()}
-      {renderButton()}
+      {loggedIn && renderButton()}
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/session_actions";
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { useLoggedIn, useUser } from "../../util/hooks";
 import { openModal } from "../../actions/modal_actions";
 import { SearchParams } from "../../types/types";
@@ -72,15 +72,17 @@ const HomeHeader = () => {
           </button>
       </div>
 
-      <ul className="splash-header-nav-right">
+      { loggedIn && 
+        <ul className="splash-header-nav-right">
         <li className="create-group">
           <a onClick={handleCreateGroup}>Create a new group!</a>
         </li>
         <li className="login">
           <a onClick={handleLogout}>Log out</a>
         </li>      
-        {loggedIn && <img className="avatar-round-small" src={user.avatar} />}
+        <img className="avatar-round-small" src={user.avatar} />
       </ul>
+      }
   
     </nav>
   )

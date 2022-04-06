@@ -7,7 +7,7 @@ import { fetchAttendances, fetchAttendees } from '../../actions/ui_actions';
 import { RootState } from '../../store/store';
 import { Event, Group, _nullGroup } from '../../types/types';
 import { fetchGroups, fetchEvents } from '../../util/entities_api_util';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 import Loading from '../misc/loading';
 import EventsHeader from './events_header';
 import EventsPage from './events_page';
@@ -24,6 +24,8 @@ function EventsContainer() {
   const [event, setEvent] = useState<Event>(_nullEvent)
   const dispatch = useDispatch();
   const user = useUser();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
 
   useEffect(() => {
     setLoading(true);
@@ -54,7 +56,7 @@ function EventsContainer() {
   }
 
   const isAttending = () => {
-    return event.attendees.includes(user.id)
+    return event.attendees.includes(userId)
   }
 
   return (

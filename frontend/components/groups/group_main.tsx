@@ -4,19 +4,19 @@ import { NavLink, Routes, Route, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { Group, Membership } from '../../types/types';
 import { deleteMembership, createMembership } from '../../actions/users_actions'
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 import GroupAbout from './group_about';
 import GroupEvents from "./group_events"
 import GroupMembers from './group_members';
-import { openModal } from '../../actions/modal_actions';
-
 
 function GroupMain({ group }: {group: Group}) {
   const user = useUser();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let membershipsFromStore: Membership[] = useSelector((state: RootState) => state.ui.group.memberships)
-  let membership = membershipsFromStore[user.id]
+  let membership = membershipsFromStore[userId]
 
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState(false);
@@ -24,7 +24,7 @@ function GroupMain({ group }: {group: Group}) {
 
   const leaveGroup = () => {
     // user can't leave if they're the last organizer
-    if (group.organizers.length === 1 && group.organizers[0] === user.id) {
+    if (group.organizers.length === 1 && group.organizers[0] === userId) {
       setError(true);
       setErrorMsg("Group must have at least 1 organizer!")
       return;
@@ -48,7 +48,7 @@ function GroupMain({ group }: {group: Group}) {
   const joinGroup = () => {
     const status = group.public ? "APPROVED" : "PENDING"
     const data: Membership = {
-      member_id: user.id,
+      member_id: userId,
       group_id: group.id,
       organizer: false,
       status: status
@@ -89,7 +89,7 @@ function GroupMain({ group }: {group: Group}) {
     
     }
 
-    if (group.members.includes(user.id)) {
+    if (group.members.includes(userId)) {
       return (
         <button onClick={leaveGroup} className="joined">
           {updating ? "Updating..." : "Leave group"}
@@ -124,7 +124,7 @@ function GroupMain({ group }: {group: Group}) {
           <li><a>More</a></li>
         </ul> 
 
-        {renderButton()}
+        {loggedIn && renderButton()}
         <span style={shown} className="group-error">{errorMsg}</span>
       </nav>
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Group, Membership, MembershipObject, User, UserName } from '../../types/types';
-import { useUser } from '../../util/hooks';
+import { useLoggedIn, useUser } from '../../util/hooks';
 import GroupMembersItem from './group_members_item';
 
 function GroupMembersList({ group, organizers }: { group: Group, organizers: boolean }) {
@@ -86,9 +86,10 @@ function GroupMembersList({ group, organizers }: { group: Group, organizers: boo
   }
 
   const user = useUser();
+  const loggedIn = useLoggedIn();
 
   const userNotMemberPrivateGroup = () => {
-    if (!group.public) {
+    if (!group.public && loggedIn) {
       return !user.groups.includes(group.id)
     }
     return false;

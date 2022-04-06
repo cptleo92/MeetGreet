@@ -7,14 +7,16 @@ import TopicButton from '../home/topic_button';
 import { getGroupTopics } from '../../selectors/selectors';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 import GroupPanelPending from './group_panel_pending';
 
 function GroupAbout({ group }: { group: Group }) {
   const user = useUser();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
 
   const pending = () => {
-    return group.organizers.includes(user.id) && group.pending.length !== 0
+    return group.organizers.includes(userId) && group.pending.length !== 0
   }
 
   const groupTopics = useSelector((state: RootState) => getGroupTopics(state, group.id))

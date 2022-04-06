@@ -4,7 +4,7 @@ import { updateMembership } from '../../util/entities_api_util';
 import { RootState } from '../../store/store';
 import { UserName } from '../../types/types';
 import { stringifyDateMedium } from '../../util/event_util';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 import { useNavigate } from 'react-router-dom';
 
 function GroupMembersItem({ member }: {member: UserName}) {
@@ -12,10 +12,12 @@ function GroupMembersItem({ member }: {member: UserName}) {
   const isOrganizer = memberships[member.id].organizer
   const navigate = useNavigate();
   const user = useUser();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
 
   let userIsOrganizer = false;
-  if (memberships[user.id]) {
-    userIsOrganizer = memberships[user.id].organizer
+  if (memberships[userId]) {
+    userIsOrganizer = memberships[userId].organizer
   }
 
   const calcJoinedTime = () => {

@@ -2,15 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDate } from '../../util/event_util';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 
 function EventsHeader({ event }: { event: Event }) {
   const user = useUser();
   const navigate = useNavigate();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
 
   const isEditable = () => {
     const current = new Date();
-    return event.host_id === user.id && (event.start_time > current.toISOString())
+    return event.host_id === userId && (event.start_time > current.toISOString())
   }
 
   const handleEditEvent = () => {

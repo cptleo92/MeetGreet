@@ -1,10 +1,11 @@
 import { Event } from "../types/types";
-import { useUser } from "./hooks";
+import { useLoggedIn, useUser } from "./hooks";
 
 export const userNotMemberPrivateGroup = (event: Event) => {
   const user = useUser();
+  const loggedIn = useLoggedIn();
 
-  if (!event.public) {
+  if (!event.public && loggedIn) {
     return !user.groups.includes(event.group_id)
   }
   return false;

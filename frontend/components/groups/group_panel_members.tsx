@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { Group, User } from '../../types/types';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 
 function GroupPanelMembers({ group }: { group: Group }) {
   const memberships = useSelector((state: RootState) => state.ui.group.memberships)
@@ -12,9 +12,11 @@ function GroupPanelMembers({ group }: { group: Group }) {
   const previewMembers = members.slice(0, 15).filter(member => memberships[member.id].status === "APPROVED")
 
   const user = useUser();
+  const loggedIn = useLoggedIn();
+
 
   const userNotMemberPrivateGroup = () => {
-    if (!group.public) {
+    if (!group.public && loggedIn) {
       return !user.groups.includes(group.id)
     }
     return false;

@@ -3,14 +3,16 @@ import { Group } from '../../types/types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
-import { useUser } from '../../util/hooks';
+import { useUser, useLoggedIn } from '../../util/hooks';
 
 function GroupHeader({ group }: {group: Group}) {
   const user = useUser();
+  const loggedIn = useLoggedIn();
+  const userId = loggedIn ? user.id : 0
   const organizers = useSelector((state: RootState) => state.ui.group.organizers)
 
   const isOrganizer = () => {
-    return organizers.some(organizer => organizer.id === user.id)
+    return organizers.some(organizer => organizer.id === userId)
   }
 
   const handleEdit = () => {

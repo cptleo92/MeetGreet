@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, createSearchParams } from "react-router-dom";
+import { SearchParams } from "../../types/types";
 
 const SplashMainOverviewExplore = () => {
+  const navigate = useNavigate();
+
+  const [searchInput, setSearchInput] = useState<SearchParams>({
+    keyword: "",
+    location: ""
+  })
+
+  const update = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput({
+      ...searchInput,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSearch = () => {    
+    navigate(`/search/?${createSearchParams(searchInput)}`)
+  }
+
   return (
     <div className="splash-explore">
       <section className="explore-search">
@@ -12,6 +32,9 @@ const SplashMainOverviewExplore = () => {
             <input           
               type="text"
               placeholder='Search for "Tennis"'
+              value={searchInput.keyword}
+              name="keyword"
+              onChange={update}
             />    
           </div>  
           <div className="input-location">   
@@ -19,10 +42,13 @@ const SplashMainOverviewExplore = () => {
             <input         
               type="text"
               placeholder='Search by location'
+              value={searchInput.location}
+              name="location"
+              onChange={update}
             />                
           </div>
         </div>
-        <button className="btn-red">Search</button>
+        <button onClick={handleSearch} className="btn-red">Search</button>
       </section>
 
       <section className="explore-buttons">

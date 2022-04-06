@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { AuthRoutes, ProtectedRoutes} from '../util/route_utils';
+import { AuthRoutes, ProtectedRoutes } from '../util/route_utils';
 import Splash from './splash/splash';
 import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
@@ -15,36 +15,35 @@ import Search from './misc/search';
 
 
 export default function App() {
-  const currentUser = useSelector((state: RootState) => state.session.currentUserId )
+  const currentUser = useSelector((state: RootState) => state.session.currentUserId)
   const loggedIn = Boolean(currentUser)
 
   return (
     <div>
 
-      <Routes> 
-        <Route element={<AuthRoutes loggedIn={loggedIn} />}>    
-          <Route path="/" element={<Splash />}/>
+      <Routes>
+        <Route element={<AuthRoutes loggedIn={loggedIn} />}>
+          <Route path="/" element={<Splash />} />
         </Route>
 
-      <Route element={<Layout />}>
-        <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-          <Route path="/home/*" element={<Home />} />
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
+            <Route path="/home/*" element={<Home />} />
+            <Route path="/groups/new" element={<GroupForm type="new" />} />
+            <Route path="/groups/:id/edit" element={<GroupForm type="edit" />} />
+            <Route path="/groups/:group_id/events/new" element={<EventForm type="new" />} />
+            <Route path="/groups/:group_id/events/:event_id/edit" element={<EventForm type="edit" />} />
+          </Route>
+
+          <Route path="/search/*" element={<Search />} />
+          <Route path="/groups/:id/*" element={<GroupContainer />} />
+          <Route path="/groups/:group_id/events/:id/*" element={<EventsContainer />} />
+
+          <Route path="*" element={<Missing />} />
+
         </Route>
-
-        <Route path="/search/*" element={<Search />}/>
-        <Route path="/groups/:id/*" element={<GroupContainer />}/>
-        <Route path="/groups/new" element={<GroupForm type="new"/>}/>
-        <Route path="/groups/:id/edit" element={<GroupForm type="edit"/>}/>
-        <Route path="/groups/:group_id/events/new" element={<EventForm type="new"/>}/>
-        <Route path="/groups/:group_id/events/:event_id/edit" element={<EventForm type="edit"/>}/>
-
-        <Route path="/groups/:group_id/events/:id/*" element={<EventsContainer />} />
-
-        <Route path="*" element={<Missing />} />
-
-        </Route>     
       </Routes>
-      
+
     </div>
   )
 }
@@ -56,4 +55,3 @@ export default function App() {
 //  - User can only acccess home page if logged in
 //  - Any user can access these routes: 
 //   - Search, groups/:id, events/:id, user/:id
- 

@@ -13,6 +13,7 @@ function Search() {
   const [searchType, setSearchType] = useState("events")
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setSearching(true)
     search(searchType, Object.fromEntries(searchParams))
       .then((data) => {
