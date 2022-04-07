@@ -7,13 +7,13 @@ const SplashMainOverviewButtons = () => {
 
   return (
     <div className="splash-main-overview-buttons">
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Boost your career</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Find your zen</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Get moving</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Share language + culture</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Read with friends</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Write together</button>
-      <button onClick={() => dispatch(openModal('login'))} className="splash-button">Hone your craft</button>
+      <button className="splash-button">Boost your career</button>
+      <button className="splash-button">Find your zen</button>
+      <button className="splash-button">Get moving</button>
+      <button className="splash-button">Share language + culture</button>
+      <button className="splash-button">Read with friends</button>
+      <button className="splash-button">Write together</button>
+      <button className="splash-button">Hone your craft</button>
     </div>
   )
 

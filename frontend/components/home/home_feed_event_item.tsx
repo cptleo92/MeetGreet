@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDate, stringifyDateLong } from '../../util/event_util';
 import { useUser, useLoggedIn } from '../../util/hooks';
+import { generateEventPath } from '../../util/event_util';
 
 function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
   const user = useUser();
@@ -27,13 +28,6 @@ function HomeFeedEventItem({ day, events }: { day: string, events: Event[] }) {
       )
     }
   }  
-
-  // const navigate = useNavigate();
-
-  const generateEventPath = (event: Event) => {
-    const group_id = event.group_id;
-    return(`/groups/${group_id}/events/${event.id}`)
-  }
 
   return (
     <div className="feed-event">

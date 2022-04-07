@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import EventsPageAttendees from './events_page_attendees';
 import EventsPageGroupCard from './events_page_group_card';
 import EventsPageDetails from './events_page_details';
-import Modal from '../splash/modal';
 import { openModal } from '../../actions/modal_actions';
 import { userNotMemberPrivateGroup } from '../../util/user_util';
 import EventMembersOnly from './event_members_only';
@@ -41,8 +40,6 @@ export function getAttendeesWithJoinDate() {
 
 function EventsPage({ group, event }: { group: Group, event: Event }) {
   const attendeesWithJoinDate = getAttendeesWithJoinDate();
-
-  const modal = useSelector((state: RootState) => state.ui.modal)
   const dispatch = useDispatch();
   const openAttendeesModal = () => {
     dispatch(openModal("attendees"))
@@ -70,7 +67,6 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
 
   return (
     <div className="content-bg">
-      <Modal modal={modal} />
       <div className="event-main body">
         <div className="event-main-left">
           <img className="avatar-big" src={event.avatar} />

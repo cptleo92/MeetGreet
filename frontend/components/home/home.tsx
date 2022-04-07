@@ -41,6 +41,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0,0);
     dispatch(fetchEvents(currentUser.events))
       .then(({ payload }: { payload: EventEntity }) => {
         dispatch(fetchGroupsOfEvents(payload))
@@ -55,8 +56,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="home">
-      <Modal modal={modal} />
+    <div className="home">     
       {!loading &&
         <div className="body">          
           <HomeGreeting />

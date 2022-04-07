@@ -48,6 +48,10 @@ class Group < ApplicationRecord
 
     unless query[:location] == "" || query[:location].nil?
       groups.filter! {|group| group.location.downcase == query[:location].downcase }
+
+      if query[:keyword] == ""
+        groups += Group.where('location ~* ?', "#{query[:location]}")
+      end
     end
 
     return groups

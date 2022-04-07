@@ -1,9 +1,16 @@
+import path from "path";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { closeModal, openModal } from "../../actions/modal_actions";
 
 const SessionFormHeader = ({ formType }: {formType: string}) => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  const isModal = () => {
+    return !pathname.includes("login") && !pathname.includes("signup")
+  }
 
   let head: string, text: string, link: string;
   if (formType === "login") {
@@ -16,19 +23,27 @@ const SessionFormHeader = ({ formType }: {formType: string}) => {
     link = "Log in"
   }
 
+  const navigate = useNavigate();
+
   const handleToggle = () => {
-    if (formType === "login") {
-      // dispatch(closeModal());
-      dispatch(openModal("signup"))
-    } else {
-      // dispatch(closeModal());
-      dispatch(openModal("login"))
+    if (!isModal()) {
+      if (formType === "login") {
+        navigate("/signup")
+      } else {
+        navigate("/login")
+      }
+    } else {      
+      if (formType === "login") {
+        dispatch(openModal("signup"))
+      } else {
+        dispatch(openModal("login"))
+      }
     }
   }
 
   return (
     <div className="session-header">
-      <span className="close" onClick={() => dispatch(closeModal())}>x</span>
+      { isModal() && <span className="close" onClick={() => dispatch(closeModal())}>x</span> }
       <img
         src={window.smallLogo}
         alt="meetgreet logo"        

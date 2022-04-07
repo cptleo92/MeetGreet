@@ -16,17 +16,14 @@ const Modal = ({ modal }: {modal: string}) => {
   let component;
   switch (modal) {
     case 'login':
-      component = <UserForm formType={'login'} />
+      component = <UserForm type="modal" formType={'login'} />
       break;
     case 'signup':
-      component = <UserForm formType={'signup'}/>
+      component = <UserForm type="modal" formType={'signup'}/>
       break;
     case 'attendees':
       component = <AttendeesModal />
-      break;
-    case 'user-topics':
-      component = <HomeEditInterests />
-      break;
+      break;  
     default:
       return null;
   }

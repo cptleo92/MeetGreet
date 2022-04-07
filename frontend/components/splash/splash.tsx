@@ -2,6 +2,9 @@ import React from "react";
 import SplashHeader from "./splash_header";
 import SplashMain from "./splash_main"
 import SplashFooter from "./splash_footer"
+import Modal from "./modal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 // this makes typescript happy when using images set on 
 // the window property over in application.html.erb
@@ -32,8 +35,11 @@ declare global {
 }
 
 const Splash: React.FC = () => {
+  const modal = useSelector((state: RootState) => state.ui.modal)
+
   return (
     <div className="splash">   
+      <Modal modal={modal} />
       <div className="blob green-blob"></div>
       <div className="blob red-blob-top"></div>
       <div className="blob yellow-blob-top"></div>     

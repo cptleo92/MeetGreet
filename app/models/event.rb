@@ -37,6 +37,11 @@ class Event < ApplicationRecord
         (event.location.downcase == query[:location].downcase) ||
         (event.group.location.downcase == query[:location].downcase)
       end
+
+
+      if query[:keyword] == "" || query[:keyword].nil?
+        events += Event.where('location ~* ?', "#{query[:location]}")
+      end
     end
 
     return events

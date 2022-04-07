@@ -40,7 +40,7 @@ function GroupAbout({ group }: { group: Group }) {
       <div className="group-about">
         <div className="description">
           <h4>What we're about</h4>
-          <p>{group === undefined ? "" : group.description}</p>
+          <p className="text">{group === undefined ? "" : group.description}</p>
         </div>
 
         <div className="members-panel">

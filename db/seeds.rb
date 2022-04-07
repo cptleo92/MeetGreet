@@ -21,8 +21,22 @@ locations = [
   "Boston",
   "Los Angeles",
   "Toronto",
-  "Ceres Station",
-  "Mars"
+  "Mars",
+  "Ceres",
+  "Winterfell",
+  "London",
+  "Barcelona",
+  "Leyndell"
+]
+
+group_template = [
+  "_topic_ enthusiasts of _location_!",
+  "_location_'s _topic_ Group",
+  "Explore _topic_ in _location_ for Young Professionals",
+  "We love _topic_!",
+  "Make friends in _location_!",
+  "Meet fellow _topic_ lovers",
+  "_location_ - Serious _topic_ Connoisseurs"
 ]
 
 demo = User.create!(
@@ -36,16 +50,16 @@ demo = User.create!(
 # demo.avatar.attach(io: file, filename: "kendall570.png")
 
 demo_group = Group.create!(
-  title: Faker::Emotion.adjective.capitalize + " " + Faker::Commerce.department,
-  description: Faker::Hipster.paragraph,
+  title: group_template.sample,
+  description: Faker::Hipster.paragraphs.join("\n\n"),
   location: locations.sample,
   public: false
 )
 
 NUM_USERS = 100
-NUM_GROUPS = 100
-MEM_MULT = rand(4..8) # each user will join this many groups
-NUM_EVENTS = 150 # 2x past events, 1x future events
+NUM_GROUPS = 50
+MEM_MULT = rand(6..12) # each user will join this many groups
+NUM_EVENTS = 100 # 2x past events, 1x future events
 ATTEND_MULT = rand(6..12) # each user will attend this many events
 
 NUM_USERS.times do 
@@ -68,6 +82,7 @@ end
 
 # group seeding
 NUM_GROUPS.times do 
+  # leaving this in even though the title will be overwritten later since I need unique ones anyway
   rand_title = Faker::Emotion.adjective.capitalize + " " + Faker::Commerce.department
   while Group.find_by(title: rand_title)
     rand_title = Faker::Commerce.department
@@ -75,11 +90,43 @@ NUM_GROUPS.times do
 
   Group.create!(
     title: rand_title,
-    description: Faker::Hipster.paragraph,
+    description: Faker::Hipster.paragraphs.join("\n\n"),
     location: locations.sample,
     public: (rand(1..4) == 1 ? false : true) 
   )
   
+end
+
+# seeding topics for groups
+3.times do 
+  (1..NUM_GROUPS + 1).to_a.each do |group_id|
+    rand_name = Faker::Hobby.activity
+
+    topic = Topic.find_by(name: rand_name, topicable_id: group_id, topicable_type: "Group")
+
+    unless topic
+      Topic.create!(
+        name: rand_name,
+        topicable_id: group_id,
+        topicable_type: "Group"
+      )
+    end
+  end
+end
+
+# rewrite group titles 
+
+Group.all.each do |group|
+  new_title = group_template.sample
+  if new_title.include?("_location_")
+    new_title = new_title.split("_location_").join(group.location)
+  end
+
+  if new_title.include?("_topic_")
+    new_title = new_title.split("_topic_").join(group.topics.sample.name)
+  end
+
+  group.update(title: new_title)
 end
 
 # making sure every group has an organizer
@@ -158,7 +205,7 @@ NUM_EVENTS.times do
     group_id: rand_group,
     host_id: rand_organizer.sample,
     title: Faker::Book.title,
-    description: Faker::Hipster.paragraph,
+    description: Faker::Hipster.paragraphs.join("\n\n"),
     location: Group.find(rand_group).location,
     start_time: rand_start,
     end_time: rand_start + rand_duration,
@@ -208,7 +255,7 @@ end
     group_id: rand_group,
     host_id: rand(1..NUM_USERS),
     title: Faker::Hipster.sentence,
-    description: Faker::Hipster.paragraph,
+    description: Faker::Hipster.paragraphs.join("\n\n"),
     location: Group.find(rand_group).location,
     start_time: rand_start,
     end_time: rand_start + rand_duration,
@@ -217,7 +264,7 @@ end
 end
 
 # seeding attendances for past events
-(1..NUM_USERS).to_a.each do |id|
+(1..NUM_USERS + 1).to_a.each do |id|
   ATTEND_MULT.times do
     ev_id = rand((NUM_EVENTS + 1)..(NUM_EVENTS * 2))
 
@@ -261,52 +308,57 @@ events.each do |event|
   end
 end
 
-# seeding topics for groups
-(NUM_GROUPS * 2).times do 
-  rand_id = rand(1..NUM_GROUPS)
-  rand_name = Faker::Hobby.activity
-
-  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "Group")
-
-  unless topic
-    Topic.create!(
-      name: rand_name,
-      topicable_id: rand_id,
-      topicable_type: "Group"
-    )
-  end
-end
-
 # seeding topics for events
-(NUM_EVENTS * 2).times do 
-  rand_id = rand(1..NUM_EVENTS)
-  rand_name = Faker::Hobby.activity
 
-  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "Event")
+
+(1..NUM_EVENTS).each do |event_id|
+  rand_name = Event.find(event_id).group.topics.sample.name
+
+  topic = Topic.find_by(name: rand_name, topicable_id: event_id, topicable_type: "Event")
 
   unless topic
     Topic.create!(
       name: rand_name,
-      topicable_id: rand_id,
+      topicable_id: event_id,
       topicable_type: "Event"
     )
   end
 end
 
-(NUM_USERS * 3).times do
-  rand_id = rand(1..NUM_USERS)
+
+
+# give demo user random topics
+
+7.times do 
   rand_name = Faker::Hobby.activity
 
-  topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "User")
+  topic = Topic.find_by(name: rand_name, topicable_id: 1, topicable_type: "User")
 
   unless topic
     Topic.create!(
       name: rand_name,
-      topicable_id: rand_id,
+      topicable_id: 1,
       topicable_type: "User"
     )
   end
 end
+
+# no need to seed topics for other users at the moment
+
+# (NUM_USERS * 3).times do
+#   rand_id = rand(1..NUM_USERS)
+#   rand_name = Faker::Hobby.activity
+
+#   topic = Topic.find_by(name: rand_name, topicable_id: rand_id, topicable_type: "User")
+
+#   unless topic
+#     Topic.create!(
+#       name: rand_name,
+#       topicable_id: rand_id,
+#       topicable_type: "User"
+#     )
+#   end
+# end
 
 
 

@@ -84,3 +84,8 @@ export const getPastEvents = (eventArray: Event[]): Event[] => {
   })
 }
 
+export const generateEventPath = (event: Event) => {
+  const group_id = event.group_id;
+  return(`/groups/${group_id}/events/${event.id}`)
+}
+

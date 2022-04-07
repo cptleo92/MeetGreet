@@ -2,7 +2,7 @@ import React from 'react';
 import { Event } from '../../types/types';
 import { userNotMemberPrivateGroup } from '../../util/user_util';
 
-function EventMembersOnly({ event, component }: {event: Event, component: JSX.Element}) {
+function EventMembersOnly({ event, component }: {event: Event, component: JSX.Element}) {    
 
   return (
     userNotMemberPrivateGroup(event) ? 

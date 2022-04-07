@@ -13,6 +13,7 @@ import GroupForm from './groups/group_form';
 import EventForm from './events/event_form';
 import Search from './misc/search';
 import HomeEditInterests from './home/home_edit_interests';
+import UserForm from './user_forms/user_form';
 
 
 export default function App() {
@@ -21,10 +22,12 @@ export default function App() {
 
   return (
     <div>
-
+      
       <Routes>
         <Route element={<AuthRoutes loggedIn={loggedIn} />}>
           <Route path="/" element={<Splash />} />
+          <Route path="/login" element={<UserForm type="page" formType="login" />} />
+          <Route path="/signup" element={<UserForm type="page" formType="signup" />} />
         </Route>
 
         <Route element={<Layout />}>

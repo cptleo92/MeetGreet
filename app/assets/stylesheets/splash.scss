@@ -302,6 +302,14 @@ p {
   flex-direction: column;;
   min-width: 260px;
 
+  a {
+    color: black;
+  }
+
+  .item {
+    width: fit-content;
+  }
+
   .avatar {
     width: 200px;
     height: 100px;
@@ -366,7 +374,9 @@ p {
   border-radius: 15px;
   height: fit-content;
   margin-right: 35px;
-  padding: 20px;
+  padding: 20px; 
+  
+  p {color: black;}
 
   &:last-child {
     margin-right: 22px;

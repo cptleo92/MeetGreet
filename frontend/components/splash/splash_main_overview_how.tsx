@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../actions/modal_actions";
 
 const SplashMainOverviewHow = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="splash-how">
       <h3>How MeetGreet Works</h3>
@@ -33,7 +37,7 @@ const SplashMainOverviewHow = () => {
           <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
         </div>
       </section>
-      <button className="splash-button">Join MeetGreet</button>
+      <button onClick={() => dispatch(openModal("signup"))} className="splash-button">Join MeetGreet</button>
     </div>
   )
 }

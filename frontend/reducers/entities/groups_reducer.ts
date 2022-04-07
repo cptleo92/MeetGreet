@@ -11,7 +11,7 @@ export default (state = _nullState, {type, payload}: AnyAction) => {
     case RECEIVE_GROUPS:
       return Object.assign({}, state, payload)      
     case LOGOUT_USER:
-    case RECEIVE_USER:
+    // case RECEIVE_USER:
       return _nullState;
     default:
       return state;

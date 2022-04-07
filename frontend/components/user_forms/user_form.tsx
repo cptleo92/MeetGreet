@@ -5,8 +5,9 @@ import { RootState } from '../../store/store'
 import SessionFormHeader from './session_form_header'
 import FormErrors from './form_errors'
 import { closeModal } from '../../actions/modal_actions'
+import { useNavigate } from 'react-router-dom'
 
-const UserForm = ({ formType }: {formType: string}) => {
+const UserForm = ({ type, formType }: { type: string, formType: string}) => {
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -34,8 +35,11 @@ const UserForm = ({ formType }: {formType: string}) => {
   //   btn.clone().appendTo( $(".modal-child") ).addClass("shown")
   // }, [])
 
+  const navigate = useNavigate();
+
   const loginSuccess = () => {
     dispatch(closeModal())
+    type === "modal" ? navigate("/home") : navigate(-1)
   }
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +47,6 @@ const UserForm = ({ formType }: {formType: string}) => {
     e.stopPropagation();
     const user = input; 
 
-    // sorry Typescript! have to ignore you for now
     formType === "login" ? 
       dispatch(login(user)).then(loginSuccess) :
       dispatch(signup(user)).then(loginSuccess) ;    
@@ -63,7 +66,7 @@ const UserForm = ({ formType }: {formType: string}) => {
   const errors = useSelector((state: RootState) => state.errors.session)  
 
   return (
-    <div className="login-form">
+    <div className={type === "modal" ? "login-form" : "login-form page"}>
       <SessionFormHeader formType={formType} />
       
       <form onSubmit={submit}>

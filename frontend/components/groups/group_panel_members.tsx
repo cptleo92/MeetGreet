@@ -16,10 +16,14 @@ function GroupPanelMembers({ group }: { group: Group }) {
 
 
   const userNotMemberPrivateGroup = () => {
-    if (!group.public && loggedIn) {
-      return !user.groups.includes(group.id)
+    if (!loggedIn) {
+      return true;
+    } else {
+      if (!group.public && loggedIn) {
+        return !user.groups.includes(group.id)
+      }
+      return false;
     }
-    return false;
   }
 
   return (

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/session_actions";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useLoggedIn, useUser } from "../../util/hooks";
 import { openModal } from "../../actions/modal_actions";
-import { SearchParams } from "../../types/types";
+import { RootState } from "../../store/store";
+import Modal from "../splash/modal";
 
 const HomeHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useUser();
   const loggedIn = useLoggedIn();
+  const [searchParams] = useSearchParams();
+  const modal = useSelector((state: RootState) => state.ui.modal)
 
-  const [searchInput, setSearchInput] = useState<SearchParams>({
-    keyword: "",
-    location: loggedIn ? user.location || "" : ""
+  const [searchInput, setSearchInput] = useState({
+    keyword: searchParams.get("keyword") || "",
+    location: searchParams.get("location") || ""
   })
 
   const update = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,7 @@ const HomeHeader = () => {
   }
 
   const handleCreateGroup = () => {
-    loggedIn ? navigate("groups/new") : dispatch(openModal("login"))
+    loggedIn ? navigate("groups/new") : navigate("/login")
   }
 
   const handleSearch = () => {
@@ -43,6 +46,7 @@ const HomeHeader = () => {
 
   return (
     <nav className="splash-header-nav home-header">
+      <Modal modal={modal} />
       <img
         src={window.smallLogo}
         alt="meetgreet logo"
@@ -87,10 +91,10 @@ const HomeHeader = () => {
       {!loggedIn &&
         <ul className="splash-header-nav-right">
           <li className="splash-header-nav-right-login">
-            <a onClick={() => dispatch(openModal('login'))}>Log in</a>
+            <a onClick={() => navigate("/login")}>Log in</a>
           </li>
           <li className="splash-header-nav-right-signup">
-            <a onClick={() => dispatch(openModal('signup'))}>Sign up</a>
+            <a onClick={() => navigate("/signup")}>Sign up</a>
           </li>
         </ul>
       }
