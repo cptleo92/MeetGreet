@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/session_actions";
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useLoggedIn, useUser } from "../../util/hooks";
-import { openModal } from "../../actions/modal_actions";
 import { RootState } from "../../store/store";
 import Modal from "../splash/modal";
 
@@ -41,7 +40,7 @@ const HomeHeader = () => {
   }
 
   const handleSearch = () => {
-    navigate(`/search/?${createSearchParams(searchInput)}`)
+    navigate(`/search/?${createSearchParams(searchInput)}&type=events`)
   }
 
   return (

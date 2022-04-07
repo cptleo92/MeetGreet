@@ -32,7 +32,7 @@ locations = [
 group_template = [
   "_topic_ enthusiasts of _location_!",
   "_location_'s _topic_ Group",
-  "Explore _topic_ in _location_ for Young Professionals",
+  "Explore _topic_ in _location_ - Free!",
   "We love _topic_!",
   "Make friends in _location_!",
   "Meet fellow _topic_ lovers",

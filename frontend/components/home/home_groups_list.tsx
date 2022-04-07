@@ -5,6 +5,7 @@ import { RootState } from "../../store/store";
 import { Group } from "../../types/types";
 import { getUserGroups } from "../../selectors/selectors";
 import HomeSidebarGroupItem from "./home_sidebar_group_item";
+import { Link } from "react-router-dom";
 
 const HomeGroupsList = ({preview, organizerOnly}: { preview: boolean, organizerOnly: boolean}) => {
   const user = useUser();
@@ -26,15 +27,13 @@ const HomeGroupsList = ({preview, organizerOnly}: { preview: boolean, organizerO
     userGroups = userGroups.filter(group => group.organizers.includes(user.id))
   }
 
-  
-
   const renderGroups = () => {
     if (userGroups.length === 0) {
       if (preview) {
         return (
           <div className="no-preview">          
           <strong>You have not joined any groups</strong>
-          <a>Discover groups</a>
+          <Link to="/search/?keyword=&location=NYC">Discover groups</Link>
         </div>
         )
       } else {

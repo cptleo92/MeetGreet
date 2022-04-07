@@ -12,7 +12,7 @@ function SearchGroupItem({ group }: { group: Group }) {
     }
   }
 
-  return (
+  return (   
     <Link to={`/groups/${group.id}`}>
     <div className="search-item">
       <img className="avatar-medium-long" src={group.avatar}></img>
@@ -26,7 +26,7 @@ function SearchGroupItem({ group }: { group: Group }) {
       </div>
     </div>
     </Link>
-  )
+  )  
 }
 
 export default SearchGroupItem;

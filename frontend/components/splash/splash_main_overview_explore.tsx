@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
-import { SearchParams } from "../../types/types";
 
 const SplashMainOverviewExplore = () => {
   const navigate = useNavigate();
 
-  const [searchInput, setSearchInput] = useState<SearchParams>({
+  const [searchInput, setSearchInput] = useState({
     keyword: "",
-    location: ""
+    location: "",
+    type: "events"
   })
 
   const update = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -5,7 +5,7 @@ function TopicButton({ topic }: {topic: string}) {
   const navigate = useNavigate();
 
   const searchTopic = () => {
-    navigate(`/search/?${createSearchParams({keyword: topic})}`)
+    navigate(`/search/?${createSearchParams({keyword: topic})}&type=events`)
   }
 
   return (   

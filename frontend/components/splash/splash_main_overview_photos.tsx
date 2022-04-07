@@ -6,7 +6,7 @@ const SplashMainOverviewPhotos = () => {
 
   return (
     <div className="splash-overview-photos">
-      <Link to="/search/?keyword=coffee&location=" className="splash-photo">
+      <Link to="/search/?keyword=coffee&location=&type=groups" className="splash-photo">
         <img 
           src={window.category1}
           alt="make new friends"
@@ -14,7 +14,7 @@ const SplashMainOverviewPhotos = () => {
         <div className="caption">Make new friends</div>     
       </Link>
 
-      <Link to="/search/?keyword=bird&location=" className="splash-photo">
+      <Link to="/search/?keyword=bird&location=&type=groups" className="splash-photo">
         <img
           src={window.category2}
           alt="explore the outdoors"
@@ -22,7 +22,7 @@ const SplashMainOverviewPhotos = () => {
         <div className="caption">Explore the outdoors</div>   
       </Link>
 
-      <Link to="/search/?keyword=computer&location=" className="splash-photo">
+      <Link to="/search/?keyword=electronics&location=&type=groups" className="splash-photo">
         <img 
           src={window.category3}
           alt="connect over tech"
