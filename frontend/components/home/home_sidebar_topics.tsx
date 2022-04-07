@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import HomeSidebarTopicsPreview from "./home_sidebar_topics_preview"
+import { openModal } from "../../actions/modal_actions";
+import { Link } from "react-router-dom";
 
 const HomeSidebarTopicss = () => {
+
+  const dispatch = useDispatch();
+
   return (
     <div className="home-sidebar-events">
       <section className="sidebar-header">
         <h4>Your interests</h4>
-        <a>See all your interests</a>
-      </section>
-      <HomeSidebarTopicsPreview />
+        <Link to="interests/edit">Edit interests</Link>
+      </section>      
+      <HomeSidebarTopicsPreview />     
     </div>
   )
 }

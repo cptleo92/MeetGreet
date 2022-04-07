@@ -12,6 +12,7 @@ import EventsContainer from './events/events_container';
 import GroupForm from './groups/group_form';
 import EventForm from './events/event_form';
 import Search from './misc/search';
+import HomeEditInterests from './home/home_edit_interests';
 
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
             <Route path="/home/*" element={<Home />} />
+            <Route path="/home/interests/edit" element={<HomeEditInterests />} />
             <Route path="/groups/new" element={<GroupForm type="new" />} />
             <Route path="/groups/:id/edit" element={<GroupForm type="edit" />} />
             <Route path="/groups/:group_id/events/new" element={<EventForm type="new" />} />

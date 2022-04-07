@@ -1,6 +1,6 @@
 import { newGroupType } from "../components/groups/group_form"
 import { newEventType } from "../components/events/event_form"
-import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams } from "../types/types"
+import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams, User } from "../types/types"
 
 export const fetchGroups = (filter: number[] = [0]) => {
   return $.ajax({
@@ -124,6 +124,14 @@ export const updateEvent = (event: Event, topics: string[]) => {
     method: "PATCH",
     url: `api/events/${event.id}`,
     data: {event: event, topics: topics}
+  })
+}
+
+export const updateUserTopics = (user: User, topics: string[] = []) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/users/${user.id}`,
+    data: {topics: topics}
   })
 }
 

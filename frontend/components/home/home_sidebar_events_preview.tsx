@@ -9,7 +9,6 @@ import { useNavigate, generatePath } from "react-router-dom";
 
 const HomeSidebarEventsPreview = () => {
   const userEvents: Event[] = useSelector((state: RootState) => getUserEvents(state))
-
   let firstEvent: Event | null;
   if (userEvents.length === 0) {
     firstEvent = null;

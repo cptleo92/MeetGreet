@@ -6,8 +6,7 @@ import Root from './components/root'
 
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
-// import { getUpcomingEvents, getPastEvents } from "./util/event_util"
-// import { getEventsFromGroup } from "./selectors/selectors"
+import { closeModal } from './actions/modal_actions';
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -34,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.signup = signup;
   window.login = login;
   window.logout = logout;
+  window.closeModal = closeModal;
   // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")

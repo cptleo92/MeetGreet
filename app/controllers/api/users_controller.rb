@@ -27,16 +27,23 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    if @user.update(user_params)
-      redirect_to api_user_url(@user)
-    else
-      render json: @user.errors.full_messages, status: 422
+    # byebug
+    if params[:topics]
+      topics = params[:topics].map do |topic|
+        Topic.find_or_create_by(
+          name: topic,
+          topicable_id: params[:id],
+          topicable_type: "User"
+        )
+      end
     end
+    @user.topics = topics || []
+    render :show
   end
 
   private
   def user_params
-    params.require(:user).permit(:id, :fname, :lname, :location, :email, :password, :provider, :uid)
+    params.require(:user).permit(:id, :fname, :lname, :location, :email, :password, :provider, :uid, topics: [])
   end
 
 end

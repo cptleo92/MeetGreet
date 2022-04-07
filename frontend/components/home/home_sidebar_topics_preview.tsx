@@ -8,14 +8,12 @@ import TopicButton from './topic_button';
 function HomeSidebarTopicsPreview() {
   const currentUser = useUser();
   let userTopics = useSelector((state: RootState) => getUserTopics(state, currentUser.id))  
-  userTopics = userTopics.slice(0, 15)
 
   const renderTopics = () => {
     if (userTopics.length === 0) {
       return (
         <div className="no-preview">
-          <strong>You have not added any interests</strong>
-          <a>Select interests</a>
+          <strong>You have not added any interests</strong>          
         </div>
       )
     } else {
@@ -26,7 +24,7 @@ function HomeSidebarTopicsPreview() {
   }
 
   return (
-    <div className="sidebar-preview">
+    <div className="sidebar-preview topics">
       {renderTopics()}
     </div>
   );

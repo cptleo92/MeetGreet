@@ -5,6 +5,7 @@ import { fetchEvents } from "../../actions/events_actions";
 import { EventEntity, Group, GroupEntity } from "../../types/types";
 import { fetchGroups } from "../../actions/groups_actions"
 import { Route, Routes } from "react-router-dom";
+import Modal from "../splash/modal";
 
 import HomeGreeting from "./home_greeting";
 import HomeMain from "./home_main";
@@ -17,6 +18,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const currentUser = useUser();
+  const modal = useSelector((state: RootState) => state.ui.modal)
 
   // make sure store has groups belonging to all user's events
   const fetchGroupsOfEvents = (userEvents: EventEntity) => (dispatch: any) => {
@@ -54,8 +56,9 @@ const Home = () => {
 
   return (
     <div className="home">
+      <Modal modal={modal} />
       {!loading &&
-        <div className="body">
+        <div className="body">          
           <HomeGreeting />
           <Routes>
             <Route index element={<HomeMain />} />

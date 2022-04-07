@@ -212,7 +212,6 @@ function EventForm({ type }: { type: string }) {
           </label>
           <ul>
             {
-
               input.topics.map((topic, idx) =>
                 <button
                   className="topic-button"
