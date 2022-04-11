@@ -13,6 +13,11 @@ export const getSoonestEvent = (eventArray: Event[]): Event => {
   return sortByDate(getUpcomingEvents(eventArray))[0]
 }
 
+export const stringifyDateShort = (time: string | number) : string => {
+  const date = new Date(time);
+  return date.toLocaleString("en-US", { month: 'long', year: 'numeric' });
+}
+
 export const stringifyRSVPtime = (time: string): string => {
   const date = new Date(time);
   return date.toLocaleString("en-US", {hour: "numeric", minute: "numeric"}) + ' , ' + date.toLocaleString("en-US", {month: 'long', day: 'numeric'})

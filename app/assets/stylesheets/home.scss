@@ -33,10 +33,6 @@
   .splash-header-nav-right {
     display: flex;
     align-items: center;
-
-    .login {
-      margin-right: 20px;
-    }
   }
 }
 
@@ -176,7 +172,7 @@
   }
 
   &:first-child {
-    padding-top: 0;
+    // padding-top: 0;
   }
 
   a {

@@ -3,11 +3,12 @@ export interface User {
   fname: string;
   lname: string;
   email: string;
-  location: string | null;
+  location: string;
   groups: number[];
   events: number[];
   topics: string[];
   avatar: string;
+  created_at: string;
 }
 
 export type Event = {

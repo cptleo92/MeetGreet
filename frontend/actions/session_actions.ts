@@ -19,7 +19,7 @@ const logoutUser = (): AnyAction => ({
   type: LOGOUT_USER  
 })
 
-const receiveUserErrors = (errors: string[]): AnyAction => ({
+export const receiveUserErrors = (errors: string[]): AnyAction => ({
   type: RECEIVE_USER_ERRORS,
   payload: errors
 })

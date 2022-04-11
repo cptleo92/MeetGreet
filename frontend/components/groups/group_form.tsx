@@ -72,7 +72,7 @@ function GroupForm({ type }: { type: string }) {
 
   const navigate = useNavigate();
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     const newGroup: newGroupType = {
@@ -160,12 +160,12 @@ function GroupForm({ type }: { type: string }) {
 
         <div className="form-line radio">
           <label>Public?</label>
-          <p className="form-info">If set to NO, members have to request to join the group. Only group members can attend events from this group and view information about this group's events.<br />If unchecked, this defaults to NO!</p>
+          <p className="form-info">If set to NO, members have to request to join the group. Only group members can attend events from this group and view information about this group's events.</p>
           <label>
             <input
               type="radio"
               value="true"
-              checked={input.public === "true"}
+              checked={input.public === "true" || input.public}
               onChange={update}
               name="public"
             />
@@ -176,7 +176,7 @@ function GroupForm({ type }: { type: string }) {
             <input
               type="radio"
               value="false"
-              checked={input.public === "false"}
+              checked={input.public === "false" || !input.public}
               onChange={update}
               name="public"
             />
@@ -193,7 +193,7 @@ function GroupForm({ type }: { type: string }) {
               value={inputTopic}
               onChange={updateTopic}
               onKeyDown={handleEnterTopic}
-              placeholder="Press 'Enter' to add topic"
+              placeholder="Type and press 'Enter' to add"
             />
           </label>
           <ul>

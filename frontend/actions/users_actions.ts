@@ -1,8 +1,8 @@
+import { newUserType } from "../components/home/user_profile_edit";
 import { AppDispatch } from "../store/store";
 import { AttendancePost, Membership, MembershipUpdate } from "../types/types";
 import * as EntitiesAPIUtil from "../util/entities_api_util"
-import { receiveUser } from "./session_actions";
-import { receiveMembership } from "./ui_actions";
+import { receiveUser,receiveUserErrors } from "./session_actions";
 
 export const deleteMembership = (membershipId: number) => (dispatch: AppDispatch) => {
   return EntitiesAPIUtil.deleteMembership(membershipId)
@@ -45,4 +45,10 @@ export const createAttendance = (data: AttendancePost) => (dispatch: AppDispatch
       EntitiesAPIUtil.fetchUser(attendeeId)
         .then((user) => dispatch(receiveUser(user)))        
     })
+}
+
+export const updateUser = (userData: newUserType) => (dispatch: AppDispatch) => {
+  return EntitiesAPIUtil.updateUser(userData)
+    .then(user => dispatch(receiveUser(user)),
+      err => dispatch(receiveUserErrors(err.responseJSON)))
 }

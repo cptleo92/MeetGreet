@@ -211,7 +211,7 @@ function EventForm({ type }: { type: string }) {
               value={inputTopic}
               onChange={updateTopic}
               onKeyDown={handleEnterTopic}
-              placeholder="Press 'Enter' to add topic"
+              placeholder="Type and press 'Enter' to add"
             />
           </label>
           <ul>

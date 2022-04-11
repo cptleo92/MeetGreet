@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/session_actions";
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
+import { createSearchParams, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useLoggedIn, useUser } from "../../util/hooks";
 import { RootState } from "../../store/store";
 import Modal from "../splash/modal";
@@ -83,7 +83,8 @@ const HomeHeader = () => {
           <li className="login">
             <a onClick={handleLogout}>Log out</a>
           </li>
-          <img className="avatar-round-small" src={user.avatar} />
+          <li><Link to="/myprofile">Your Profile</Link></li>
+          <Link to="/myprofile"><img className="avatar-round-small" src={user.avatar} /></Link>
         </ul>
       }
 

@@ -14,6 +14,8 @@ import EventForm from './events/event_form';
 import Search from './misc/search';
 import HomeEditInterests from './home/home_edit_interests';
 import UserForm from './user_forms/user_form';
+import UserProfile from './home/user_profile';
+import UserProfileEdit from './home/user_profile_edit';
 
 
 export default function App() {
@@ -38,6 +40,8 @@ export default function App() {
             <Route path="/groups/:id/edit" element={<GroupForm type="edit" />} />
             <Route path="/groups/:group_id/events/new" element={<EventForm type="new" />} />
             <Route path="/groups/:group_id/events/:event_id/edit" element={<EventForm type="edit" />} />
+            <Route path="/myprofile" element={<UserProfile />} />
+            <Route path="/myprofile/edit" element={<UserProfileEdit />} />
           </Route>
 
           <Route path="/search/*" element={<Search />} />

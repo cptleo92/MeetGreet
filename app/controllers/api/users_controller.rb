@@ -36,9 +36,16 @@ class Api::UsersController < ApplicationController
           topicable_type: "User"
         )
       end
+      @user.topics = topics || []
+      render :show
+    else
+      if @user.update(user_params)
+        render :show
+      else
+        render json: @user.errors.full_messages, status: 422
+      end
     end
-    @user.topics = topics || []
-    render :show
+    
   end
 
   private
