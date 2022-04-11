@@ -116,12 +116,12 @@ NUM_USERS.times do
 end
 
 # seeding random avatars (WILL UPLOAD TO AWS SO DON'T SEED TOO OFTEN)
-# rand_avatars = avatars.shuffle
-# rand_avatars.length.times do 
-#   rand_url = rand_avatars.shift
-#   file = URI.open(rand_url)
-#   User.find(rand(10..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
-# end
+rand_avatars = avatars.shuffle
+rand_avatars.length.times do 
+  rand_url = rand_avatars.shift
+  file = URI.open(rand_url)
+  User.find(rand(2..NUM_USERS)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
+end
 
 # group seeding
 NUM_GROUPS.times do 
@@ -389,16 +389,16 @@ end
 end
 
 # seeding random group and event avatars
-# Group.all.each do |group|
-#   rand_url = group_avatars.sample
-#   file = URI.open(rand_url)
-#   group.avatar.attach(io: file, filename: rand_url.slice(44..-1))
-# end
+Group.all.each do |group|
+  rand_url = group_avatars.sample
+  file = URI.open(rand_url)
+  group.avatar.attach(io: file, filename: rand_url.slice(44..-1))
+end
 
-# Event.all.each do |event|
-#   group = Group.find(event.group_id)
-#   event.avatar.attach group.avatar.blob
-# end
+Event.all.each do |event|
+  group = Group.find(event.group_id)
+  event.avatar.attach group.avatar.blob
+end
 
 # no need to seed topics for other users at the moment
 
