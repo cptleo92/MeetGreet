@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SplashMainStories = () => {
   return (
@@ -7,7 +8,7 @@ const SplashMainStories = () => {
         <h6>People on Meetup have fostered community, learned new skills, started businesses, and made life-long friends. Learn how.</h6>
         <section className="stories-cards">
           <div className="stories-card">
-            <a>
+            <a href="https://www.meetup.com/blog/three-ways-to-make-coworker-friendships-while-working-from-home/" target="_blank">
               <img
                 src={window.firstArticle}
                 alt="first article"
@@ -18,7 +19,7 @@ const SplashMainStories = () => {
           </div>
 
           <div className="stories-card">
-            <a>
+            <a href="https://www.meetup.com/blog/five-ways-to-feel-more-connected/" target="_blank">
               <img
                 src={window.secondArticle}
                 alt="second article"
@@ -29,7 +30,7 @@ const SplashMainStories = () => {
           </div>
 
           <div className="stories-card">
-            <a>
+            <a href="https://www.meetup.com/blog/how-to-live-your-best-social-life/" target="_blank">
               <img
                 src={window.thirdArticle}
                 alt="third article"

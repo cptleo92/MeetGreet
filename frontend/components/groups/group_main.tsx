@@ -119,9 +119,6 @@ function GroupMain({ group }: {group: Group}) {
           <NavLink to="" end>About</NavLink>
           <NavLink to="allevents">Events</NavLink>
           <NavLink to="members">Members</NavLink>          
-          <li><a>Photos</a></li>
-          <li><a>Discussions</a></li>
-          <li><a>More</a></li>
         </ul> 
 
         {loggedIn && renderButton()}

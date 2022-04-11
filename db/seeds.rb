@@ -13,7 +13,29 @@ avatars = [
   "https://meetgreet-seed-dev.s3.amazonaws.com/logan.jpg",
   "https://meetgreet-seed-dev.s3.amazonaws.com/Marco_Inaros.png",
   "https://meetgreet-seed-dev.s3.amazonaws.com/MichaelScott.png",
-  "https://meetgreet-seed-dev.s3.amazonaws.com/miller.jpg"
+  "https://meetgreet-seed-dev.s3.amazonaws.com/miller.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/roy.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/shiv.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/tom.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/walter_white.png"
+]
+
+group_avatars = [
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-del-adams-2444852.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-matheus-bertelli-3856026.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-spencer-gurley-films-1448055.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-viktoria-alipatova-2074130.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-wendy-wei-1190297.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-matheus-bertelli-2467506.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-fu-zhichao-587741.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-marcin-dampc-1684187.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-elle-hughes-1549196.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-fauxels-3183197.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-del-adams-2444852.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-eberhard-grossgasteiger-707344.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-cedric-fauntleroy-7219246.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-christina-morillo-1181438.jpg",
+  "https://meetgreet-seed-dev.s3.amazonaws.com/pexels-belle-co-1000445.jpg"
 ]
 
 locations = [
@@ -26,7 +48,8 @@ locations = [
   "Winterfell",
   "London",
   "Barcelona",
-  "Leyndell"
+  "Leyndell",
+  "NYC" # padding this since why not!
 ]
 
 group_template = [
@@ -36,7 +59,22 @@ group_template = [
   "We love _topic_!",
   "Make friends in _location_!",
   "Meet fellow _topic_ lovers",
-  "_location_ - Serious _topic_ Connoisseurs"
+  "_location_ - Serious _topic_ Connoisseurs",
+  "FREE! _location_ _topic_ Socializers",
+  "Outstanding _topic_ Association of _location_!"
+]
+
+event_template = [
+  "Free _topic_ at the park",
+  "_topic_ and socializing after work",
+  "Boozy brunch and _topic_!",
+  "Professional-level _topic_ - $10 entry",
+  "Beginner-level _topic_ - Free!",
+  "Practice _topic_ with new friends",
+  "ONLINE ONLY! _topic_ competition",
+  "_topic_ classes ft. John Bar",
+  "Learn _topic_ fast!",
+  "_topic_ and the Soul: A Formal Discussion"
 ]
 
 demo = User.create!(
@@ -46,6 +84,7 @@ demo = User.create!(
   lname: 'McDemo', 
   location: "NYC"
 )
+
 # file = URI.open("https://meetgreet-seed-dev.s3.amazonaws.com/kendall570.png")
 # demo.avatar.attach(io: file, filename: "kendall570.png")
 
@@ -56,11 +95,11 @@ demo_group = Group.create!(
   public: false
 )
 
-NUM_USERS = 100
-NUM_GROUPS = 50
-MEM_MULT = rand(6..12) # each user will join this many groups
-NUM_EVENTS = 100 # 2x past events, 1x future events
-ATTEND_MULT = rand(6..12) # each user will attend this many events
+NUM_USERS = 20
+NUM_GROUPS = 20
+MEM_MULT = rand(8..12) # each user will join this many groups
+NUM_EVENTS = 20 # 2x past events, 1x future events
+ATTEND_MULT = rand(8..12) # each user will attend this many events
 
 NUM_USERS.times do 
   User.create!(
@@ -77,7 +116,7 @@ end
 # rand_avatars.length.times do 
 #   rand_url = rand_avatars.shift
 #   file = URI.open(rand_url)
-#   User.find(rand(50..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
+#   User.find(rand(10..100)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
 # end
 
 # group seeding
@@ -115,15 +154,15 @@ end
 end
 
 # rewrite group titles 
-
 Group.all.each do |group|
-  new_title = group_template.sample
-  if new_title.include?("_location_")
-    new_title = new_title.split("_location_").join(group.location)
-  end
+  new_title = group_template.sample 
 
   if new_title.include?("_topic_")
     new_title = new_title.split("_topic_").join(group.topics.sample.name)
+  end
+
+  if new_title.include?("_location_")
+    new_title = new_title.split("_location_").join(group.location)
   end
 
   group.update(title: new_title)
@@ -309,26 +348,28 @@ events.each do |event|
 end
 
 # seeding topics for events
+Event.all.each do |event|
+  rand_name = event.group.topics.sample.name
 
-
-(1..NUM_EVENTS).each do |event_id|
-  rand_name = Event.find(event_id).group.topics.sample.name
-
-  topic = Topic.find_by(name: rand_name, topicable_id: event_id, topicable_type: "Event")
+  topic = Topic.find_by(name: rand_name, topicable_id: event.id, topicable_type: "Event")
 
   unless topic
     Topic.create!(
       name: rand_name,
-      topicable_id: event_id,
+      topicable_id: event.id,
       topicable_type: "Event"
     )
   end
 end
 
-
+# rewrite event titles 
+Event.all.each do |event|
+  new_title = event_template.sample
+  new_title = new_title.split("_topic_").join(event.topics.sample.name)
+  event.update(title: new_title)
+end
 
 # give demo user random topics
-
 7.times do 
   rand_name = Faker::Hobby.activity
 
@@ -342,6 +383,18 @@ end
     )
   end
 end
+
+# seeding random group and event avatars
+# Group.all.each do |group|
+#   rand_url = group_avatars.sample
+#   file = URI.open(rand_url)
+#   group.avatar.attach(io: file, filename: rand_url.slice(44..-1))
+# end
+
+# Event.all.each do |event|
+#   group = Group.find(event.group_id)
+#   event.avatar.attach group.avatar.blob
+# end
 
 # no need to seed topics for other users at the moment
 

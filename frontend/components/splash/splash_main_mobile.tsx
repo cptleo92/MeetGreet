@@ -23,14 +23,14 @@ const SplashMainMobile = () => {
         <p className="mobile-text">Download the app.</p>
 
         <div className="download-buttons">
-          <a>
+          <a href="https://apps.apple.com/us/app/meetup/id375990038" target="_blank">
             <img 
               className="ios-button"
               src={window.iosDownload}
               alt="ios store download"
             />
           </a>
-          <a>
+          <a href="https://play.google.com/store/apps/details?id=com.meetup&hl=en-US" target="_blank">
             <img 
               className="android-button"
               src={window.androidDownload}

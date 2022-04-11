@@ -25,20 +25,20 @@ const SplashFooterSocials = () => {
         </div>
       </div>
       <div className="footer-socials-right">
-        <a>
-              <img 
-                className="ios-button"
-                src={window.iosDownload}
-                alt="ios store download"
-              />
-            </a>
-            <a>
-              <img 
-                className="android-button"
-                src={window.androidDownload}
-                alt="android store download"
-              />
-            </a>
+        <a href="https://apps.apple.com/us/app/meetup/id375990038" target="_blank">
+          <img
+            className="ios-button"
+            src={window.iosDownload}
+            alt="ios store download"
+          />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.meetup&hl=en-US" target="_blank">
+          <img
+            className="android-button"
+            src={window.androidDownload}
+            alt="android store download"
+          />
+        </a>
       </div>
     </div>
   )

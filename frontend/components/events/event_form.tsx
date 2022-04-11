@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker"
 import { useUser } from '../../util/hooks';
@@ -113,6 +113,10 @@ function EventForm({ type }: { type: string }) {
         .then(() => navigate(`/groups/${group_id}/events/${event_id}`))
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <div className="body event-form">

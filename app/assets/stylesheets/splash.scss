@@ -1,6 +1,6 @@
 * {
   font-family: 'Roboto', sans-serif;
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
 }
 
 h1 {
@@ -295,6 +295,7 @@ p {
   overflow-x: hidden;
   padding: 40px 0;
   width: 1000px;
+  scroll-behavior: smooth;
 }
 
 .splash-event-card {

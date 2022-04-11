@@ -28,10 +28,10 @@ const SplashFooter = () => {
 
         <ul className="footer-copy">
           <li>&copy; 2022 MeetGreet</li>
-          <li><a>Terms of Service</a></li>
-          <li><a>Privacy Policy</a></li>
-          <li><a>Cookie Policy</a></li>
-          <li><a>Help</a></li>
+          <li>Terms of Service</li>
+          <li>Privacy Policy</li>
+          <li>Cookie Policy</li>
+          <li><a href="mailto:leo.cheng92@gmail.com?subject=Suggestions for MeetGreet!">Help</a></li>
         </ul>
       </div>
     </footer>

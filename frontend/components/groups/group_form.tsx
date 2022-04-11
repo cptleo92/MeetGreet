@@ -105,6 +105,10 @@ function GroupForm({ type }: { type: string }) {
         .then(() => navigate(`/groups/${input.id}`))
     }
   }
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   const errors = useSelector((state: RootState) => state.errors.group)
 

@@ -64,7 +64,7 @@ const HomeHeader = () => {
 
         <input
           type="text"
-          placeholder='Search by location'
+          placeholder='Search by city'
           value={searchInput.location}
           name="location"
           onChange={update}

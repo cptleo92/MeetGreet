@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../actions/modal_actions";
 import { useUser } from "../../util/hooks";
 
 const SplashFooterLinks = () => {
   const currentUser = useUser();
+  const dispatch = useDispatch();  
 
   const accountLinks = () => {
     if (currentUser) {
@@ -16,8 +19,8 @@ const SplashFooterLinks = () => {
     } else {
       return (
         <>
-          <li><a>Sign up</a></li>
-          <li><a>Log in</a></li>
+          <li><a onClick={() => dispatch(openModal('signup'))}>Sign up</a></li>
+          <li><a onClick={() => dispatch(openModal('login'))}>Log in</a></li>
         </>
       )
     }
@@ -29,17 +32,15 @@ const SplashFooterLinks = () => {
       <ul className="account">
         <li className="footer-links-title">Your Account</li>         
         {accountLinks()}
-        <li><a>Help</a></li>
+        <li><a href="mailto:leo.cheng92@gmail.com?subject=Suggestions for MeetGreet!">Help</a></li>
       </ul>
 
       <ul className="discover">
         <li className="footer-links-title">Discover</li>
-        <li> <a>Groups</a></li>
-        <li> <a>Calender</a></li>
-        <li> <a>Topics</a></li>
-        <li> <a>Cities</a></li>
-        <li> <a>Online Events</a></li>
-        <li> <a>Local Guides</a></li>
+        <li><a>Groups</a></li>
+        <li><a>Topics</a></li>
+        <li><a>Cities</a></li>
+        <li><a>Events</a></li>
       </ul>
 
       <ul className="meetgreet">
@@ -48,7 +49,6 @@ const SplashFooterLinks = () => {
         <li><a>Blog</a></li>
         <li><a>MeetGreet Pro</a></li>
         <li><a>Careers</a></li>
-        <li><a>Apps</a></li>
       </ul>
     </div>
   )

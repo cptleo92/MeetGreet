@@ -22,7 +22,7 @@ const SplashMainOverviewPhotos = () => {
         <div className="caption">Explore the outdoors</div>   
       </Link>
 
-      <Link to="/search/?keyword=electronics&location=&type=groups" className="splash-photo">
+      <Link to="/search/?keyword=games&location=&type=groups" className="splash-photo">
         <img 
           src={window.category3}
           alt="connect over tech"
