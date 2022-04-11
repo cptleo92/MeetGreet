@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HomeFeed from './home_feed';
 import { NavLink, Routes, Route } from 'react-router-dom';
 
 function HomeMyEvents() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <div className="tab">

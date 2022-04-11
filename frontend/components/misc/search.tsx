@@ -43,10 +43,8 @@ function Search() {
   return (
     <div className="body search">
       <ul className="entities">
-        {/* <Link to={redoSearchEvents("events")} className={searchingEvents()}><h3>Events</h3></Link> */}
         <li><a onClick={() => toggleSearch("events")} className={searchingEvents()}><h3>Events</h3></a></li>
         <li><a onClick={() => toggleSearch("groups")} className={searchingGroups()}><h3>Groups</h3></a></li>
-        {/* <Link to={redoSearchEvents("groups")} className={searchingGroups()}><h3>Groups</h3></Link> */}
       </ul>
 
       {searching && <Loading />}

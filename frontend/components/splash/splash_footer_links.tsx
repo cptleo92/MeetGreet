@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../actions/modal_actions";
 import { useUser } from "../../util/hooks";
+import { Link } from "react-router-dom";
 
 const SplashFooterLinks = () => {
   const currentUser = useUser();
@@ -11,9 +12,9 @@ const SplashFooterLinks = () => {
     if (currentUser) {
       return (
         <>
-          <li><a>Your Profile</a></li>
-          <li><a>Your Events</a></li>
-          <li><a>Your Groups</a></li>
+          <li><Link to="/myprofile">Your Profile</Link></li>
+          <li><Link to="/home/myevents">Your Events</Link></li>
+          <li><Link to="/home/mygroups">Your Groups</Link></li>
         </>
       )
     } else {
@@ -37,18 +38,19 @@ const SplashFooterLinks = () => {
 
       <ul className="discover">
         <li className="footer-links-title">Discover</li>
-        <li><a>Groups</a></li>
-        <li><a>Topics</a></li>
-        <li><a>Cities</a></li>
-        <li><a>Events</a></li>
+        <li>Groups</li>
+        <li>Topics</li>
+        <li>Cities</li>
+        <li>Events</li>
+        <li>Local Guides</li>
       </ul>
 
       <ul className="meetgreet">
         <li className="footer-links-title">MeetGreet</li>
-        <li><a>About</a></li>
-        <li><a>Blog</a></li>
-        <li><a>MeetGreet Pro</a></li>
-        <li><a>Careers</a></li>
+        <li>About</li>
+        <li>Blog</li>
+        <li>MeetGreet Pro</li>
+        <li>Careers</li>
       </ul>
     </div>
   )

@@ -1,6 +1,5 @@
 * {
   font-family: 'Roboto', sans-serif;
-  // scroll-behavior: smooth;
 }
 
 h1 {
@@ -479,7 +478,7 @@ p {
 .splash-footer {
   margin-top: auto;
   background-color: #212121;
-  height: 530px;
+  height: 500px;
   line-height: 2em;
   font-size: 15px;
   color: #C5C4C4;
@@ -551,12 +550,15 @@ p {
     margin-left: 20px;
   }
 
-  .icons img {
+  .icons svg {
     width: 30px;
     white-space: nowrap;
     fill: white;
     margin: 20px 20px 20px 0;
-    filter: invert(80%)
+
+    &:hover {
+      opacity: 80%;
+    }
   }
   
 }

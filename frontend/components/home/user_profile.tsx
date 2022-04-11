@@ -43,6 +43,10 @@ function UserProfile() {
     objectFit: "cover"
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <div className="profile">
       <div className="profile-banner">

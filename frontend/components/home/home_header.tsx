@@ -14,10 +14,14 @@ const HomeHeader = () => {
   const [searchParams] = useSearchParams();
   const modal = useSelector((state: RootState) => state.ui.modal)
 
-  const [searchInput, setSearchInput] = useState({
-    keyword: searchParams.get("keyword") || "",
-    location: searchParams.get("location") || ""
-  })
+  const getParams = () => {
+    return {
+      keyword: searchParams.get("keyword") || "",
+      location: searchParams.get("location") || ""
+    }
+  }
+
+  const [searchInput, setSearchInput] = useState(getParams())
 
   const update = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput({
@@ -42,6 +46,11 @@ const HomeHeader = () => {
   const handleSearch = () => {
     navigate(`/search/?${createSearchParams(searchInput)}&type=events`)
   }
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+    getParams();
+  }, [searchParams])
 
   return (
     <nav className="splash-header-nav home-header">

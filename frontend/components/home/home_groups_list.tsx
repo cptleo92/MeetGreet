@@ -33,7 +33,7 @@ const HomeGroupsList = ({preview, organizerOnly}: { preview: boolean, organizerO
         return (
           <div className="no-preview">          
           <strong>You have not joined any groups</strong>
-          <Link to="/search/?keyword=hiking&location=&type=groups">Discover groups</Link>
+          <Link to={`/search/?keyword=&location=${user.location}&type=groups`}>Discover groups</Link>
         </div>
         )
       } else {

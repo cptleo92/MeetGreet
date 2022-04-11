@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import HomeGroupsList from './home_groups_list';
 
 function HomeMyGroups() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <div className="tab">

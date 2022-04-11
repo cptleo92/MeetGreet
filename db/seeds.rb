@@ -46,9 +46,13 @@ locations = [
   "Mars",
   "Ceres",
   "Winterfell",
+  "Pawnee",
+  "Scranton",
+  "Eagleton",
   "London",
   "Barcelona",
   "Leyndell",
+  "Queens",
   "NYC" # padding this since why not!
 ]
 
