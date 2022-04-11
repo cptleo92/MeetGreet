@@ -44,13 +44,12 @@ class Api::UsersController < ApplicationController
       else
         render json: @user.errors.full_messages, status: 422
       end
-    end
-    
+    end    
   end
 
   private
   def user_params
-    params.require(:user).permit(:id, :fname, :lname, :location, :email, :password, :provider, :uid, topics: [])
+    params.require(:user).permit(:id, :fname, :lname, :location, :email, :password, :provider, :uid, :avatar, topics: [])
   end
 
 end
