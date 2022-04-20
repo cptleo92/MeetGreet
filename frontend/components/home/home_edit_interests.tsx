@@ -32,7 +32,6 @@ function HomeEditInterests() {
   const submit = () => {
     updateUserTopics(user, topics)
       .then((user) => {
-        console.log('getting user')
         dispatch(receiveUser(user))
       }
       ).then(() => navigate("/home"))

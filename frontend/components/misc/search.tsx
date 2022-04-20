@@ -4,6 +4,7 @@ import { search } from '../../util/entities_api_util';
 import Loading from './loading';
 import SearchGroupItem from './search_group_item';
 import SearchEventItem from './search_event_item';
+import { getUpcomingEvents } from '../../util/event_util';
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -16,7 +17,11 @@ function Search() {
     setSearching(true)
     search(searchType, Object.fromEntries(searchParams))
       .then((data) => {
-        setResults(Object.values(data))
+        let entityData = Object.values(data)
+        if (searchType === "events") {
+          entityData = getUpcomingEvents(entityData)
+        }
+        setResults(entityData)
         setSearching(false)
       })
   }, [searchParams, searchType])
@@ -37,8 +42,6 @@ function Search() {
   const searchingGroups = () => {
     return searchType === "groups" ? "active" : ""
   }
-
-  console.log(searchType)
 
   return (
     <div className="body search">
