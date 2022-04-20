@@ -34,4 +34,4 @@ Upon logging in, you'll be greeted with a personal feed of upcoming events hoste
 
 
 ## Contact Me
-Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](leo.cheng92@gmail.com)
+Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](mailto:leo.cheng92@gmail.com)
