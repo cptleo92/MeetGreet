@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { receiveUser } from "../../actions/session_actions";
 import { RootState } from '../../store/store';
-import { createTopic, fetchUser, updateUserTopics } from "../../util/entities_api_util";
+import { updateUserTopics } from "../../util/entities_api_util";
 import { useUser } from "../../util/hooks";
 
 function HomeEditInterests() {

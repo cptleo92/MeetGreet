@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getEventsFromGroup } from '../../selectors/selectors';
 import { RootState } from '../../store/store';
 import { Event, Group } from '../../types/types';

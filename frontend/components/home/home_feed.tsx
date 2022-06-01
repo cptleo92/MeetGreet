@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { getEvents, getUserEvents } from "../../selectors/selectors"
-import { stringifyDateLong, sortByDate, stringifyDate, getUpcomingEvents, getPastEvents } from "../../util/event_util";
+import { sortByDate, stringifyDate, getUpcomingEvents, getPastEvents } from "../../util/event_util";
 import { Event } from "../../types/types";
 import HomeFeedEventItem from "./home_feed_event_item";
 import { useUser } from "../../util/hooks";

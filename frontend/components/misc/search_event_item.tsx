@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
 import { useLoggedIn, useUser } from '../../util/hooks';

@@ -1,13 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import SplashFooterLinks from "./splash_footer_links";
 import SplashFooterSocials from "./splash_footer_socials";
-import { openModal } from "../../actions/modal_actions";
 import { useLoggedIn } from "../../util/hooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SplashFooter = () => {  
-  const dispatch = useDispatch();
   const loggedIn = useLoggedIn();
   const navigate = useNavigate();
 

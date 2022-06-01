@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Group } from '../../types/types';
 
 function SearchGroupItem({ group }: { group: Group }) {

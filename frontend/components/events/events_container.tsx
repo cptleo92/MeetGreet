@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { receiveEvents } from '../../actions/events_actions';
 import { receiveGroups } from '../../actions/groups_actions';
 import { fetchAttendances, fetchAttendees } from '../../actions/ui_actions';
-import { RootState } from '../../store/store';
 import { Event, Group, _nullGroup } from '../../types/types';
 import { fetchGroups, fetchEvents } from '../../util/entities_api_util';
 import { useUser, useLoggedIn } from '../../util/hooks';

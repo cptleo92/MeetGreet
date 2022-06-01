@@ -51,7 +51,7 @@ function UserProfile() {
     <div className="profile">
       <div className="profile-banner">
         <div className="avatar" style={avatarStyle}>
-          <AvatarImageCropper className="avatar" apply={apply} errorHandler={errorHandler}/>
+          <AvatarImageCropper className="avatar" apply={apply} errorHandler={errorHandler} isBack={true}/>
         </div>
 
         <ul className="profile-info">

@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
-import { getGroup } from '../../selectors/selectors';
-import { RootState } from '../../store/store';
 import { Group } from '../../types/types';
 import GroupEventsList from './group_events_list';
 

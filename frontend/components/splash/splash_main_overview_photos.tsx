@@ -1,8 +1,7 @@
 import React from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const SplashMainOverviewPhotos = () => {
-  const navigate = useNavigate();
 
   return (
     <div className="splash-overview-photos">

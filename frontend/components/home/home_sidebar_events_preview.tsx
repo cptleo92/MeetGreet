@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
-import { Event, EventEntity, Group, GroupEntity } from "../../types/types";
+import { Event } from "../../types/types";
 import { RootState } from "../../store/store";
-import { sortByDate, getSoonestEvent, stringifyDateLong } from "../../util/event_util";
+import { getSoonestEvent, stringifyDateLong } from "../../util/event_util";
 import { getUserEvents } from "../../selectors/selectors";
 import { useNavigate, generatePath } from "react-router-dom";
 
@@ -17,18 +17,19 @@ const HomeSidebarEventsPreview = () => {
   } else {
     firstEvent = getSoonestEvent(userEvents);
   }
-  const getFirstEventGroup = () => {
-    if (firstEvent !== null) {
+
+  const getFirstEventGroup = () => {    
+
       return (
         firstEvent.group_title
       )
-    }
+    
   }
 
   const user = useUser();
 
   const renderEvents = () => {
-    if (firstEvent === null) {
+    if (!firstEvent) {
       return (
         <div className="no-preview">          
           <strong>You have not registered for any events</strong>
@@ -66,7 +67,7 @@ const HomeSidebarEventsPreview = () => {
   const navigate = useNavigate();
 
   const handleClick = () => { 
-    if (firstEvent !== null) {
+    if (firstEvent) {
       const path = generatePath("/groups/:group_id/events/:id", {
         group_id: firstEvent.group_id.toString(),
         id: firstEvent.id.toString()

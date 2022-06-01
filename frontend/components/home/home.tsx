@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "../../util/hooks";
 import { fetchEvents } from "../../actions/events_actions";
-import { EventEntity, Group, GroupEntity } from "../../types/types";
+import { EventEntity, GroupEntity } from "../../types/types";
 import { fetchGroups } from "../../actions/groups_actions"
 import { Route, Routes } from "react-router-dom";
-import Modal from "../splash/modal";
 
 import HomeGreeting from "./home_greeting";
 import HomeMain from "./home_main";

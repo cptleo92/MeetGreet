@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createGroup, updateGroup } from '../../actions/groups_actions';
 import { RootState } from '../../store/store';
-import { Group, GroupEntity, Topic } from '../../types/types';
+import { GroupEntity } from '../../types/types';
 import { useUser } from '../../util/hooks';
 import { createMembership } from '../../actions/users_actions';
 import FormErrors from '../user_forms/form_errors';

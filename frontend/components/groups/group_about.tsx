@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Group } from '../../types/types';
 import GroupPanelMembers from './group_panel_members';
 import GroupPanelOrganizers from './group_panel_organizers';

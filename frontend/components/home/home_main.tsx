@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HomeSidebar from "./home_sidebar";
 import HomeFeed from "./home_feed";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { Group, Membership, MembershipObject, User, UserName } from '../../types/types';
+import { Group, MembershipObject, User, UserName } from '../../types/types';
 import { useLoggedIn, useUser } from '../../util/hooks';
 import GroupMembersItem from './group_members_item';
 

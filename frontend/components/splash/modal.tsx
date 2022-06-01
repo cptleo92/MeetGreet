@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "../../actions/modal_actions";
 import UserForm from "../user_forms/user_form";
 import AttendeesModal from "../events/attendees_modal";
-import HomeEditInterests from "../home/home_edit_interests";
 
 const Modal = ({ modal }: {modal: string}) => { 
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthRoutes, ProtectedRoutes } from '../util/route_utils';
 import Splash from './splash/splash';

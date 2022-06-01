@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams, createSearchParams, useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams, createSearchParams } from 'react-router-dom';
 import { search } from '../../util/entities_api_util';
 import Loading from './loading';
 import SearchGroupItem from './search_group_item';

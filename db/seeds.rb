@@ -51,7 +51,9 @@ locations = [
   "Eagleton",
   "London",
   "Barcelona",
-  "Leyndell",
+  "San Francisco",
+  "Vancouver",
+  "Paris",
   "Queens",
   "NYC" # padding this since why not!
 ]

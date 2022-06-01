@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { Event } from '../../types/types';
 import { stringifyDateLong } from '../../util/event_util';
 import { userNotMemberPrivateGroup } from '../../util/user_util';

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Group } from '../../types/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';

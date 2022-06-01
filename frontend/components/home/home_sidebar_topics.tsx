@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 import HomeSidebarTopicsPreview from "./home_sidebar_topics_preview"
-import { openModal } from "../../actions/modal_actions";
 import { Link } from "react-router-dom";
 
 const HomeSidebarTopicss = () => {
