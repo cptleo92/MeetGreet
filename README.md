@@ -4,7 +4,9 @@
 
 MeetGreet uses React, Redux, CSS, HTML, and Typescript for its front-end technology, and Ruby on Rails (with PostgreSQL) with Amazon S3 storage to handle the back-end.
 
-<!-- ![MeetGreet preview image](/app/assets/images/readme1.png) -->
+[See the live demo!](https://meetgreet-lc.herokuapp.com)
+
+[![MeetGreet preview image](/app/assets/images/meetgreet-preview-1.gif)](https://meetgreet-lc.herokuapp.com/)
 
 ## Features
 
@@ -32,4 +34,4 @@ Upon logging in, you'll be greeted with a personal feed of upcoming events hoste
 
 
 ## Contact Me
-Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](leo.cheng92@gmail.com)
+Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](mailto:leo.cheng92@gmail.com)
