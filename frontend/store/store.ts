@@ -14,7 +14,7 @@ const persistConfig = {
 
 const middlewares = [thunk];
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   // must use 'require' (import only allowed at top of file)
   const { logger } = require("redux-logger");
   middlewares.push(logger);
@@ -39,8 +39,9 @@ export const configureTestStore = (preloadedState = {}) => {
     preloadedState,
     composeWithDevTools(applyMiddleware(thunk))
   )
-  let persistor = persistStore(store)
-  return { testStore, persistor }
+  const origDispatch = testStore.dispatch
+  testStore.dispatch = jest.fn(origDispatch)
+  return testStore
 }
 
 // sloppy way of exporting types for now
