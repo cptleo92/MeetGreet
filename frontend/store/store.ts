@@ -33,6 +33,16 @@ export const configureStore = (preloadedState = {}) => {
   return { store, persistor }
 }
 
+export const configureTestStore = (preloadedState = {}) => {
+  let testStore = createStore(
+    persistedReducer,
+    preloadedState,
+    composeWithDevTools(applyMiddleware(thunk))
+  )
+  let persistor = persistStore(store)
+  return { testStore, persistor }
+}
+
 // sloppy way of exporting types for now
 const store = configureStore().store;
 export type RootState = ReturnType<typeof store.getState>
