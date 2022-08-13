@@ -5,9 +5,9 @@ import Root from './components/root'
 
 
 //TESTING
-import { signup, login, logout } from "./actions/session_actions"
-import { closeModal } from './actions/modal_actions';
-import axios from 'axios'
+// import { signup, login, logout } from "./actions/session_actions"
+// import { closeModal } from './actions/modal_actions';
+// import axios from 'axios'
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -29,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { store, persistor } = persistedStore;
   // //TESTING
-  window.demo = {email: 'demo@fake.com', password: 'password'}
-  window.dispatch = store.dispatch;
+  // window.demo = {email: 'demo@fake.com', password: 'password'}
+  // window.dispatch = store.dispatch;
   // window.signup = signup;
-  window.login = login;
-  window.logout = logout;
-  window.closeModal = closeModal;
-  window.axios = axios;
+  // window.login = login;
+  // window.logout = logout;
+  // window.closeModal = closeModal;
+  // window.axios = axios;
   // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")
