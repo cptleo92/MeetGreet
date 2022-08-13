@@ -10,7 +10,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@redux-devtools/extension": "^3.2.2",
-    "@types/jquery": "^3.5.14",
     "@types/node": "^17.0.22",
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
