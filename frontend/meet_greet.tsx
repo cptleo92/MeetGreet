@@ -7,6 +7,7 @@ import Root from './components/root'
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
 import { closeModal } from './actions/modal_actions';
+import axios from 'axios'
 
 document.addEventListener("DOMContentLoaded", () => {  
 
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.login = login;
   window.logout = logout;
   window.closeModal = closeModal;
+  window.axios = axios;
   // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")
