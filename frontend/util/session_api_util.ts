@@ -1,3 +1,5 @@
+import ax from "./axiosCSRF";
+
 export interface UserLogin {
   fname?: string;
   lname?: string;
@@ -6,24 +8,24 @@ export interface UserLogin {
 }
 
 export const login = (user: UserLogin) => (
-  $.ajax({
+  ax({
     method: "POST",
     url: "/api/session",
     data: { user }
-  })
+  }).then(res => res.data)
 )
 
 export const logout = () => (
-  $.ajax({
+  ax({
     method: "DELETE",
     url: "/api/session"
-  })
+  }).then(res => res.data)
 )
 
 export const signup = (user: UserLogin) => (
-  $.ajax({
+  ax({
     method: "POST",
     url: "/api/users",
     data: { user }
-  })
+  }).then(res => res.data)
 )

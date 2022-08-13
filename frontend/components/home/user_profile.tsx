@@ -7,6 +7,7 @@ import UserProfileInterests from './user_profile_interests';
 import AvatarImageCropper from 'react-avatar-image-cropper'
 import { useDispatch } from 'react-redux';
 import { receiveUser } from '../../actions/session_actions';
+import ax from '../../util/axiosCSRF';
 
 function UserProfile() {
   const user = useUser();
@@ -22,13 +23,11 @@ function UserProfile() {
   const apply = (file) => {
     const formData = new FormData();
     formData.append('user[avatar]', file)
-    $.ajax({
+    ax({
       method: "PATCH",
       url: `api/users/${user.id}`,
       data: formData,
-      contentType: false,
-      processData: false
-    }).then(user => dispatch(receiveUser(user)))    
+    }).then(res => dispatch(receiveUser(res.data)))    
     setImgErrors("")
   }
 

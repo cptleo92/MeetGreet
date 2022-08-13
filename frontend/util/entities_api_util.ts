@@ -2,161 +2,166 @@ import { newGroupType } from "../components/groups/group_form"
 import { newEventType } from "../components/events/event_form"
 import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams, User } from "../types/types"
 import { newUserType } from "../components/home/user_profile_edit"
+import ax from "./axiosCSRF"
+const qs = require('qs');
 
-export const fetchGroups = (filter: number[] = [0]) => {
-  return $.ajax({
+export const fetchGroups = (filter: number[] = [0]) => (
+  ax({
     method: "GET",
     url: "api/groups",
-    data: {filter: filter}
-  })
-}
+    params: {filter: filter} // data key does not work, only "params" can be used by rails controller
+  }).then(res => res.data) // returning this way because code used to be jQuery which returned data directly
+)
 
 export const fetchEvents = (filter: number[] | string = [0]) => (
-  $.ajax({
+  ax({
     method: "GET",
     url: "api/events",
-    data: {filter: filter}
-  })
+    params: {filter: filter}
+  }).then(res => res.data)
 )
 
 export const fetchTopics = (filter: number[] = [0]) => (
-  $.ajax({
+  ax({
     method: "GET",
     url: "api/topics",
-    data: {filter: filter}
-  })
+    params: {filter: filter}
+  }).then(res => res.data)
 )
 
 export const fetchUsers = (filter: number[] = [0]) => (
-  $.ajax({
+  ax({
     method: "GET",
     url: "api/users",
-    data: {filter: filter}
-  })
+    params: {filter: filter}
+  }).then(res => res.data)
 )
 
-export const fetchMemberships = (group: Group) => {
-  return $.ajax({
+export const fetchMemberships = (group: Group) => (
+  ax({
     method: "GET",
     url: "api/memberships",
-    data: {id: group.id}
-  })
-}
+    params: {id: group.id}
+  }).then(res => res.data)
+)
 
-export const fetchAttendances = (event: Event) => {
-  return $.ajax({
+export const fetchAttendances = (event: Event) => (
+  ax({
     method: "GET",
     url: "api/attendances",
-    data: {id: event.id}
-  })
-}
+    params: {id: event.id}
+  }).then(res => res.data)
+)
 
-export const deleteMembership = (id: number) => {
-  return $.ajax({
+export const deleteMembership = (id: number) => (
+  ax({
     method: "DELETE",
     url: `api/memberships/${id}`
-  })
-}
+  }).then(res => res.data)
+)
 
-export const createMembership = (data: Membership) => {
-  return $.ajax({
+export const createMembership = (data: Membership) => (
+  ax({
     method: "POST",
     url: "api/memberships/",
     data: {membership: data}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const updateMembership = (data: MembershipUpdate) => {
-  return $.ajax({
+export const updateMembership = (data: MembershipUpdate) => (
+  ax({
     method: "PATCH",
     url: `api/memberships/${data.id}`,
     data: {membership: data}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const fetchUser = (id: number) => {
-  return $.ajax({
+export const fetchUser = (id: number) => (
+  ax({
     method: "GET",
     url: `api/users/${id}`
-  })
-}
+  }).then(res => res.data)
+)
 
-export const deleteAttendance = (id: number) => {
-  return $.ajax({
+export const deleteAttendance = (id: number) => (
+  ax({
     method: "DELETE",
     url: `api/attendances/${id}`
-  })
-}
+  }).then(res => res.data)
+)
 
-export const createAttendance = (data: AttendancePost) => {
-  return $.ajax({
+export const createAttendance = (data: AttendancePost) => (
+  ax({
     method: "POST",
     url: "api/attendances/",
     data: {attendance: data}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const createGroup = (group: newGroupType, topics: string[]) => {
-  return $.ajax({
+export const createGroup = (group: newGroupType, topics: string[]) => (
+  ax({
     method: "POST",
     url: "api/groups",
     data: {group: group, topics: topics}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const updateGroup = (group: Group, topics: string[]) => {
-  return $.ajax({
+export const updateGroup = (group: Group, topics: string[]) => (
+  ax({
     method: "PATCH",
     url: `api/groups/${group.id}`,
     data: {group: group, topics: topics}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const createEvent = (event: newEventType, topics: string[]) => {
-  return $.ajax({
+export const createEvent = (event: newEventType, topics: string[]) => (
+  ax({
     method: "POST",
     url: "api/events",
     data: {event: event, topics: topics}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const updateEvent = (event: Event, topics: string[]) => {
-  return $.ajax({
+export const updateEvent = (event: Event, topics: string[]) => (
+  ax({
     method: "PATCH",
     url: `api/events/${event.id}`,
     data: {event: event, topics: topics}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const updateUser = (user: newUserType) => {
-  return $.ajax({
+export const updateUser = (user: newUserType) => (
+  ax({
     method: "PATCH",
     url: `api/users/${user.id}`,
     data: {user}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const updateUserTopics = (user: User, topics: string[] = []) => {
-  return $.ajax({
+export const updateUserTopics = (user: User, topics: string[] = []) => (
+  ax({
     method: "PATCH",
     url: `api/users/${user.id}`,
     data: {topics: topics}
-  })
-}
+  }).then(res => res.data)
+)
 
 
-export const createTopic = (topic: Topic) => {
-  return $.ajax({
+export const createTopic = (topic: Topic) => (
+  ax({
     method: "POST",
     url: "api/topics",
     data: {topic}
-  })
-}
+  }).then(res => res.data)
+)
 
-export const search = (entity: string, search: SearchParams) => {
-  return $.ajax({
+export const search = (entity: string, search: SearchParams) => (
+  ax({
     method: "GET",
     url: `api/${entity}`,
-    data: {search}
-  })
-}
+    params: {search},
+    paramsSerializer: params => {
+      return qs.stringify(params)
+    }
+  }).then(res => res.data)
+)
