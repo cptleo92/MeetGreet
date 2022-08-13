@@ -2,13 +2,14 @@ import { newGroupType } from "../components/groups/group_form"
 import { newEventType } from "../components/events/event_form"
 import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams, User } from "../types/types"
 import { newUserType } from "../components/home/user_profile_edit"
+import axios from "axios"
 
 export const fetchGroups = (filter: number[] = [0]) => {
-  return $.ajax({
+  return axios({
     method: "GET",
     url: "api/groups",
-    data: {filter: filter}
-  })
+    params: {filter: filter}
+  }).then(res => res.data)
 }
 
 export const fetchEvents = (filter: number[] | string = [0]) => (
