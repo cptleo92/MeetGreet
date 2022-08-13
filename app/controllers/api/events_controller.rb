@@ -1,6 +1,7 @@
 class Api::EventsController < ApplicationController
   def index
     if params[:search]
+      p params
       @events = Event.search(params[:search])
     else
       filter = params[:filter]
