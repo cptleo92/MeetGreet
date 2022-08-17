@@ -149,3 +149,14 @@ export interface SearchParams {
   keyword: string;
   location: string;
 }
+
+export interface Post {
+  author_id: number;
+  body: string;
+  id: number;
+  created_at: string;
+  updated_at: string;
+  postable_type: string;
+  postable_id: number;
+  parent_id?: number;
+}

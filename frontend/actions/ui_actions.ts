@@ -4,9 +4,10 @@ export const RECEIVE_MEMBERSHIPS = "RECEIVE_MEMBERSHIPS"
 export const RECEIVE_MEMBERSHIP = "RECEIVE_MEMBERSHIP"
 export const RECEIVE_ATTENDEES = "RECEIVE_ATTENDEES"
 export const RECEIVE_ATTENDANCES = "RECEIVE_ATTENDANCES"
+export const RECEIVE_POSTS = "RECEIVE_POSTS"
 
 import { AppDispatch } from "../store/store"
-import { Event, Group, Membership, UserName, UserNameEntity, Attendance } from "../types/types"
+import { Event, Group, Membership, UserName, UserNameEntity, Attendance, Post } from "../types/types"
 import * as APIUtil from "../util/entities_api_util"
 
 
@@ -37,6 +38,11 @@ const receiveAttendees = (attendees: UserName[]) => ({
 const receiveAttendances = (attendances: Attendance[]) => ({
   type: RECEIVE_ATTENDANCES,
   payload: attendances
+})
+
+const receivePosts = (posts: Post[]) => ({
+  type: RECEIVE_POSTS,
+  payload: posts
 })
 
 
@@ -73,5 +79,12 @@ export const fetchAttendances = (event: Event) => (dispatch: AppDispatch) => {
   return APIUtil.fetchAttendances(event)
     .then((attendances: Attendance[]) => {
       dispatch(receiveAttendances(attendances))
+    })
+}
+
+export const fetchPosts = (entity: Group | Event) => (dispatch: AppDispatch) => {
+  return APIUtil.fetchPosts(entity)
+    .then((posts: Post[]) => {
+      dispatch(receivePosts(posts))
     })
 }
