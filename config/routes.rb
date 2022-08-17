@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :events 
 
-    resources :posts, only: [:index, :show, :destroy, :update]
+    resources :posts
 
     resources :topics, only: [:index, :show, :create]
 

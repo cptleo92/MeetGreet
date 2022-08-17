@@ -117,13 +117,14 @@ NUM_USERS.times do
   )
 end
 
+# MAKE SURE TO ENABLE THIS OUTSIDE OF TESTING
 # seeding random avatars (WILL UPLOAD TO AWS SO DON'T SEED TOO OFTEN)
-rand_avatars = avatars.shuffle
-rand_avatars.length.times do 
-  rand_url = rand_avatars.shift
-  file = URI.open(rand_url)
-  User.find(rand(2..NUM_USERS)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
-end
+# rand_avatars = avatars.shuffle
+# rand_avatars.length.times do 
+#   rand_url = rand_avatars.shift
+#   file = URI.open(rand_url)
+#   User.find(rand(2..NUM_USERS)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
+# end
 
 # group seeding
 NUM_GROUPS.times do 
@@ -390,6 +391,56 @@ end
   end
 end
 
+# seed posts for random events
+Event.all.each do |event|
+  if rand(1..2) == 1
+    Post.create!(
+      body: Faker::TvShows::TheExpanse.quote,
+      author_id: rand(1..NUM_USERS),
+      postable_type: "Event",
+      postable_id: event.id
+    )
+  end
+end
+
+# seed posts for random groups
+Group.all.each do |group|
+  if rand(1..2) == 1
+    Post.create!(
+      body: Faker::TvShows::MichaelScott.quote,
+      author_id: rand(1..NUM_USERS),
+      postable_type: "Group",
+      postable_id: group.id
+    )
+  end
+end
+
+# seed child posts 
+Post.all.each do |post|
+  if rand(1..2) == 1
+    Post.create!(
+      body: Faker::TvShows::StrangerThings.quote,
+      author_id: rand(1..NUM_USERS),
+      parent_id: post.id,
+      postable_type: post.postable_type,
+      postable_id: post.postable_id
+    )
+  end
+end
+
+# one more time so new child posts can possibly have children
+Post.all.each do |post|
+  if rand(1..2) == 1
+    Post.create!(
+      body: Faker::GreekPhilosophers.quote,
+      author_id: rand(1..NUM_USERS),
+      parent_id: post.id,
+      postable_type: post.postable_type,
+      postable_id: post.postable_id
+    )
+  end
+end
+
 # seeding random group and event avatars
 Group.all.each do |group|
   rand_url = group_avatars.sample
@@ -418,6 +469,7 @@ end
 #     )
 #   end
 # end
+
 
 
 
