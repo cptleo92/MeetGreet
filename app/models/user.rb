@@ -28,6 +28,9 @@ class User < ApplicationRecord
 
   has_many :topics, as: :topicable, dependent: :destroy
 
+  has_many :posts, 
+    foreign_key: :author_id
+
   has_one_attached :avatar
 
   def organizings
