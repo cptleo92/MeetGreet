@@ -76,6 +76,10 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
           }
         </div>
       )    
+    } else {
+      return (
+        <p>No posts yet!</p>
+      )
     }
   }
 

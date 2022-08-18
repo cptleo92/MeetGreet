@@ -151,12 +151,15 @@ export interface SearchParams {
 }
 
 export interface Post {
-  author_id: number;
+  author: {
+    id: number;
+    fname: string;
+    lname: string;
+    author_avatar: string;
+  }
   body: string;
   id: number;
   created_at: string;
   updated_at: string;
-  postable_type: string;
-  postable_id: number;
   parent_id?: number;
 }

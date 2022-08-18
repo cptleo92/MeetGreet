@@ -188,3 +188,22 @@
   // min-width: 1000px;
   // width: 100%;
 }
+
+.post-item {
+  display: flex;
+  padding-bottom: 20px;
+ 
+
+  .post-body {    
+    margin-left: 15px;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+  }
+
+  .post-author {
+    margin: 0 0 15px 0;    
+    font-weight: 700;
+  }
+}
