@@ -9,6 +9,6 @@
         json.author_avatar url_for("https://meetgreet-seed-dev.s3.amazonaws.com/profile_avatar_placeholder_large.png")
       end
     end
-    json.extract! post, :id, :body, :parent_id, :created_at, :updated_at
+    json.extract! post, :id, :body, :created_at, :updated_at
   end
 end

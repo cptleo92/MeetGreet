@@ -393,7 +393,7 @@ end
 
 # seed posts for random events
 Event.all.each do |event|
-  if rand(1..2) == 1
+  rand(0..3).times do
     Post.create!(
       body: Faker::TvShows::TheExpanse.quote,
       author_id: rand(1..NUM_USERS),
@@ -405,38 +405,12 @@ end
 
 # seed posts for random groups
 Group.all.each do |group|
-  if rand(1..2) == 1
+  rand(0..3).times do
     Post.create!(
       body: Faker::TvShows::MichaelScott.quote,
       author_id: rand(1..NUM_USERS),
       postable_type: "Group",
       postable_id: group.id
-    )
-  end
-end
-
-# seed child posts 
-Post.all.each do |post|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::TvShows::StrangerThings.quote,
-      author_id: rand(1..NUM_USERS),
-      parent_id: post.id,
-      postable_type: post.postable_type,
-      postable_id: post.postable_id
-    )
-  end
-end
-
-# one more time so new child posts can possibly have children
-Post.all.each do |post|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::GreekPhilosophers.quote,
-      author_id: rand(1..NUM_USERS),
-      parent_id: post.id,
-      postable_type: post.postable_type,
-      postable_id: post.postable_id
     )
   end
 end

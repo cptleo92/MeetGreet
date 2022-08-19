@@ -100,8 +100,8 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
             } />
           </div>
           <div className="posts">
-            <h4>Posts</h4>
-            {renderPosts()}
+            <h4>Comments</h4>
+            <EventMembersOnly event={event} component={renderPosts()} />
           </div>
           <div className="related-topics">
             <h4>Related Topics</h4>
