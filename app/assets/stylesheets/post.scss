@@ -1,0 +1,32 @@
+.page-post {
+    display: flex;
+    
+    .small {
+        min-width: 50px;
+        max-width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    .content {             
+        width: 80%;    
+
+        .content-body {
+            padding: 15px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+        }
+
+       .content-footer {
+            font-size: .8rem;
+            margin-top: 5px;
+            padding-left: 15px;
+            color: gray;
+       }
+    } 
+
+    .author {
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+}
