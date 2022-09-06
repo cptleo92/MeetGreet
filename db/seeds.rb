@@ -415,32 +415,6 @@ Group.all.each do |group|
   end
 end
 
-# seed child posts 
-Post.all.each do |post|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::TvShows::StrangerThings.quote,
-      author_id: rand(1..NUM_USERS),
-      parent_id: post.id,
-      postable_type: post.postable_type,
-      postable_id: post.postable_id
-    )
-  end
-end
-
-# one more time so new child posts can possibly have children
-Post.all.each do |post|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::GreekPhilosophers.quote,
-      author_id: rand(1..NUM_USERS),
-      parent_id: post.id,
-      postable_type: post.postable_type,
-      postable_id: post.postable_id
-    )
-  end
-end
-
 # seeding random group and event avatars
 Group.all.each do |group|
   rand_url = group_avatars.sample

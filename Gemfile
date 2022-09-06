@@ -35,6 +35,10 @@ gem 'omniauth-google-oauth2'
 gem 'oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'uuidtools'
+
+# for getting avatar urls 
+gem 'open-uri'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

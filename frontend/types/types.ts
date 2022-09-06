@@ -158,5 +158,4 @@ export interface Post {
   updated_at: string;
   postable_type: string;
   postable_id: number;
-  parent_id?: number;
 }
