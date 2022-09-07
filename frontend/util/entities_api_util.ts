@@ -1,6 +1,6 @@
 import { newGroupType } from "../components/groups/group_form"
 import { newEventType } from "../components/events/event_form"
-import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams, User } from "../types/types"
+import { AttendancePost, Event, Group, Membership, Topic, MembershipUpdate, SearchParams, User, Post } from "../types/types"
 import { newUserType } from "../components/home/user_profile_edit"
 import ax from "./axiosCSRF"
 const qs = require('qs');
@@ -34,6 +34,17 @@ export const fetchUsers = (filter: number[] = [0]) => (
     method: "GET",
     url: "api/users",
     params: {filter: filter}
+  }).then(res => res.data)
+)
+
+export const fetchPosts = (entity: Group | Event) => (
+  ax({
+    method: "GET",
+    url: "api/posts",
+    params: {
+      postable_type: "Event",
+      postable_id: entity.id
+    }
   }).then(res => res.data)
 )
 
@@ -152,6 +163,14 @@ export const createTopic = (topic: Topic) => (
     method: "POST",
     url: "api/topics",
     data: {topic}
+  }).then(res => res.data)
+)
+
+export const createPost = (post: Post) => (
+  ax({
+    method: "POST",
+    url: "api/posts",
+    data: {post}
   }).then(res => res.data)
 )
 

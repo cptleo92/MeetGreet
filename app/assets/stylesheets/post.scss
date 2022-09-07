@@ -1,0 +1,59 @@
+.page-post {
+    display: flex;    
+    border-bottom: 1px solid lightgray;
+    width: 80%;
+    margin-bottom: 20px;
+
+    img {
+        margin-right: 15px;
+    }
+
+    .content {             
+        width: 100%;    
+
+        .content-body {
+            padding: 15px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+        }
+
+       .content-footer {
+            font-size: .8rem;
+            margin: 5px 0;
+            padding-left: 15px;
+            color: gray;
+       }
+    } 
+
+    .author {
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+}
+
+.new-post {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+    width: 80%;
+
+    .new-post-body textarea {                    
+        border-radius: 5px;
+        resize: vertical;
+        height: 30px;
+        width: 400px;
+        padding: 15px;
+        
+    }
+
+    .new-post-send {
+        width: 20px;
+        height: 20px;
+        fill: gray;
+
+        :hover {
+            opacity: 80%;
+            cursor: pointer;
+        }
+    }
+}

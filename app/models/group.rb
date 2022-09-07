@@ -9,6 +9,7 @@ class Group < ApplicationRecord
   has_many :events
 
   has_many :topics, as: :topicable, dependent: :destroy
+  has_many :posts, as: :postable, dependent: :destroy
 
   has_one_attached :avatar
 
