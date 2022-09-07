@@ -24,14 +24,29 @@
     }
 }
 
-.posts-write-new {
+.new-post {
     display: flex;
-    // align-items: center;
+    align-items: center;
     justify-content: space-between;    
     width: 80%;
 
-    textarea {
+    .new-post-body textarea {                    
         border-radius: 5px;
+        resize: vertical;
+        height: 30px;
+        width: 400px;
+        padding: 15px;
         
+    }
+
+    .new-post-send {
+        width: 20px;
+        height: 20px;
+        fill: gray;
+
+        :hover {
+            opacity: 80%;
+            cursor: pointer;
+        }
     }
 }
