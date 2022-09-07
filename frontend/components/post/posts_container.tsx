@@ -6,9 +6,10 @@ import PostsWriteNew from './posts_write_new'
 interface PostItemProps {
     posts: Post[];
     entityType: string;
+    entityId: number;
 }
 
-const PostsContainer = ({ posts, entityType }: PostItemProps) => {  
+const PostsContainer = ({ posts, entityType, entityId }: PostItemProps) => {  
   
   return (
     <>           
@@ -24,7 +25,7 @@ const PostsContainer = ({ posts, entityType }: PostItemProps) => {
             No posts yet!
           </h3>        
       }
-      <PostsWriteNew entityType={entityType} />
+      <PostsWriteNew entityType={entityType} entityId={entityId}/>
     </>
   )
   

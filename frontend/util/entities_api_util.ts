@@ -166,6 +166,14 @@ export const createTopic = (topic: Topic) => (
   }).then(res => res.data)
 )
 
+export const createPost = (post: Post) => (
+  ax({
+    method: "POST",
+    url: "api/posts",
+    data: {post}
+  }).then(res => res.data)
+)
+
 export const search = (entity: string, search: SearchParams) => (
   ax({
     method: "GET",

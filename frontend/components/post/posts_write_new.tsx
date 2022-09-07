@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import { useUser } from '../../util/hooks'
+import { Post } from '../../types/types';
+import { createPost } from '../../util/entities_api_util';
+import { useNavigate } from 'react-router-dom';
+
 
 interface PostItemProps {
   entityType: string;
+  entityId: number;
 }
 
 
-const PostsWriteNew = ({ entityType }: PostItemProps) => {
+const PostsWriteNew = ({ entityType, entityId }: PostItemProps) => {
   const currentUser = useUser();
+  const navigate = useNavigate();
 
   const [post, setPost] = useState("")
 
@@ -17,7 +23,15 @@ const PostsWriteNew = ({ entityType }: PostItemProps) => {
 
   const submit = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(post)
+    
+    const newPost: Post = {
+      author_id: currentUser.id,
+      body: post,
+      postable_id: entityId,
+      postable_type: entityType,
+    }
+
+    createPost(newPost).then(() => navigate(0))
   }
 
   return (

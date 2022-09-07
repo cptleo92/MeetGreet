@@ -153,9 +153,9 @@ export interface SearchParams {
 export interface Post {
   author_id: number;
   body: string;
-  id: number;
-  created_at: string;
-  updated_at: string;
+  id?: number;
+  created_at?: string;
+  updated_at?: string;
   postable_type: string;
   postable_id: number;
 }
