@@ -1,10 +1,10 @@
 import React from "react";
 import { RootState } from "../../store/store";
-import { Post, User, UserName } from "../../types/types";
+import { Post, UserName } from "../../types/types";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const PagePost = ({ post }: { post: Post }) => {
+const PostItem = ({ post }: { post: Post }) => {
   // taking user info from attendees which should already have everything
   const postAuthor: UserName = useSelector(
     (state: RootState) => state.ui.event.attendees[post.author_id]
@@ -17,7 +17,7 @@ const PagePost = ({ post }: { post: Post }) => {
 
   return (
     <div className="page-post">
-      <img className="avatar-round small" src={postAuthor.avatar} />
+      <img className="avatar-round-small" src={postAuthor.avatar} />
       <div className="content">
         <div className="content-body">
           <p className="author">
@@ -33,4 +33,4 @@ const PagePost = ({ post }: { post: Post }) => {
   );
 };
 
-export default PagePost;
+export default PostItem;
