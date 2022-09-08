@@ -42,7 +42,7 @@ function EventsContainer() {
               .then(() => {
                 dispatch(fetchAttendances(event))
                   .then(() => {
-                    dispatch(fetchPosts(event))
+                    dispatch(fetchPosts(event.id, "Event"))
                       .then(() => setLoading(false))                 
                   })
               })

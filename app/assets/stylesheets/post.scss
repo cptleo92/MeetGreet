@@ -1,7 +1,10 @@
-.page-post {
-    display: flex;    
+.posts-container {
     border-bottom: 1px solid lightgray;
     width: 80%;
+}
+
+.page-post {
+    display: flex;   
     margin-bottom: 20px;
 
     img {
@@ -34,6 +37,7 @@
 .new-post {
     display: flex;
     align-items: center;
+    margin-top: 20px;
     justify-content: space-between;    
     width: 80%;
 

@@ -37,13 +37,13 @@ export const fetchUsers = (filter: number[] = [0]) => (
   }).then(res => res.data)
 )
 
-export const fetchPosts = (entity: Group | Event) => (
+export const fetchPosts = (entityId: number, entityType: string) => (
   ax({
     method: "GET",
     url: "api/posts",
     params: {
-      postable_type: "Event",
-      postable_id: entity.id
+      postable_type: entityType,
+      postable_id: entityId
     }
   }).then(res => res.data)
 )

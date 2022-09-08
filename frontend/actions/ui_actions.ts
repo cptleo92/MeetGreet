@@ -82,8 +82,8 @@ export const fetchAttendances = (event: Event) => (dispatch: AppDispatch) => {
     })
 }
 
-export const fetchPosts = (entity: Group | Event) => (dispatch: AppDispatch) => {
-  return APIUtil.fetchPosts(entity)
+export const fetchPosts = (entityId: number, entityType: string) => (dispatch: AppDispatch) => {
+  return APIUtil.fetchPosts(entityId, entityType)
     .then((posts: Post[]) => {
       dispatch(receivePosts(posts))
     })

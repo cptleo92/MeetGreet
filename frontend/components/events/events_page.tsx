@@ -83,10 +83,10 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
               <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0, 8)} />
             } />
           </div>
-          <div className="posts">
+
             <h4>Posts</h4>
             <PostsContainer posts={eventPosts} entityType="Event" entityId={event.id} />
-          </div>
+
           <div className="related-topics">
             <h4>Related Topics</h4>
             {renderTopics()}

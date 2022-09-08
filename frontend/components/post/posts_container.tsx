@@ -14,7 +14,7 @@ const PostsContainer = ({ posts, entityType, entityId }: PostItemProps) => {
   return (
     <>           
       { posts.length > 0 &&
-        <div className="posts">
+        <div className="posts-container">
           {
             posts.map(post => <PostItem key={post.id} post={post} />)
           }

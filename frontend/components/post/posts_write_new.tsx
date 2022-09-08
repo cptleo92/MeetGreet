@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useUser } from '../../util/hooks'
 import { Post } from '../../types/types';
-import { createPost } from '../../util/entities_api_util';
-import { useNavigate } from 'react-router-dom';
+import { createPost } from '../../actions/users_actions';
+import { useDispatch } from 'react-redux';
 
 
 interface PostItemProps {
@@ -13,7 +13,7 @@ interface PostItemProps {
 
 const PostsWriteNew = ({ entityType, entityId }: PostItemProps) => {
   const currentUser = useUser();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [post, setPost] = useState("")
 
@@ -23,6 +23,11 @@ const PostsWriteNew = ({ entityType, entityId }: PostItemProps) => {
 
   const submit = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
+
+    if (post === "") {
+      alert("Post must not be empty!")
+      return;
+    } 
     
     const newPost: Post = {
       author_id: currentUser.id,
@@ -31,7 +36,7 @@ const PostsWriteNew = ({ entityType, entityId }: PostItemProps) => {
       postable_type: entityType,
     }
 
-    createPost(newPost).then(() => navigate(0))
+    dispatch(createPost(newPost)).then(() => setPost(""))
   }
 
   return (
