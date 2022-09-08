@@ -174,6 +174,13 @@ export const createPost = (post: Post) => (
   }).then(res => res.data)
 )
 
+export const deletePost = (post: Post) => (
+  ax({
+    method: "DELETE",
+    url: `api/posts/${post.id}`
+  }).then(res => res.data)
+)
+
 export const search = (entity: string, search: SearchParams) => (
   ax({
     method: "GET",

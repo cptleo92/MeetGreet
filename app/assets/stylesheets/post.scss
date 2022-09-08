@@ -20,11 +20,16 @@
             border-radius: 10px;
         }
 
-       .content-footer {
-            font-size: .8rem;
-            margin: 5px 0;
+       .content-footer {         
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
             padding-left: 15px;
-            color: gray;
+
+            p {
+                font-size: .8rem;              
+                color: gray;
+            }
        }
     } 
 
@@ -59,5 +64,16 @@
             opacity: 80%;
             cursor: pointer;
         }
+    }
+}
+
+.post-delete {
+    width: 15px;
+    height: 15px;
+    fill: gray;
+
+    :hover {
+        fill: red;
+        cursor: pointer;
     }
 }

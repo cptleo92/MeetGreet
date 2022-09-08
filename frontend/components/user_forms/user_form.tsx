@@ -40,8 +40,8 @@ const UserForm = ({ type, formType }: { type: string, formType: string }) => {
     const user = input;
 
     formType === "login" ?
-      dispatch(login(user)).then(loginSuccess) :
-      dispatch(signup(user)).then(loginSuccess);
+      dispatch(login(user)).then(() => loginSuccess) :
+      dispatch(signup(user)).then(() => loginSuccess);
   }
 
   const handleDemoLogin = () => {
