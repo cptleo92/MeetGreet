@@ -53,6 +53,14 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
   const eventTopics: string[] = useSelector((state: RootState) => state.entities.events[event.id].topics)
   const eventPosts: Post[] = Object.values(useSelector((state: RootState) => state.ui.event.posts))
 
+  // this block is only necessary because of how the seeding works
+  // in reality, posts will just show up in the order they are posted 
+  eventPosts.sort((a, b) => {
+    const post1 = new Date(a.created_at).valueOf();
+    const post2 = new Date(b.created_at).valueOf();
+    return post1 - post2;
+  })
+
   const renderTopics = () => {
     if (eventTopics.length === 0) {
       return (
@@ -85,7 +93,9 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
           </div>
 
             <h4>Posts</h4>
-            <PostsContainer posts={eventPosts} entityType="Event" entityId={event.id} />
+            <EventMembersOnly event={event} component={
+              <PostsContainer posts={eventPosts} entityType="Event" entityId={event.id} />
+            } />
 
           <div className="related-topics">
             <h4>Related Topics</h4>

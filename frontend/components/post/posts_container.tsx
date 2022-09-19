@@ -1,7 +1,10 @@
 import React from 'react'
-import { Post } from '../../types/types'
+import { Attendance, Post } from '../../types/types'
 import PostItem from './post_item'
 import PostsWriteNew from './posts_write_new'
+import { useUser } from '../../util/hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 interface PostItemProps {
     posts: Post[];
@@ -10,6 +13,20 @@ interface PostItemProps {
 }
 
 const PostsContainer = ({ posts, entityType, entityId }: PostItemProps) => {  
+  const user = useUser() || -1;
+  
+  const userCanPost = () => {
+    if (entityType === "Event") {
+      let attendees: Attendance = useSelector((state: RootState) => state.ui.event.attendances)
+      return user.id in attendees;
+    }
+
+    if (entityType === "Group") {
+      let members = useSelector((state: RootState) => state.ui.group.memberships)
+      return user.id in members;
+      
+    }
+  }
   
   return (
     <>           
@@ -25,7 +42,7 @@ const PostsContainer = ({ posts, entityType, entityId }: PostItemProps) => {
             No posts yet!
           </h3>        
       }
-      <PostsWriteNew entityType={entityType} entityId={entityId}/>
+      {userCanPost() && <PostsWriteNew entityType={entityType} entityId={entityId}/> }
     </>
   )
   

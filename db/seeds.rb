@@ -392,28 +392,37 @@ end
 end
 
 # seed posts for random events
-Event.all.each do |event|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::TvShows::TheExpanse.quote,
-      author_id: rand(1..NUM_USERS),
-      postable_type: "Event",
-      postable_id: event.id
-    )
+3.times do 
+  Event.all.each do |event|
+    if rand(1..2) == 1
+      rand_author = event.attendees.sample.id
+      Post.create!(
+        body: Faker::TvShows::TheExpanse.quote,
+        author_id: rand_author,
+        postable_type: "Event",
+        postable_id: event.id
+      )
+    end
   end
 end
 
-# seed posts for random groups
-Group.all.each do |group|
-  if rand(1..2) == 1
-    Post.create!(
-      body: Faker::TvShows::MichaelScott.quote,
-      author_id: rand(1..NUM_USERS),
-      postable_type: "Group",
-      postable_id: group.id
-    )
-  end
+# adjust posts start time for realism
+Post.all.each do |post|
+  new_time = Faker::Time.backward(days: 7)
+  post.update(created_at: new_time)
 end
+
+# seed posts for random groups
+# Group.all.each do |group|
+#   if rand(1..2) == 1
+#     Post.create!(
+#       body: Faker::TvShows::MichaelScott.quote,
+#       author_id: rand(1..NUM_USERS),
+#       postable_type: "Group",
+#       postable_id: group.id
+#     )
+#   end
+# end
 
 # seeding random group and event avatars
 Group.all.each do |group|
