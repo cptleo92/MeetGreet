@@ -30,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const { store, persistor } = persistedStore;
   // //TESTING
   // window.demo = {email: 'demo@fake.com', password: 'password'}
-  window.dispatch = store.dispatch;
+  // window.dispatch = store.dispatch;
   // window.signup = signup;
   // window.login = login;
-  window.logout = logout;
+  // window.logout = logout;
   // window.closeModal = closeModal;
-  window.axios = axios;
+  // window.axios = axios;
   // window.getEventsFromGroup = getEventsFromGroup;
 
   const rootEl = document.getElementById("root")
