@@ -29,7 +29,7 @@ export const createGroup = (group: newGroupType, topics: string[]) => (dispatch:
   return EntitiesAPIUtil.createGroup(group, topics)
     .then(
       (group: Group) => dispatch(receiveGroups({[group.id]: group})),
-      err => dispatch(receiveGroupErrors(err.responseJSON))
+      err => dispatch(receiveGroupErrors(err.response.data))
     )
 }
 
@@ -37,6 +37,6 @@ export const updateGroup = (group: Group, topics: string[]) => (dispatch: AppDis
   return EntitiesAPIUtil.updateGroup(group, topics)
     .then(
       (group: Group) => dispatch(receiveGroups({[group.id]: group})),
-      err => dispatch(receiveGroupErrors(err.responseJSON))
+      err => dispatch(receiveGroupErrors(err.response.data))
     )
 }

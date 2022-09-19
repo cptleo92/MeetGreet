@@ -5,9 +5,9 @@ import Root from './components/root'
 
 
 //TESTING
-// import { signup, login, logout } from "./actions/session_actions"
+import { signup, login, logout } from "./actions/session_actions"
 // import { closeModal } from './actions/modal_actions';
-// import axios from 'axios'
+import axios from 'axios'
 
 document.addEventListener("DOMContentLoaded", () => {  
 

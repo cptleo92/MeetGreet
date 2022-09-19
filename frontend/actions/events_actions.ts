@@ -32,7 +32,7 @@ export const createEvent = (event: newEventType, topics: string[]) => (dispatch:
   return EntitiesAPIUtil.createEvent(event, topics)
     .then(
       (event: Event) => dispatch(receiveEvents({[event.id]: event})),
-      err => dispatch(receiveEventErrors(err.responseJSON))
+      err => dispatch(receiveEventErrors(err.response.data))
     )
 }
 
@@ -40,6 +40,6 @@ export const updateEvent = (event: Event, topics: string[]) => (dispatch: AppDis
   return EntitiesAPIUtil.updateEvent(event, topics)
     .then(
       (event: Event) => dispatch(receiveEvents({[event.id]: event})),
-      err => dispatch(receiveEventErrors(err.responseJSON))
+      err => dispatch(receiveEventErrors(err.response.data))
     )
 }

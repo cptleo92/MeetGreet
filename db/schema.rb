@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_172051) do
+ActiveRecord::Schema.define(version: 2022_09_06_193929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,19 @@ ActiveRecord::Schema.define(version: 2022_04_05_172051) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attendee_id", "event_id"], name: "index_attendances_on_attendee_id_and_event_id", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.text "body", null: false
+    t.integer "parent_id"
+    t.string "postable_type"
+    t.bigint "postable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["postable_type", "postable_id"], name: "index_comments_on_postable_type_and_postable_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -87,13 +100,11 @@ ActiveRecord::Schema.define(version: 2022_04_05_172051) do
   create_table "posts", force: :cascade do |t|
     t.integer "author_id", null: false
     t.text "body", null: false
-    t.integer "parent_id"
     t.string "postable_type"
     t.bigint "postable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
-    t.index ["parent_id"], name: "index_posts_on_parent_id"
     t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
   end
 

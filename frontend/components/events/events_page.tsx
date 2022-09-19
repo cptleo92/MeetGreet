@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Event, Group, UserName, Attendance } from '../../types/types';
+import { Event, Group, UserName, Attendance, Post, Topic } from '../../types/types';
 import { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import EventsPageAttendees from './events_page_attendees';
@@ -9,6 +9,7 @@ import { openModal } from '../../actions/modal_actions';
 import { userNotMemberPrivateGroup } from '../../util/user_util';
 import EventMembersOnly from './event_members_only';
 import TopicButton from '../home/topic_button';
+import PostsContainer from '../post/posts_container';
 
 export interface AttendeesWithDate {
   created_at: string;
@@ -49,7 +50,8 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
     window.scrollTo(0, 0);
   }, [])
 
-  const eventTopics = useSelector((state: RootState) => state.entities.events[event.id].topics)
+  const eventTopics: string[] = useSelector((state: RootState) => state.entities.events[event.id].topics)
+  const eventPosts: Post[] = Object.values(useSelector((state: RootState) => state.ui.event.posts))
 
   const renderTopics = () => {
     if (eventTopics.length === 0) {
@@ -81,10 +83,14 @@ function EventsPage({ group, event }: { group: Group, event: Event }) {
               <EventsPageAttendees group={group} attendees={attendeesWithJoinDate.slice(0, 8)} />
             } />
           </div>
+
+            <h4>Posts</h4>
+            <PostsContainer posts={eventPosts} entityType="Event" entityId={event.id} />
+
           <div className="related-topics">
             <h4>Related Topics</h4>
             {renderTopics()}
-          </div>
+          </div>      
         </div>
         <div className="event-main-right">
           <EventsPageGroupCard group={group} />

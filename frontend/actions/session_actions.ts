@@ -32,17 +32,19 @@ const receiveSessionErrors = (errors: string[]): AnyAction => ({
 export const signup = (user: UserLogin) => (dispatch: AppDispatch) => {
   return SessionAPIUtil.signup(user).then(
     user => dispatch(receiveUser(user)),
-    err => dispatch(receiveUserErrors(err.responseJSON)))
+    err => dispatch(receiveUserErrors(err.response.data)))
 }
 
 export const login = (user: UserLogin) => (dispatch: AppDispatch) => {
   return SessionAPIUtil.login(user).then(
     user => dispatch(receiveUser(user)),
-    err => dispatch(receiveSessionErrors(err.responseJSON)))
+    err => {      
+      dispatch(receiveSessionErrors(err.response.data))
+    })
 }
 
 export const logout = () => (dispatch: AppDispatch) => {
   return SessionAPIUtil.logout().then(
     () => dispatch(logoutUser()),
-    err => dispatch(receiveSessionErrors(err.responseJSON)))
+    err => dispatch(receiveSessionErrors(err.response.data)))
 }

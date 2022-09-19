@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { receiveEvents } from '../../actions/events_actions';
 import { receiveGroups } from '../../actions/groups_actions';
-import { fetchAttendances, fetchAttendees } from '../../actions/ui_actions';
+import { fetchAttendances, fetchAttendees, fetchPosts } from '../../actions/ui_actions';
 import { Event, Group, _nullGroup } from '../../types/types';
 import { fetchGroups, fetchEvents } from '../../util/entities_api_util';
 import { useUser, useLoggedIn } from '../../util/hooks';
@@ -41,7 +41,10 @@ function EventsContainer() {
             dispatch(fetchAttendees(event))
               .then(() => {
                 dispatch(fetchAttendances(event))
-                  .then(() => setLoading(false))
+                  .then(() => {
+                    dispatch(fetchPosts(event.id, "Event"))
+                      .then(() => setLoading(false))                 
+                  })
               })
           })
       })

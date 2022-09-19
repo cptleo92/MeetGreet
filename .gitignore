@@ -33,7 +33,7 @@ config/master.key
 
 ## Environment normalization:
 /.bundle
-/vendor/bundle
+/vendor/bundleSJi2qzodEo+i3hKC5urdwDqV2+mYJSjqQr7Cn1wLNJeDIYNN5STLSgro25xbqtx2nlBj9wbd4gK1spt/74Y7dNMcyPseVkXFIM5e3Mg0dvXDjGgUHvlQyd1dEsqutTZ1MaSTtsyl1/fadHJ2CaemR40nF7LVITpZw5ftyWJQXkw14Djl32nPWGOYM1qFuwM+DH--9gcUlFjA1oJWMjbL--NFyDNcj3xTRS4R8a6R3OvA==
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset

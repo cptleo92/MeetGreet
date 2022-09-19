@@ -1,4 +1,4 @@
-# fly.toml file generated for meetgreet-lc on 2022-09-19T00:21:26-04:00
+# fly.toml file generated for meetgreet-lc on 2022-09-19T01:02:29-04:00
 
 app = "meetgreet-lc"
 kill_signal = "SIGINT"
@@ -6,9 +6,7 @@ kill_timeout = 5
 processes = []
 
 [build]
-  [build.args]
-    BUILD_COMMAND = "bin/rails fly:build"
-    SERVER_COMMAND = "bin/rails fly:server"
+  buildpack= ["heroku/nodejs", "heroku/ruby"]
 
 [deploy]
   release_command = "bin/rails fly:release"
