@@ -119,12 +119,12 @@ end
 
 # MAKE SURE TO ENABLE THIS OUTSIDE OF TESTING
 # seeding random avatars (WILL UPLOAD TO AWS SO DON'T SEED TOO OFTEN)
-# rand_avatars = avatars.shuffle
-# rand_avatars.length.times do 
-#   rand_url = rand_avatars.shift
-#   file = URI.open(rand_url)
-#   User.find(rand(2..NUM_USERS)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
-# end
+rand_avatars = avatars.shuffle
+rand_avatars.length.times do 
+  rand_url = rand_avatars.shift
+  file = URI.open(rand_url)
+  User.find(rand(2..NUM_USERS)).avatar.attach(io: file, filename: rand_url.slice(44..-1))
+end
 
 # group seeding
 NUM_GROUPS.times do 
