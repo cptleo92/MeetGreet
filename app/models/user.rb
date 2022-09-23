@@ -1,12 +1,7 @@
 require 'open-uri'
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #        :recoverable, :rememberable, :validatable
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
-  attr_reader :password
+   attr_reader :password
 
   validates :fname, :location, :password_digest, :session_token, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -58,25 +53,7 @@ class User < ApplicationRecord
     Group.joins(:topics).where('name ILIKE ANY ( array[?] )', split_topics)
   end
 
-  # auth-related methods below  
-  def self.find_or_create_by_oauth(auth)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-
-    unless user
-      user = User.create!(
-      fname: auth.info.first_name,
-      provider: auth.provider,
-      uid: auth.uid,
-      email: auth.info.email,
-      password: Devise.friendly_token[0,20]
-    )
-    end
-
-    user
-  end
-
-
-  def self.find_by_credentials(email, password)
+   def self.find_by_credentials(email, password)
     return nil if User.find_by(email: email).nil?
     @user = User.find_by(email: email)
     @user.is_password?(password) ? @user : nil

@@ -29,12 +29,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem "aws-sdk-s3"
 gem 'faker'
 gem 'figaro'
-gem 'devise'
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'oauth2'
-gem 'omniauth-rails_csrf_protection'
-gem 'uuidtools'
 
 # for getting avatar urls 
 gem 'open-uri'
@@ -52,9 +46,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'annotate'  
-
-  gem 'guard-livereload', '~> 2.5', require: false
-  gem "rack-livereload"
 
 end
 
