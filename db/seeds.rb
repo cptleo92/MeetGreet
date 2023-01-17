@@ -104,7 +104,7 @@ demo_group = Group.create!(
 NUM_USERS = 40
 NUM_GROUPS = 30
 MEM_MULT = rand(8..12) # each user will join this many groups
-NUM_EVENTS = 30 # 2x past events, 1x future events
+NUM_EVENTS = 60 # 2x past events, 1x future events
 ATTEND_MULT = rand(8..12) # each user will attend this many events
 
 NUM_USERS.times do 
@@ -242,7 +242,7 @@ end
 
 # future event seeding 
 NUM_EVENTS.times do
-  rand_start = Faker::Time.forward(days: 30)
+  rand_start = Faker::Time.forward(days: 60)
   rand_duration = rand(3600.. (3600 * 3))
   rand_group = rand(1..NUM_GROUPS)
   rand_organizer = Membership.where(organizer: true, group_id: rand_group).pluck(:member_id)
